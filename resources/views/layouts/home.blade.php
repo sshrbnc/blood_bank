@@ -94,7 +94,7 @@
                 <div class="col-md-6 item text">
                     <h5>About Us:</h5>
                     <p>
-                        এইখানে, আপনাদের সম্পর্কে লিখবেন । Bangladesh, to the east of India on the Bay of Bengal, is a South Asian country marked by lush greenery and many waterways. Its Padma (Ganges), Meghna and Jamuna rivers create fertile plains, and travel by boat is common. On the southern coast, the Sundarbans, an enormous mangrove forest shared with Eastern India, is home to the royal Bengal tiger.
+                        At present, the Philippine Red Cross provides six major services: Blood Services, Disaster Management Services, Safety Services, Health Services, Social Services, Red Cross Youth and Volunteer Services. All of them embody the fundamental principles of the International Red Cross and Red Crescent Movement – humanity, impartiality, neutrality, independence, voluntary service, unity and universality. These values guide and inspire all Red Cross staff and volunteers, to whom being a Red Crosser is more than just a philosophy but a way of life.
                     </p>
                 </div>
             </div>
@@ -107,7 +107,7 @@
         <a href="https://twitter.com/mminhazulkabir"><i class="icon ion-social-twitter-outline"></i></a>
         <a href="https://www.instagram.com/minhazulkabir/"><i class="icon ion-social-instagram-outline"></i></a>
     </div>
-    <p class="copyright" style="font-size:15px;padding-top:10px;">Minhazul Kabir, 📧 kabir110409@acc.edu.bd © <?php echo date("Y"); ?>  </p>
+    <p class="copyright" style="font-size:15px;padding-top:10px;">All Rigths Reserved © <?php echo date("Y"); ?>  </p>
 
 </div>
 
