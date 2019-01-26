@@ -1,0 +1,25 @@
+.main-art{
+	height: 40%;
+	width: 100%;
+	/*border: 1px solid black;*/
+}
+
+.sub-art{
+	height: 30%;
+	width: 100%;
+	/*border: 1px solid black;*/
+	padding-left: 5%;
+}
+
+.main-article{
+	height: 80%;
+	width: 50%;
+	margin-top: 20px;
+	margin-left: 350px;
+}
+
+.article{
+	margin: 50px;
+	height: 35%;
+	width: 25%;
+}

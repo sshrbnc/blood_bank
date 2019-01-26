@@ -1,0 +1,21 @@
+.prc_logo{
+	height: 50px;
+	width: 50px;
+}
+
+.container1{
+	width: 50%;
+	margin-left: 0;
+	margin-right: 31%;
+}
+
+.fa-search{
+	color: #fff;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.search_button{
+	background: transparent;
+	border: none;
+}

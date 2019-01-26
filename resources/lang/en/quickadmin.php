@@ -1,11 +1,55 @@
 <?php
 
 return [
-		'user-management' => [		'title' => 'User management',		'fields' => [		],	],
-		'roles' => [		'title' => 'Roles',		'fields' => [			'title' => 'Title',		],	],
-		'users' => [		'title' => 'Users',		'fields' => [			'name' => 'Name',			'email' => 'Email',			'password' => 'Password',			'role' => 'Role',			'remember-token' => 'Remember token',		],	],
-		'profile' => [		'title' => 'Profile',		'fields' => [			'profile-picture' => 'Profile Picture',			'name' => 'Name',			'phone-number' => 'Phone Number',			'email' => 'Email',			'faceebook-id' => 'Faceebook ID',			'blood-group' => 'Blood Group',			'status' => 'Status',			'last-donation' => 'Last Donation',			'location' => 'Location',			'details-information' => 'Details Information',		],	],
-		'blog' => [		'title' => 'Blog',		'fields' => [			'blog-picture' => 'Blog Picture',			'head-line' => 'Head Line',			'post' => 'Post',		],	],
+	
+	'user-management' => [
+		'title' => 'User management',
+		'fields' => [
+		],
+	],
+	
+	'roles' => [
+		'title' => 'Roles',
+		'fields' => [
+			'title' => 'Title',
+		],
+	],
+	
+	'users' => [
+		'title' => 'Users',
+		'fields' => [
+			'name' => 'Name',
+			'email' => 'Email',
+			'password' => 'Password',
+			'role' => 'Role',
+			'remember-token' => 'Remember token',
+		],
+	],
+	
+	'profile' => [
+		'title' => 'Profile',
+		'fields' => [
+			'profile-picture' => 'Profile Picture',
+			'name' => 'Name',
+			'phone-number' => 'Phone Number',
+			'email' => 'Email',
+			'faceebook-id' => 'Faceebook ID',
+			'blood-group' => 'Blood Group',
+			'status' => 'Status',
+			'last-donation' => 'Last Donation',
+			'location' => 'Location',
+			'details-information' => 'Details Information',
+		],
+	],
+	
+	'blog' => [
+		'title' => 'Blog',
+		'fields' => [
+			'blog-picture' => 'Blog Picture',
+			'head-line' => 'Head Line',
+			'post' => 'Post',
+		],
+	],
 	'qa_create' => 'Create',
 	'qa_save' => 'Save',
 	'qa_edit' => 'Edit',

@@ -23,12 +23,16 @@
     <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
-    <link rel="shortcut icon" type="image/png" href="assets/img/blood-clipart-blood-clipart.png"/>
+    <link rel="stylesheet" href="assets/css/Navbar.css">
+    <link rel="stylesheet" href="assets/css/User-Article.css">
+    <link rel="stylesheet" href="assets/css/Status.css">
+    <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 
-    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color:#000000;">
-        <div class="container"><a class="navbar-brand" href="/">Blood Bank</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">
+        <div class="container1"><img class="prc_logo" src="assets/img/prc_logo.png"><a class="navbar-brand" href="/">&nbsp;Philippine Red Cross - Iloilo Chapter</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <!-- <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/">Home<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/donar">Donar</a></li>
@@ -37,11 +41,13 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/about-us">About Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/contact-us">Contact Us</a></li>
                 </ul>
-            </div>
-            <div class="col-lg-4 text-right" >
+            </div> -->
+            <!-- <div class="col-lg-4" ></div> -->
+            <!-- <div class="col-lg-4" ></div> -->
+            <div class="col-lg-20 text-right" style="margin-top: -50px" >
                 @if (Auth::check())
-                    <div style="color:white">
-                        Logged in as </br>{{ Auth::user()->email }}
+                    <div style="color:white; width: 200%;">
+                        Logged in as {{ Auth::user()->name }}
                         <form action="{{ route('auth.logout') }}" method="post">
                             {{ csrf_field() }}
                             <input type="submit" value="Logout" class="btn btn-success">
@@ -57,9 +63,13 @@
 
             </div>
         </div>
+        <form class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
+            <input class="form-control mr-lg-2" type="search" placeholder="Enter Transaction ID" aria-label="Search">
+            <button type="button" class="search_button" type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </nav>
 <div style="background-color:rgb(238,244,247);">
-<div class="container">
+<div class="container2" style="margin: 0;">
     <div class="row" style="margin:0px;">
 
         @yield('main')
@@ -73,7 +83,7 @@
 <div class="projects-clean"></div>
 <div class="footer-dark" style="background-color:rgb(0,0,0);">
     <footer>
-        <div class="container">
+        <div class="container3">
             <div class="row">
                 <div class="col-sm-6 col-md-3 item">
                     <h5>Important Links:</h5>
