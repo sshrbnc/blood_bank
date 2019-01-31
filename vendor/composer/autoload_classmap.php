@@ -8,9 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Blog' => $baseDir . '/app/Blog.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Donor' => $baseDir . '/app/Donor.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AarticleController' => $baseDir . '/app/Http/Controllers/AarticleController.php',
     'App\\Http\\Controllers\\Admin\\BlogsController' => $baseDir . '/app/Http/Controllers/Admin/BlogsController.php',
+    'App\\Http\\Controllers\\Admin\\DonorsController' => $baseDir . '/app/Http/Controllers/Admin/DonorsController.php',
     'App\\Http\\Controllers\\Admin\\ProfilesController' => $baseDir . '/app/Http/Controllers/Admin/ProfilesController.php',
     'App\\Http\\Controllers\\Admin\\RolesController' => $baseDir . '/app/Http/Controllers/Admin/RolesController.php',
     'App\\Http\\Controllers\\Admin\\UsersController' => $baseDir . '/app/Http/Controllers/Admin/UsersController.php',

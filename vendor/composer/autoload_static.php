@@ -393,9 +393,11 @@ class ComposerStaticInit3ff4a5f5e1f087c298e6fdbda7d9a873
     public static $classMap = array (
         'App\\Blog' => __DIR__ . '/../..' . '/app/Blog.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Donor' => __DIR__ . '/../..' . '/app/Donor.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AarticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/AarticleController.php',
         'App\\Http\\Controllers\\Admin\\BlogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BlogsController.php',
+        'App\\Http\\Controllers\\Admin\\DonorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DonorsController.php',
         'App\\Http\\Controllers\\Admin\\ProfilesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfilesController.php',
         'App\\Http\\Controllers\\Admin\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RolesController.php',
         'App\\Http\\Controllers\\Admin\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UsersController.php',

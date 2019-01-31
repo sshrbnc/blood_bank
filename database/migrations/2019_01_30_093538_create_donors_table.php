@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateDonorsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if(! Schema::hasTable('donors')) {
+            Schema::create('donors', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name')->nullable();
+                $table->string('blood_type')->nullable();
+                $table->string('patient')->nullable();
+                $table->integer('patient_id')->nullable();
+                $table->string('status')->nullable();
+                $table->date('last_donation')->nullable();
+                $table->string('details_information')->nullable();
+
+                $table->timestamps();
+                $table->softDeletes();
+
+                $table->index(['deleted_at']);
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('donors');
+    }
+}

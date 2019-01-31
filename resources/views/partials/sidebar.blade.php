@@ -58,14 +58,20 @@
                     <span>@lang('quickadmin.profile.title')</span>
                 </a>
             </li>@endcan
-            
-            @can('blog_access')
+
             <li>
-                <a href="{{ route('admin.blogs.index') }}">
-                    <i class="fa fa-text-width"></i>
-                    <span>@lang('quickadmin.blog.title')</span>
+                <a href="{{ route('admin.donors.index') }}">
+                    <i class="fa fa-gift"></i>
+                    <span>Donor</span>
                 </a>
-            </li>@endcan
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-gratipay"></i>
+                    <span>Patient</span>
+                </a>
+            </li>
 
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">

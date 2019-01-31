@@ -103,5 +103,21 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->role_id, [1]);
         });
 
+        //Auth gates for: Donor
+        Gate::define('donor_access', function ($user) {
+            return in_array($user->role_id, [1, 2]);
+        });
+        Gate::define('donor_create', function ($user) {
+            return in_array($user->role_id, [1, 2]);
+        });
+        Gate::define('donor_edit', function ($user) {
+            return in_array($user->role_id, [1, 2]);
+        });
+        Gate::define('donor_view', function ($user) {
+            return in_array($user->role_id, [1, 2]);
+        });
+        Gate::define('donor_delete', function ($user) {
+            return in_array($user->role_id, [1, 2]);
+        });
     }
 }
