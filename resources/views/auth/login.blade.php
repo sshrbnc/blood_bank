@@ -1,9 +1,9 @@
 @extends('layouts.auth')
 
 @section('content')
-    <div class="row">
-    <div class="col-md-12" id="loginHeader">
-        <h1 class="title">Philippine Red Cross - Iloilo Chapter</h1>
+    <div class="row" id="loginHeader">
+    <div class="col-md-12">
+        <h1 class="title"><img class="prc_logo" src="assets/img/prc_logo.png"> &nbsp; Philippine Red Cross - Iloilo Chapter</h1>
     </div>
     </div>
     <div class="row">
@@ -15,7 +15,7 @@
                     
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>@lang('quickadmin.qa_whoops')</strong> @lang('quickadmin.qa_there_were_problems_with_input'):
+                            <strong>Invalid Usernamer or Password</strong>
                             <br><br>
                             <ul>
                                 @foreach ($errors->all() as $error)

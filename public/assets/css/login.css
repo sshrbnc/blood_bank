@@ -1,8 +1,13 @@
+.prc_logo{
+	width: 60px;
+	height: 60px;
+}
+
 .title{
 	color: white;
 	width: 100%;
-	text-align: center;
-	margin-top: 10%;
+	text-align: left;
+	margin-top: 5px;
 }
 #loginPanel{
 	margin-top: 15%;
@@ -41,8 +46,7 @@
 
 #loginHeader{
 	/*height: 3000px;*/
-	height: 50%;
-	width: 100%;
+	height: 80px;
 	background-color: rgb(174,0,0);
 	/*border-bottom-left-radius: 30% 60%;
 	border-bottom-right-radius: 30% 60% */

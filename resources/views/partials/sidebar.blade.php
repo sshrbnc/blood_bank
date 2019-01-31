@@ -59,31 +59,27 @@
                 </a>
             </li>@endcan
 
-
-            <!-- @can('profile_access')
- -->            <li>
-                <a href="{{ route('admin.donors.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span>@lang('quickadmin.donors.title')</span>
-                </a>
-            </li><!-- @endcan -->
-            
-          <!--   @can('profile_access') -->
             <li>
-                <a href="{{ route('admin.patients.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span>@lang('quickadmin.patients.title')</span>
+                <a href="{{ route('admin.donors.index') }}">
+                    <i class="fa fa-gift"></i>
+                    <span>Donors</span>
                 </a>
             </li>
-           <!--  @endcan
- -->
-            @can('blog_access')
+
             <li>
-                <a href="{{ route('admin.blogs.index') }}">
-                    <i class="fa fa-text-width"></i>
-                    <span>@lang('quickadmin.blog.title')</span>
+                <a href="{{ route('admin.patients.index') }}">
+                    <i class="fa fa-wheelchair"></i>
+                    <span>Patients</span>
                 </a>
-            </li>@endcan
+            </li>
+
+            <li>
+                <a href=#>
+                    <i class="fa fa-heart"></i>
+                    <span>Blood Requests</span>
+                </a>
+            </li>
+
 
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">

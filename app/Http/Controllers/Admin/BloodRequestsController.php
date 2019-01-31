@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Patient;
+use App\BloodRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-class PatientsController extends Controller
+class BloodRequestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,6 @@ class PatientsController extends Controller
     public function index()
     {
         //
-        return view('admin.patients.index', compact('patients'));
     }
 
     /**
@@ -44,10 +42,10 @@ class PatientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Patient  $patient
+     * @param  \App\BloodRequests  $bloodRequests
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show(BloodRequests $bloodRequests)
     {
         //
     }
@@ -55,10 +53,10 @@ class PatientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Patient  $patient
+     * @param  \App\BloodRequests  $bloodRequests
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(BloodRequests $bloodRequests)
     {
         //
     }
@@ -67,10 +65,10 @@ class PatientsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Patient  $patient
+     * @param  \App\BloodRequests  $bloodRequests
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, BloodRequests $bloodRequests)
     {
         //
     }
@@ -78,10 +76,10 @@ class PatientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Patient  $patient
+     * @param  \App\BloodRequests  $bloodRequests
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy(BloodRequests $bloodRequests)
     {
         //
     }
