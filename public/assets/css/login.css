@@ -1,0 +1,50 @@
+.title{
+	color: white;
+	width: 100%;
+	text-align: center;
+	margin-top: 10%;
+}
+#loginPanel{
+	margin-top: 15%;
+	width: 75%;
+	height: 85%;
+	border-radius: 10px;
+}
+
+#formCont{
+	margin-top: 15%;
+}
+
+#adminPassword{
+	margin-top: 5%;
+	border-radius: 20px;
+}
+
+#adminUsername{
+	border-radius: 20px;
+}
+
+#loginSubmit{
+	margin-right: 15px; 
+	background-color: rgb(174,0,0);
+	color: white;
+	height: 100%; 
+	width: 20%;
+	float: right;
+	margin-top: 5%;
+	border-radius: 5px;
+}
+
+/*.button{
+	color: white;
+}*/
+
+#loginHeader{
+	/*height: 3000px;*/
+	height: 50%;
+	width: 100%;
+	background-color: rgb(174,0,0);
+	/*border-bottom-left-radius: 30% 60%;
+	border-bottom-right-radius: 30% 60% */
+	/*clip-path: ellipse(60% 10% at 50% 0%);*/
+}

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     @include('partials.head')
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/Login-footer.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
+    <link href="/css/app.css" rel="stylesheet">
+
 </head>
 
-<body class="page-header-fixed" style='background-image:url("assets/img/redback.jpg")'>
-
-    <div style="margin-top: 10%;"></div>
-
+<body class="page-header-fixed">
     <div class="container-fluid">
         @yield('content')
     </div>
@@ -18,6 +21,8 @@
         <i class="fa fa-arrow-up"></i>
     </div>
 
+
+    <script src="/js/app.js"></script>
     @include('partials.javascripts')
 
 </body>

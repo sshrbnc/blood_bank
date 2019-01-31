@@ -25,6 +25,33 @@ return [
 			'remember-token' => 'Remember token',
 		],
 	],
+
+// jan 30, 2019
+	'donors' => [
+		'title' => 'Donors',
+		'fields' => [
+			'name' => 'Name',
+			'email' => 'Email',
+			'password' => 'Password',
+			'role' => 'Role',
+			'remember-token' => 'Remember token',
+		],
+	],
+
+	'patients' => [
+		'title' => 'Patients',
+		'fields' => [
+			'name' => 'Name',
+			'address' => 'Address',
+			'age' => 'Age',
+			'contact-number' => 'Contact Number',
+			'blood-type' => 'Blood Type',
+			'remember-token' => 'Remember token',
+		],
+	],
+
+
+// --------------------------
 	
 	'profile' => [
 		'title' => 'Profile',

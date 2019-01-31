@@ -58,7 +58,25 @@
                     <span>@lang('quickadmin.profile.title')</span>
                 </a>
             </li>@endcan
+
+
+            <!-- @can('profile_access')
+ -->            <li>
+                <a href="{{ route('admin.donors.index') }}">
+                    <i class="fa fa-gears"></i>
+                    <span>@lang('quickadmin.donors.title')</span>
+                </a>
+            </li><!-- @endcan -->
             
+          <!--   @can('profile_access') -->
+            <li>
+                <a href="{{ route('admin.patients.index') }}">
+                    <i class="fa fa-gears"></i>
+                    <span>@lang('quickadmin.patients.title')</span>
+                </a>
+            </li>
+           <!--  @endcan
+ -->
             @can('blog_access')
             <li>
                 <a href="{{ route('admin.blogs.index') }}">
