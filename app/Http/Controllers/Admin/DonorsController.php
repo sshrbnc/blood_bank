@@ -6,10 +6,8 @@ use App\Donor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreProfilesRequest;
-use App\Http\Requests\Admin\UpdateProfilesRequest;
-// use App\Http\Requests\Admin\StoreDonorsRequest;
-// use App\Http\Requests\Admin\UpdateDonorsRequest;
+use App\Http\Requests\Admin\StoreDonorsRequest;
+use App\Http\Requests\Admin\UpdateDonorsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 
 class DonorsController extends Controller
@@ -115,7 +113,7 @@ class DonorsController extends Controller
      */
     public function show($id)
     {
-        if (! Gate::allows('donor_show')) {
+        if (! Gate::allows('donor_view')) {
             return abort(401);
         }
         $donor = Donor::findOrFail($id);

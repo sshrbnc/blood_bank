@@ -31,8 +31,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     Route::get('/home', 'HomeController@index');
 
-    // Route::resource('donors',   'Admin\DonorsController');
-
 //Roles
 Route::resource('roles', 'Admin\RolesController');
 Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);

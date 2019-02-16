@@ -2,7 +2,11 @@
 
 @section('content')
     <h3 class="page-title">Donors</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.profiles.store'], 'files' => true,]) !!}
+
+    <a href="{{ route('admin.donors.index') }}" class="btn btn-success"><< Back to list</a>
+    <p></p>
+    
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.donors.store'], 'files' => true,]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -33,49 +37,49 @@
                     @endif
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Aplus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'A+', false, ['required' => '']) !!}
                             A+
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Aminus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'A-', false, ['required' => '']) !!}
                             A-
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Bplus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'B+', false, ['required' => '']) !!}
                             B+
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Bminus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'B-', false, ['required' => '']) !!}
                             B-
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'ABplus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'AB+', false, ['required' => '']) !!}
                             AB+
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'ABminus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'AB-', false, ['required' => '']) !!}
                             AB-
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Oplus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'O+', false, ['required' => '']) !!}
                             O+
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('blood_type', 'Ominus', false, ['required' => '']) !!}
+                            {!! Form::radio('blood_type', 'O-', false, ['required' => '']) !!}
                             O-
                         </label>
                     </div>                    
@@ -169,7 +173,7 @@
         </div>
     </div>
 
-    {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit('Submit', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 @stop
 
