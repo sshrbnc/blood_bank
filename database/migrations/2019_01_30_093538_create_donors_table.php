@@ -18,10 +18,19 @@ class CreateDonorsTable extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->string('blood_type');
-                $table->string('patient');
-                $table->integer('patient_id');
-                $table->integer('phone_number');
+
+                $table->string('gender');
+                $table->integer('weight');
+                $table->date('birthday');
+                $table->integer('age');
+                $table->integer('contact_number');
+
+
+                // $table->string('patient');
+                // $table->integer('patient_id');
+                // $table->integer('phone_number');
                 $table->string('status')->nullable();
+
                 $table->date('last_donation')->nullable();
                 $table->string('details_information')->nullable();
 

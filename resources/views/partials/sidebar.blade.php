@@ -77,7 +77,7 @@
 
             @can('blood_request_access')
             <li>
-                <a href=#>
+                <a href="{{ route('admin.blood_requests.index') }}">
                     <i class="fa fa-heart"></i>
                     <span>Blood Requests</span>
                 </a>

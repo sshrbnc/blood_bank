@@ -64,5 +64,7 @@ Route::post('donors_mass_destroy', ['uses' => 'Admin\DonorsController@massDestro
 Route::post('donors_restore/{id}', ['uses' => 'Admin\DonorsController@restore', 'as' => 'donors.restore']);
 Route::delete('donors_perma_del/{id}', ['uses' => 'Admin\DonorsController@perma_del', 'as' => 'donors.perma_del']);
 
+//Blood Requests
+Route::resource('blood_requests', 'Admin\BloodRequestsController');
 
 });
