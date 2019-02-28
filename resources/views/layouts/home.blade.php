@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="assets/css/Navbar.css">
     <link rel="stylesheet" href="assets/css/User-Article.css">
     <link rel="stylesheet" href="assets/css/Status.css">
+    <link rel="stylesheet" href="assets/css/Transaction.css">
     <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
@@ -63,10 +64,24 @@
 
             </div>
         </div>
-        <form class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
+
+        <form action="/transaction" method="POST" role="search">
+            {{ csrf_field() }}
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Search users"> 
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </form>
+
+   
+        <!-- <form class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
             <input class="form-control mr-lg-2" type="search" placeholder="Enter Transaction ID" aria-label="Search">
             <button type="button" class="search_button" type="submit"><i class="fas fa-search"></i></button>
-        </form>
+        </form> -->
     </nav>
 <div style="background-color:rgb(238,244,247);">
 <div class="container2" style="margin: 0;">

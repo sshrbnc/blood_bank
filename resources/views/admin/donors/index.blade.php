@@ -32,14 +32,15 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
-                        <th>Name</th>
+                        @can('donor_id_access')<th>Donor ID</th>@endcan
+                        @can('donor_name_access')<th>Name</th>@endcan
                         <th>Blood Type</th>
                         <th>Patient</th>
                         <th>Patient ID</th>
                         <th>Phone Number</th>
                         <th>Status</th>
                         <th>Last Donation</th>
-                        <th>Details Information</th>
+                        @can('details_information_access')<th>Details Information</th>@endcan
 
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -56,34 +57,35 @@
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
-                                <td field-key='name'>{{ $donor->name }}</td>
+                                @can('donor_id_access')<td field-key='id'>{{ $donor->id }}</td>@endcan
+                                @can('donor_name_access')<td field-key='name'>{{ $donor->name }}</td>@endcan
                                 <td field-key='blood_type'>{{ $donor->blood_type }}</td>                                
                                 <td field-key='patient'>{{ $donor->patient }}</td>
                                 <td field-key='patient_id'>{{ $donor->patient_id }}</td>
                                 <td field-key='phone_number'>{{ $donor->phone_number }}</td>
                                 <td field-key='status'>{{ $donor->status }}</td>
                                 <td field-key='last_donation'>{{ $donor->last_donation }}</td>
-                                <td field-key='details_information'>{!! $donor->details_information !!}</td>
+                                @can('details_information_access')<td field-key='details_information'>{!! $donor->details_information !!}</td>@endcan
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     @can('donor_delete')
-                                                                        {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'POST',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.donors.restore', $donor->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
-                                    {!! Form::close() !!}
-                                @endcan
+                                        {!! Form::open(array(
+                                            'style' => 'display: inline-block;',
+                                            'method' => 'POST',
+                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                            'route' => ['admin.donors.restore', $donor->id])) !!}
+                                        {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                        {!! Form::close() !!}
+                                    @endcan
                                     @can('donor_delete')
-                                                                        {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.donors.perma_del', $donor->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                @endcan
+                                        {!! Form::open(array(
+                                            'style' => 'display: inline-block;',
+                                            'method' => 'DELETE',
+                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                            'route' => ['admin.donors.perma_del', $donor->id])) !!}
+                                        {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                        {!! Form::close() !!}
+                                    @endcan
                                 </td>
                                 @else
                                 <td>
@@ -94,13 +96,13 @@
                                     <a href="{{ route('admin.donors.edit',[$donor->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
                                     @endcan
                                     @can('donor_delete')
-                                    {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.donors.destroy', $donor->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
+                                        {!! Form::open(array(
+                                            'style' => 'display: inline-block;',
+                                            'method' => 'DELETE',
+                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                            'route' => ['admin.donors.destroy', $donor->id])) !!}
+                                        {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                        {!! Form::close() !!}
                                     @endcan
                                 </td>
                                 @endif

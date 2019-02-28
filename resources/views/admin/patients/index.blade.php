@@ -39,7 +39,7 @@
                         <th>Blood Type</th>
                         <th>Contact Number</th>
                         <th>Address</th>
-                        <th>Details Information</th>
+                        @can('details_information_access')<th>Details Information</th>@endcan
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else

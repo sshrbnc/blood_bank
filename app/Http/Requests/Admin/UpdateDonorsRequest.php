@@ -27,7 +27,7 @@ class UpdateDonorsRequest extends FormRequest
             'blood_type' => 'required',
             'patient' => 'min:1|max:30|required',
             'patient_id' => 'required',
-            'phone_number' => 'required|unique:donors,phone_number,'.$this->route('donor'),
+            'phone_number' => 'required|integer',
             'status' => 'required',
             'last_donation' => 'required|date_format:'.config('app.date_format'),
         ];

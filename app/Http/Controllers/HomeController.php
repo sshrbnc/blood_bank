@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Donor;
+use DB;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -24,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $donor = DB::table('donors')
+                ->select('blood_type')
+                ->get();
+
+        return view('home', compact('donor'));
     }
+
 }

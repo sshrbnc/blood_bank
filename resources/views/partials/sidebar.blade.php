@@ -67,33 +67,51 @@
                 </a>
             </li>@endcan
 
+            @can('patient_access')
             <li>
                 <a href="{{ route('admin.patients.index') }}">
                     <i class="fa fa-wheelchair"></i>
                     <span>Patients</span>
                 </a>
-            </li>
+            </li>@endcan
 
+            @can('blood_request_access')
             <li>
                 <a href=#>
                     <i class="fa fa-heart"></i>
                     <span>Blood Requests</span>
                 </a>
-            </li>
+            </li>@endcan
 
-
-            <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
-                <a href="{{ route('auth.change_password') }}">
-                    <i class="fa fa-key"></i>
-                    <span class="title">@lang('quickadmin.qa_change_password')</span>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>{{ @Auth::user()->name }}</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
-            </li>
-
-            <li>
-                <a href="#logout" onclick="$('#logout').submit();">
-                    <i class="fa fa-arrow-left"></i>
-                    <span class="title">@lang('quickadmin.qa_logout')</span>
-                </a>
+                <ul class="treeview-menu">
+                    @can('user_view')
+                    <li>
+                        <a href="{{ route('admin.users.show',[@Auth::user()->id]) }}">
+                            <i class="fa fa-star"></i>
+                            <span class="title">Profile</span>
+                        </a>
+                    </li>@endcan
+                    <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
+                        <a href="{{ route('auth.change_password') }}">
+                            <i class="fa fa-key"></i>
+                            <span class="title">Change Password</span>
+                        </a>
+                    </li>                   
+                    <li>
+                        <a href="#logout" onclick="$('#logout').submit();">
+                            <i class="fa fa-arrow-left"></i>
+                            <span class="title">Logout</span>
+                        </a>
+                    </li>                    
+                </ul>
             </li>
         </ul>
     </section>

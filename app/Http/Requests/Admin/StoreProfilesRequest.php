@@ -25,7 +25,7 @@ class StoreProfilesRequest extends FormRequest
         return [
             'profile_picture' => 'nullable|mimes:png,jpg,jpeg,gif',
             'name' => 'min:4|max:30|required',
-            'phone_number' => 'required|unique:profiles,phone_number,'.$this->route('profile'),
+            'phone_number' => 'required|integer',
             'email' => 'email',
             'blood_group' => 'required',
             'status' => 'required',

@@ -15,6 +15,10 @@ class UserSeed extends Seeder
             
             ['id' => 1, 'name' => 'Admin', 'email' => 'admin@admin.com', 'password' => '$2y$10$2kK/Yjku2V2DvpXtBJMlMO3/k3vz4.TAT7wBBWwsWCNJnmTw5A4RK', 'role_id' => 1, 'remember_token' => '',],
             ['id' => 2, 'name' => 'Minhazul Kabir', 'email' => 'kabir110409@acc.edu.bd', 'password' => '$2y$10$HqQzk.ZE78tdY6sOBzThqeo4yHpWgLwh4Jq0fXtpo7i2nJr3NA2SO', 'role_id' => 1, 'remember_token' => null,],
+            ['id' => 3, 'name' => 'SubAdmin', 'email' => 'subadmin@upv.com', 'password' => 'subadmin', 'role_id' => 3, 'remember_token' => null,],
+            ['id' => 4, 'name' => 'Laboratory', 'email' => 'lab@upv.com', 'password' => 'laboratory', 'role_id' => 4, 'remember_token' => null,],
+            ['id' => 5, 'name' => 'DonorRegistrar', 'email' => 'dreg@upv.com', 'password' => 'dregistrar', 'role_id' => 5, 'remember_token' => null,],
+            ['id' => 6, 'name' => 'PatientRegistrar', 'email' => 'preg@upv.com', 'password' => 'pregistrar', 'role_id' => 6, 'remember_token' => null,],
 
         ];
 

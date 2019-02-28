@@ -33,6 +33,8 @@
                     @endif
                     @if ($errors->count() > 0)
                         <div class="alert alert-danger">
+                            <strong>Oopsies!</strong>
+                            <br><br>
                             <ul class="list-unstyled">
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>

@@ -15,9 +15,10 @@ class RoleSeed extends Seeder
             
             ['id' => 1, 'title' => 'Administrator (can create other users)',],
             ['id' => 2, 'title' => 'Simple user',],
-            // ['id' => 3, 'title' => 'Laboratory',],
-            // ['id' => 4, 'title' => 'Registrar',],
-
+            ['id' => 3, 'title' => 'SubAdmin',],
+            ['id' => 4, 'title' => 'Laboratory',],
+            ['id' => 5, 'title' => 'DonorRegistrar',],
+            ['id' => 6, 'title' => 'PatientRegistrar',],
         ];
 
         foreach ($items as $item) {
