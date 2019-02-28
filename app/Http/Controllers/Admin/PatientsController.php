@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class PatientsController extends Controller
@@ -17,6 +18,7 @@ class PatientsController extends Controller
     public function index()
     {
         //
+        $patients = Patient::all()->toArray();
         return view('admin.patients.index', compact('patients'));
     }
 
@@ -28,6 +30,8 @@ class PatientsController extends Controller
     public function create()
     {
         //
+        return view('admin.patients.create');
+
     }
 
     /**
@@ -39,6 +43,33 @@ class PatientsController extends Controller
     public function store(Request $request)
     {
         //
+
+         $this->validate($request, [
+            'name'  => 'required',
+            'blood_type'  => 'required',
+            'address'  => 'required',
+            'birthday'  => 'required',
+            'contact_number'  => 'required'
+            ]);
+
+
+        if (Auth::check()){
+
+            $patients = new Patient;
+            $patients->name = $request->input('name');
+            $patients->blood_type = $request->input('blood_type');
+            $patients->address = $request->input('address');
+            $patients->birthday = $request->input('birthday');
+            $patients->age = $request->input('age');
+            $patients->contact_number = $request->input('contact_number');
+            $patients->details_information = $request->input('details_information');
+            $patients->save();  
+        }
+       
+
+        if($patients){
+            return redirect()->route('admin.patients.index');
+        }
     }
 
     /**

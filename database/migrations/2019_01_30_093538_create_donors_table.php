@@ -25,7 +25,6 @@ class CreateDonorsTable extends Migration
                 $table->integer('age');
                 $table->integer('contact_number');
 
-
                 // $table->string('patient');
                 // $table->integer('patient_id');
                 // $table->integer('phone_number');

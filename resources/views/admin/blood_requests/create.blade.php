@@ -3,9 +3,7 @@
 @section('content')
     <h3 class="page-title">Blood Requests</h3>
     <!-- <form method="post" action="{{ route('admin.blood_requests.store') }}"> -->
-       
-
-    </form>
+ <!--    </form> -->
 
 
     {!! Form::open(['action' => 'Admin\BloodRequestsController@store', 'method' => 'POST']) !!}
