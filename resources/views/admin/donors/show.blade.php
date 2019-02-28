@@ -5,7 +5,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('quickadmin.qa_view')
+            View
         </div>
 
         <div class="panel-body table-responsive">
@@ -50,7 +50,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.donors.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
+            <a href="{{ route('admin.donors.index') }}" class="btn btn-default"><< Back to list</a>
         </div>
     </div>
 @stop

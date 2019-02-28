@@ -59,12 +59,13 @@
                 </a>
             </li>@endcan
 
+            @can('donor_access')
             <li>
                 <a href="{{ route('admin.donors.index') }}">
                     <i class="fa fa-gift"></i>
                     <span>Donors</span>
                 </a>
-            </li>
+            </li>@endcan
 
             <li>
                 <a href="{{ route('admin.patients.index') }}">
