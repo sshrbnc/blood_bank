@@ -8,6 +8,7 @@
 	height: 100px;
 	margin-left: 0;
 	margin-right: 31%;
+	font-size: 16px;
 }
 
 .fa-search{
@@ -20,3 +21,4 @@
 	background: transparent;
 	border: none;
 }
+

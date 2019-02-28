@@ -131,14 +131,14 @@
                     @endif
                     <div>
                         <label>
-                            {!! Form::radio('status', 'available', false, ['required' => '']) !!}
-                            Available
+                            {!! Form::radio('status', 'claimed', false, ['required' => '']) !!}
+                            Claimed
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('status', 'unavailable', false, ['required' => '']) !!}
-                            Unavailable
+                            {!! Form::radio('status', 'pending', false, ['required' => '']) !!}
+                            Pending
                         </label>
                     </div>
                     

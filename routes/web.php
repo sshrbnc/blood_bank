@@ -1,6 +1,11 @@
 <?php
 
+use App\Donor;
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', ['uses' =>'AarticleController@home', 'as' => 'article.home']);
+// Route::get('/{trans_id}', ['uses' =>'PatientsController@show', 'as' => 'transaction']);
+// Route::post('/transaction', ['uses' =>'TransactionsController@index', 'as' => 'transaction.index']);
 Route::get('/donar', ['uses' =>'DonarController@index', 'as' => 'donar.index']);
 Route::get('/donar/{id}', ['uses' =>'DonarController@show', 'as' => 'donar.show']);
 Route::get('/blog', ['uses' =>'BlogController@index', 'as' => 'blog.index']);
@@ -8,6 +13,11 @@ Route::get('/blog/{id}', ['uses' =>'BlogController@show', 'as' => 'blog.show']);
 Route::get('/manuel', ['uses' =>'PageController@manuel', 'as' => 'page.manuel']);
 Route::get('/about-us', ['uses' =>'PageController@about', 'as' => 'page.about']);
 Route::get('/contact-us', ['uses' =>'PageController@contact', 'as' => 'page.contact']);
+
+Route::any('/transaction',function(){
+    $q = Input::get ('q');
+     $donor = Donor::findOrFail($q);
+});
 
 
 //Route::get('/', function () { return redirect('/admin/home'); });

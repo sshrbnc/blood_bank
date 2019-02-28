@@ -12,7 +12,7 @@
         <div class="panel-heading">
             @lang('quickadmin.qa_create')
         </div>
-        
+
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -132,14 +132,14 @@
                     @endif
                     <div>
                         <label>
-                            {!! Form::radio('status', 'available', false, ['required' => '']) !!}
-                            Available
+                            {!! Form::radio('status', 'claimed', false, ['required' => '']) !!}
+                            Claimed
                         </label>
                     </div>
                     <div>
                         <label>
-                            {!! Form::radio('status', 'unavailable', false, ['required' => '']) !!}
-                            Unavailable
+                            {!! Form::radio('status', 'pending', false, ['required' => '']) !!}
+                            Pending
                         </label>
                     </div>
                     

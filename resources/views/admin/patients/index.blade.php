@@ -39,6 +39,7 @@
                         <th>Age</th>
                         <th>Contact Number</th>
                         <th>Details Information</th>
+
                         @if( request('show_deleted') == 1 )
                             <th>&nbsp;</th>
                         @else

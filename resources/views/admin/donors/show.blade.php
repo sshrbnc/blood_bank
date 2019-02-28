@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>Name</th>
+                        <th>Name</th> 
                             <td field-key='name'>{{ $donor->name }}</td>
                         </tr>
                         <tr>
