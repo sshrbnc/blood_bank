@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use DB;
 use App\BloodRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,8 @@ class BloodRequestsController extends Controller
     public function index()
     {
         //
+        $blood_requests = BloodRequests::all()->toArray();
+
         return view('admin.blood_requests.index', compact('blood_requests'));
     }
 

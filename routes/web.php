@@ -57,5 +57,4 @@ Route::delete('donors_perma_del/{id}', ['uses' => 'Admin\DonorsController@perma_
 //Blood Requests
 Route::resource('blood_requests', 'Admin\BloodRequestsController');
 
-
 });
