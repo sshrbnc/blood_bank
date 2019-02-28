@@ -3,7 +3,7 @@
 @section('content')
     <div class="row" id="loginHeader">
     <div class="col-md-12">
-        <h1 class="title"><img class="prc_logo" src="assets/img/prc_logo.png"> &nbsp; Philippine Red Cross - Iloilo Chapter</h1>
+        <h1 class="title"><img class="prc_logo" src="assets/img/prc_logo.png">&nbsp; Philippine Red Cross - Iloilo Chapter</h1>
     </div>
     </div>
     <div class="row">
@@ -66,7 +66,7 @@
                         </div> -->
 
                        <!--  <div class="form-group"> -->
-                                <button type="submit" class="btn btn-light text-bold col-md-12" id="loginSubmit">
+                                <button type="submit" class="btn btn-light text-bold col-md-12 formContents" id="loginSubmit">
                                     Log in
                                    <!--  @lang('quickadmin.qa_login') -->
                                 </button>

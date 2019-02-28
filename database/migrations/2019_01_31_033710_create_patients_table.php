@@ -19,6 +19,7 @@ class CreatePatientsTable extends Migration
                 $table->string('name');
                 $table->string('blood_type');
                 $table->string('address');
+                $table->date('birthday');
                 $table->integer('age');
                 $table->integer('contact_number');
                 $table->string('details_information')->nullable();

@@ -16,16 +16,17 @@ class CreateBloodRequestsTable extends Migration
         if(! Schema::hasTable('blood_requests')) {
             Schema::create('blood_requests', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('status');
-                $table->integer('quantity');
+                $table->integer('quantity')->default(1);
                 $table->string('hospital');
                 $table->string('component');
+                $table->string('blood_type');
+                $table->string('status');
 
-                $table->unsignedInteger('patient_id');
-                $table->foreign('patient_id')->references('id')->on('patients');
+                // $table->unsignedInteger('patient_id');
+                // $table->foreign('patient_id')->references('id')->on('patients');
 
-                $table->unsignedInteger('donor_id');
-                $table->foreign('donor_id')->references('id')->on('patients');
+                // $table->unsignedInteger('donor_id');
+                // $table->foreign('donor_id')->references('id')->on('patients');
 
                 $table->unsignedInteger('employee_id');
                 $table->foreign('employee_id')->references('id')->on('users');

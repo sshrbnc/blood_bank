@@ -16,6 +16,10 @@
 	border-radius: 10px;
 }
 
+input{
+	font-size: 100px;
+}
+
 #formCont{
 	margin-top: 15%;
 }
