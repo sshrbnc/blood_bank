@@ -46,7 +46,7 @@
         <div class="form-group row">
             {{form::label('component', 'Component:',['class' => 'col-sm-2 label_name'])}}
 
-            {{form::select('component', array(''=>'','PRBC' => 'PRBC', 'WBC' => 'WBC','Whole_blood' => 'Whole Blood','Platelets' => 'Platelets','Frozen_plasma' => 'Frozen Plasma', 'Cryoprecipitate ' => 'Cryoprecipitate ','Cryosupernate' => 'Cryosupernate'), null,  array('class'=>'input_field col-sm-10'))}}
+            {{form::select('component', array(''=>'','PRBC' => 'PRBC', 'WBC' => 'WBC','Whole blood' => 'Whole Blood','Platelets' => 'Platelets','Frozen Plasma' => 'Frozen Plasma', 'Cryoprecipitate ' => 'Cryoprecipitate ','Cryosupernate' => 'Cryosupernate'), null,  array('class'=>'input_field col-sm-10'))}}
         </div>
 
         <div class="form-group row">

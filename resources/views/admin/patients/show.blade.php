@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="row">
-    <a href="{{ route('admin.patients.index') }}" class="fas fa-angle-left">Back to list</a>
+    <a href="{{ route('admin.patients.index') }}" ><span>&nbsp; &nbsp;</span>
+    <i class="fas fa-angle-left back_arrow"></i>
+        &nbsp;<span class="back_to">Back to List</span> 
+    </a>
+
     </div>
     <div class="patient_blood_type">
         {{$patient->blood_type}}

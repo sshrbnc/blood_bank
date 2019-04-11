@@ -7,13 +7,20 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Blog' => $baseDir . '/app/Blog.php',
+    'App\\Blood' => $baseDir . '/app/Blood.php',
     'App\\BloodRequests' => $baseDir . '/app/BloodRequests.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Donation' => $baseDir . '/app/Donation.php',
     'App\\Donor' => $baseDir . '/app/Donor.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AarticleController' => $baseDir . '/app/Http/Controllers/AarticleController.php',
     'App\\Http\\Controllers\\Admin\\BlogsController' => $baseDir . '/app/Http/Controllers/Admin/BlogsController.php',
     'App\\Http\\Controllers\\Admin\\BloodRequestsController' => $baseDir . '/app/Http/Controllers/Admin/BloodRequestsController.php',
+
+    'App\\Http\\Controllers\\Admin\\BloodsController' => $baseDir . '/app/Http/Controllers/Admin/BloodsController.php',
+    'App\\Http\\Controllers\\Admin\\DonationsController' => $baseDir . '/app/Http/Controllers/Admin/DonationsController.php',
+
+
     'App\\Http\\Controllers\\Admin\\DonorsController' => $baseDir . '/app/Http/Controllers/Admin/DonorsController.php',
     'App\\Http\\Controllers\\Admin\\PatientsController' => $baseDir . '/app/Http/Controllers/Admin/PatientsController.php',
     'App\\Http\\Controllers\\Admin\\ProfilesController' => $baseDir . '/app/Http/Controllers/Admin/ProfilesController.php',
@@ -40,11 +47,14 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Admin\\StoreBlogsRequest' => $baseDir . '/app/Http/Requests/Admin/StoreBlogsRequest.php',
+    'App\\Http\\Requests\\Admin\\StoreBloodsRequest' => $baseDir . '/app/Http/Requests/Admin/StoreBloodsRequest.php',
+    'App\\Http\\Requests\\Admin\\StoreDonationsRequest' => $baseDir . '/app/Http/Requests/Admin/StoreDonationsRequest.php',
     'App\\Http\\Requests\\Admin\\StoreDonorsRequest' => $baseDir . '/app/Http/Requests/Admin/StoreDonorsRequest.php',
     'App\\Http\\Requests\\Admin\\StoreProfilesRequest' => $baseDir . '/app/Http/Requests/Admin/StoreProfilesRequest.php',
     'App\\Http\\Requests\\Admin\\StoreRolesRequest' => $baseDir . '/app/Http/Requests/Admin/StoreRolesRequest.php',
     'App\\Http\\Requests\\Admin\\StoreUsersRequest' => $baseDir . '/app/Http/Requests/Admin/StoreUsersRequest.php',
     'App\\Http\\Requests\\Admin\\UpdateBlogsRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateBlogsRequest.php',
+    'App\\Http\\Requests\\Admin\\UpdateBloodsRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateBloodsRequest.php',
     'App\\Http\\Requests\\Admin\\UpdateDonorsRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateDonorsRequest.php',
     'App\\Http\\Requests\\Admin\\UpdateProfilesRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateProfilesRequest.php',
     'App\\Http\\Requests\\Admin\\UpdateRolesRequest' => $baseDir . '/app/Http/Requests/Admin/UpdateRolesRequest.php',

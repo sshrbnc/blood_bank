@@ -3,9 +3,7 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <ul class="sidebar-menu">
-
-             
+        <ul class="sidebar-menu">            
 
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">
@@ -51,13 +49,13 @@
                 </ul>
             </li>@endcan
             
-            @can('profile_access')
+            <!-- @can('profile_access')
             <li>
                 <a href="{{ route('admin.profiles.index') }}">
                     <i class="fa fa-gears"></i>
                     <span>@lang('quickadmin.profile.title')</span>
                 </a>
-            </li>@endcan
+            </li>@endcan -->
 
             @can('donor_access')
             <li>
@@ -72,6 +70,14 @@
                 <a href="{{ route('admin.patients.index') }}">
                     <i class="fa fa-wheelchair"></i>
                     <span>Patients</span>
+                </a>
+            </li>@endcan
+
+            @can('blood_access')
+            <li>
+                <a href="{{ route('admin.bloods.index') }}">
+                    <i class="fa fa-tint"></i>
+                    <span>Bloods</span>
                 </a>
             </li>@endcan
 

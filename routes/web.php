@@ -4,20 +4,17 @@ use App\Donor;
 use Illuminate\Support\Facades\Input;
 
 Route::get('/', ['uses' =>'AarticleController@home', 'as' => 'article.home']);
-// Route::get('/{trans_id}', ['uses' =>'PatientsController@show', 'as' => 'transaction']);
-// Route::post('/transaction', ['uses' =>'TransactionsController@index', 'as' => 'transaction.index']);
 Route::get('/donar', ['uses' =>'DonarController@index', 'as' => 'donar.index']);
 Route::get('/donar/{id}', ['uses' =>'DonarController@show', 'as' => 'donar.show']);
-Route::get('/blog', ['uses' =>'BlogController@index', 'as' => 'blog.index']);
-Route::get('/blog/{id}', ['uses' =>'BlogController@show', 'as' => 'blog.show']);
-Route::get('/manuel', ['uses' =>'PageController@manuel', 'as' => 'page.manuel']);
-Route::get('/about-us', ['uses' =>'PageController@about', 'as' => 'page.about']);
-Route::get('/contact-us', ['uses' =>'PageController@contact', 'as' => 'page.contact']);
+Route::get('transaction/{trans_code}', ['uses' =>'TransactionsController@show', 'as' => 'transaction.show']);
 
-Route::any('/transaction',function(){
-    $q = Input::get ('q');
-     $donor = Donor::findOrFail($q);
-});
+// Route::get('/blog', ['uses' =>'BlogController@index', 'as' => 'blog.index']);
+// Route::get('/blog/{id}', ['uses' =>'BlogController@show', 'as' => 'blog.show']);
+// Route::get('/manuel', ['uses' =>'PageController@manuel', 'as' => 'page.manuel']);
+// Route::get('/about-us', ['uses' =>'PageController@about', 'as' => 'page.about']);
+// Route::get('/contact-us', ['uses' =>'PageController@contact', 'as' => 'page.contact']);
+
+
 
 
 //Route::get('/', function () { return redirect('/admin/home'); });
@@ -61,12 +58,21 @@ Route::get('/blood_requests/create/{id}', ['uses' => 'Admin\PatientsController@c
 Route::delete('patients_perma_del/{id}', ['uses' => 'Admin\PatientsController@perma_del', 'as' => 'patients.perma_del']);
 
 //Donors
+ // Route::get('donors/{id}', [
+ //    'as' => 'donors.create',
+ //        'uses' => 'DonorsController@create'
+ //    ]);
+// Route::get('/create/{id}', 'Admin\DonorsController@create');
 Route::resource('donors', 'Admin\DonorsController');
 Route::post('donors_mass_destroy', ['uses' => 'Admin\DonorsController@massDestroy', 'as' => 'donors.mass_destroy']);
 Route::post('donors_restore/{id}', ['uses' => 'Admin\DonorsController@restore', 'as' => 'donors.restore']);
 Route::delete('donors_perma_del/{id}', ['uses' => 'Admin\DonorsController@perma_del', 'as' => 'donors.perma_del']);
 
-//Blood Requests
+Route::get('donations/create/{id}', ['uses' => 'Admin\DonorsController@newDonation', 'as' => 'donors.newDonation']);
+Route::delete('donations_perma_del/{id}', ['uses' => 'Admin\DonationsController@perma_del', 'as' => 'donations.perma_del']);
+Route::post('donations_restore/{id}', ['uses' => 'Admin\DonationsController@restore', 'as' => 'donations.restore']);
+
+//Blood Request Requests
 Route::resource('blood_requests', 'Admin\BloodRequestsController');
 Route::post('/blood_requests/{id}', ['uses' => 'Admin\BloodRequestsController@store', 'as' => 'blood_requests.store']);  
 
@@ -75,6 +81,16 @@ Route::post('/blood_requests/{id}', ['uses' => 'Admin\BloodRequestsController@st
 //     return $id;
 // }]);
 
+
+
+//Blood Requests
+Route::resource('bloods', 'Admin\BloodsController');
+Route::post('bloods_mass_destroy', ['uses' => 'Admin\BloodsController@massDestroy', 'as' => 'bloods.mass_destroy']);
+Route::post('bloods_restore/{id}', ['uses' => 'Admin\BloodsController@restore', 'as' => 'bloods.restore']);
+Route::delete('bloods_perma_del/{id}', ['uses' => 'Admin\BloodsController@perma_del', 'as' => 'bloods.perma_del']);
+
+//Donations
+Route::resource('donations', 'Admin\DonationsController');
 
 
 });

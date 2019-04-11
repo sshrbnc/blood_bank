@@ -2,6 +2,8 @@
 
 @section('content')
     <h3 class="page-title">@lang('quickadmin.users.title')</h3>
+    <a href="{{ route('admin.users.index') }}" class="btn btn-success"><i class="fas fa-angle-left"></i>&nbsp; Back to list</a>
+    <p></p>
     
     {!! Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id]]) !!}
 
@@ -12,7 +14,7 @@
 
         <div class="panel-body">
             <div class="row">
-                <div class="col-xs-12 form-group">
+                <div class="form-group col-md-6">
                     {!! Form::label('name', trans('quickadmin.users.fields.name').'*', ['class' => 'control-label']) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
@@ -22,9 +24,7 @@
                         </p>
                     @endif
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
+                <div class="form-group col-md-6">
                     {!! Form::label('email', trans('quickadmin.users.fields.email').'*', ['class' => 'control-label']) !!}
                     {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 form-group">
+                <div class="form-group col-md-6">
                     {!! Form::label('password', trans('quickadmin.users.fields.password').'*', ['class' => 'control-label']) !!}
-                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '']) !!}
+                    {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('password'))
                         <p class="help-block">
@@ -46,9 +46,7 @@
                         </p>
                     @endif
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
+                <div class="form-group col-md-6">
                     {!! Form::label('role_id', trans('quickadmin.users.fields.role').'*', ['class' => 'control-label']) !!}
                     {!! Form::select('role_id', $roles, old('role_id'), ['class' => 'form-control select2', 'required' => '']) !!}
                     <p class="help-block"></p>
@@ -59,7 +57,6 @@
                     @endif
                 </div>
             </div>
-            
         </div>
     </div>
 

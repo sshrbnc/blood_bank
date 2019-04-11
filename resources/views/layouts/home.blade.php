@@ -27,8 +27,11 @@
     <link rel="stylesheet" href="assets/css/User-Article.css">
     <link rel="stylesheet" href="assets/css/Status.css">
     <link rel="stylesheet" href="assets/css/Transaction.css">
+    <link rel="stylesheet" href="assets/css/sidebar.css">
+    <link rel="stylesheet" href="adminlte/css/skins/skin-blue.css">   
     <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 </head>
 
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">
@@ -59,7 +62,11 @@
         </div>
 
 
+
         <form action="/transaction" method="POST" role="search">
+
+        <!-- <form action="/transaction" method="POST" role="search">
+
             {{ csrf_field() }}
             <div class="input-group">
                 <input type="text" class="form-control" name="q" placeholder="Search users"> 
@@ -69,10 +76,18 @@
                     </button>
                 </span>
             </div>
-        </form>
+        </form> -->
 
    
+
+
+        <form action="{{ route('transaction') }}" method="GET" class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
+            @csrf
+            <input class="form-control mr-lg-2" type="search" placeholder="Enter Transaction ID" aria-label="Search">
+            <button type="submit" class="search_button" type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </nav>
+    
 <div style="background-color:rgb(238,244,247);">
 <div class="container2" style="margin: 0;">
     <div class="row" style="margin:0px;">

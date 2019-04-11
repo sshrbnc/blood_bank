@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang('quickadmin.qa_dashboard')</div>
@@ -13,6 +13,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
         <form action="/search" method="get">
             <div class="input-group">
@@ -22,7 +23,46 @@
                 </span>
             </div>
         </form>
+=======
+    </div> -->
+    <div class="col-md-6 center">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Available Bloods
+            </div>
+
+            <div class="panel-body table-responsive">            
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>                                                
+                            <th>Blood Type</th>                        
+                            <th>In Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
+                        <tr>                              
+                            <td field-key='blood_type'>A+</td>                                
+                            <td field-key='stock'>90</td>                                
+                        </tr>    
+                        <tr>                              
+                            <td field-key='blood_type'>A-</td>                                
+                            <td field-key='stock'>67</td>                                
+                        </tr>               
+                        <tr>                              
+                            <td field-key='blood_type'>B+</td>                                
+                            <td field-key='stock'>44</td>                                
+                        </tr> 
+                        <tr>                              
+                            <td field-key='blood_type'>B-</td>                                
+                            <td field-key='stock'>10</td>                                
+                        </tr> 
+                    </tbody>        
+                </table>
+            </div>
+        </div>
+
     </div>
+
     <!-- <form action="/transaction" method="POST" role="search">
         {{ csrf_field() }}
         <div class="input-group">

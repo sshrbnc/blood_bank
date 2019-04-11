@@ -392,13 +392,20 @@ class ComposerStaticInit3ff4a5f5e1f087c298e6fdbda7d9a873
 
     public static $classMap = array (
         'App\\Blog' => __DIR__ . '/../..' . '/app/Blog.php',
+        'App\\Blood' => __DIR__ . '/../..' . '/app/Blood.php',
         'App\\BloodRequests' => __DIR__ . '/../..' . '/app/BloodRequests.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Donation' => __DIR__ . '/../..' . '/app/Donation.php',
         'App\\Donor' => __DIR__ . '/../..' . '/app/Donor.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AarticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/AarticleController.php',
         'App\\Http\\Controllers\\Admin\\BlogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BlogsController.php',
         'App\\Http\\Controllers\\Admin\\BloodRequestsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BloodRequestsController.php',
+
+        'App\\Http\\Controllers\\Admin\\BloodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BloodsController.php',
+        'App\\Http\\Controllers\\Admin\\DonationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DonationsController.php',
+
+
         'App\\Http\\Controllers\\Admin\\DonorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DonorsController.php',
         'App\\Http\\Controllers\\Admin\\PatientsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PatientsController.php',
         'App\\Http\\Controllers\\Admin\\ProfilesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfilesController.php',
@@ -425,11 +432,14 @@ class ComposerStaticInit3ff4a5f5e1f087c298e6fdbda7d9a873
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Admin\\StoreBlogsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreBlogsRequest.php',
+        'App\\Http\\Requests\\Admin\\StoreBloodsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreBloodsRequest.php',
+        'App\\Http\\Requests\\Admin\\StoreDonationsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreDonationsRequest.php',
         'App\\Http\\Requests\\Admin\\StoreDonorsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreDonorsRequest.php',
         'App\\Http\\Requests\\Admin\\StoreProfilesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreProfilesRequest.php',
         'App\\Http\\Requests\\Admin\\StoreRolesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreRolesRequest.php',
         'App\\Http\\Requests\\Admin\\StoreUsersRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/StoreUsersRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateBlogsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateBlogsRequest.php',
+        'App\\Http\\Requests\\Admin\\UpdateBloodsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateBloodsRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateDonorsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateDonorsRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateProfilesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateProfilesRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateRolesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateRolesRequest.php',
