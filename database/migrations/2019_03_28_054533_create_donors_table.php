@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,14 +17,14 @@ class CreateDonorsTable extends Migration
             Schema::create('donors', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
-                $table->string('blood_type');
-                $table->string('patient');
-                $table->integer('patient_id');
-                $table->integer('phone_number');
-                $table->string('status')->nullable();
-                $table->date('last_donation')->nullable();
-                $table->string('details_information')->nullable();
-
+                $table->string('blood_type');              
+                $table->date('birthday');
+                $table->string('sex');
+                $table->string('address');
+                $table->string('phone_number', 13); //#updated
+                $table->integer('employee_id')->unsigned();
+                $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
+                
                 $table->timestamps();
                 $table->softDeletes();
 

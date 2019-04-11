@@ -108,13 +108,13 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->role_id, [1, 2, 3, 4, 5]);
         });
         Gate::define('donor_create', function ($user) {
-            return in_array($user->role_id, [1, 2, 3, 4, 5]);
+            return in_array($user->role_id, [1, 3, 5]);
         });
         Gate::define('donor_edit', function ($user) {
-            return in_array($user->role_id, [1, 2, 3, 4]);
+            return in_array($user->role_id, [1, 2, 3, 4, 5]);
         });
         Gate::define('donor_view', function ($user) {
-            return in_array($user->role_id, [1, 2, 3, 4]);
+            return in_array($user->role_id, [1, 2, 3, 4, 5]);
         });
         Gate::define('donor_delete', function ($user) {
             return in_array($user->role_id, [1, 2, 3]);
@@ -154,7 +154,7 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->role_id, [1, 2, 3]);
         });
 
-        //Auth gates for: Donor's Name
+        //Auth gates for: Donor's Name Access
         Gate::define('donor_name_access', function ($user) {
             return in_array($user->role_id, [1, 3, 5]);
         });
@@ -166,7 +166,29 @@ class AuthServiceProvider extends ServiceProvider
 
         //Auth gates for: Donor ID Access
         Gate::define('donor_id_access', function ($user) {
-            return in_array($user->role_id, [4]);
+            return in_array($user->role_id, [2, 4]);
         }); 
+
+        //Auth gates for: Blood
+        Gate::define('blood_access', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        }); 
+        Gate::define('blood_create', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        });
+        Gate::define('blood_edit', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        });
+        Gate::define('blood_view', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        });
+        Gate::define('blood_delete', function ($user) {
+            return in_array($user->role_id, [1, 3]);
+        });
+
+        //View Donor's Donation Weight and Blood Count
+        Gate::define('donation_w_bc', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        });
     }
 }

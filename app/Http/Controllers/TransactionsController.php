@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Donor;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -15,36 +16,13 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($trans_code)
     {
-        $q = Input::get('q');
-        $donor = Donor::findOrFail($q);
+        $trans_code = $users = DB::table('transaction')->where('trans_code', $trans_code)->get();
 
-        return view('transaction');
+        return view('transaction', compact('trans_code'));
     }
 
-    // public function show()
-    // {
-    
-    //     $q = Input::get('q');
-    //     $donor = Donor::findOrFail($q);
-    //     // $donor_name = Input::get('trans_donor')
-    //     // $donor = Donor::findOrFail($trans_donor);
 
-    //     return view('transaction', compact('donor'));
-    // }
 }
 
-// use App\User;
-// use Illuminate\Support\Facades\Input;
-// Route::get ( '/', function () {
-//     return view ( 'welcome' );
-// } );
-// Route::any ( '/search', function () {
-//     $q = Input::get ( 'q' );
-//     $user = User::where ( 'name', 'LIKE', '%' . $q . '%' )->orWhere ( 'email', 'LIKE', '%' . $q . '%' )->get ();
-//     if (count ( $user ) > 0)
-//         return view ( 'welcome' )->withDetails ( $user )->withQuery ( $q );
-//     else
-//         return view ( 'welcome' )->withMessage ( 'No Details found. Try to search again !' );
-// } );

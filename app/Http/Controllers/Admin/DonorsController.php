@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Donor;
+use App\Donation;
+use App\Blood;
+use DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreDonorsRequest;
 use App\Http\Requests\Admin\UpdateDonorsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use Illuminate\Database\Eloquent\Collection;
 
 class DonorsController extends Controller
 {
@@ -33,8 +39,7 @@ class DonorsController extends Controller
         } else {
             $donors = Donor::all();
         }
-       
-        return view('admin.donors.index', compact('donors'));
+        return view('admin.donors.index', compact('donors', 'last_donation'));
     }
 
     /**
@@ -47,8 +52,14 @@ class DonorsController extends Controller
         if (! Gate::allows('donor_create')) {
             return abort(401);
         }
-        
+
         return view('admin.donors.create');
+    }
+
+    public function newDonation($id)
+    {
+        $donor = DB::table('donors')->where('id', $id)->get();
+        return view('admin.donations.create', compact('donor'));
     }
 
     /**
@@ -57,14 +68,34 @@ class DonorsController extends Controller
      * @param  \App\Http\Requests\StoreDonorsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDonorsRequest $request)
+    public function store(Request $request)
     {
         if (! Gate::allows('donor_create')) {
             return abort(401);
         }
-        $request = $this->saveFiles($request);
-        $donor = Donor::create($request->all());
 
+        request()->validate([
+            'name' => 'min:1|max:30|required',
+            'blood_type' => 'required',            
+            'birthday' => 'required|date_format:'.config('app.date_format'),
+            'sex' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
+        ]);
+
+        if(Auth::check()){
+            $donor = new Donor;
+            $donor->name = $request->input('name');
+            $donor->blood_type = $request->input('blood_type');
+            $donor->birthday = $request->input('birthday');
+            $donor->sex = $request->input('sex');
+            $donor->address = $request->input('address');
+            $donor->phone_number = $request->input('phone_number');
+            $donor->employee_id = Auth::user()->id;
+
+            $donor->save();
+        }
+        
         return redirect()->route('admin.donors.index');
     }
 
@@ -92,18 +123,36 @@ class DonorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDonorsRequest $request, $id)
+    public function update(Request $request, $id)
     {
         if (! Gate::allows('donor_edit')) {
             return abort(401);
         }
-        $request = $this->saveFiles($request);
-        $donor = Donor::findOrFail($id);
-        $donor->update($request->all());
+
+        request()->validate([
+            'name' => 'min:1|max:30|required|string',
+            'blood_type' => 'required',            
+            'birthday' => 'required|date_format:'.config('app.date_format'),
+            'sex' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
+        ]);
+
+        if(Auth::check()){
+            $donor = Donor::find($id);
+            $donor->name = $request->input('name');
+            $donor->blood_type = $request->input('blood_type');
+            $donor->birthday = $request->input('birthday');
+            $donor->sex = $request->input('sex');
+            $donor->address = $request->input('address');
+            $donor->phone_number = $request->input('phone_number');
+            $donor->employee_id = Auth::user()->id;
+
+            $donor->update();
+        }
 
         return redirect()->route('admin.donors.index');
     }
-
 
     /**
      * Display Donor.
@@ -117,8 +166,22 @@ class DonorsController extends Controller
             return abort(401);
         }
         $donor = Donor::findOrFail($id);
+        $donation = Donation::where('donor_id', $id)->get();
+        
+        $date_now_wbc = Carbon::now();
+        $date_now_rbc = Carbon::now();
+        $date_now_platelet = Carbon::now();
+        $date_now_plasma = Carbon::now();
+        $date_now_cryo= Carbon::now();
+        $date_now_wcg= Carbon::now();
+        $expdatewbc = $date_now_wbc->addMonth()->format('m-d-Y');
+        $expdaterbc = $date_now_rbc->addMonths(2)->format('m-d-Y');
+        $expdateplatelet = $date_now_platelet->addMonths(3)->format('m-d-Y');
+        $expdateplasma = $date_now_plasma->addMonths(4)->format('m-d-Y');
+        $expdatecryo = $date_now_cryo->addMonths(5)->format('m-d-Y');
+        $expdatewcg = $date_now_wcg->addMonths(6)->format('m-d-Y');
 
-        return view('admin.donors.show', compact('donor'));
+        return view('admin.donors.show', compact('donor', 'donation', 'expdatewbc', 'expdaterbc', 'expdateplatelet', 'expdateplasma', 'expdatecryo', 'expdatewcg'));
     }
 
     /**
@@ -134,6 +197,8 @@ class DonorsController extends Controller
         }
         $donor = Donor::findOrFail($id);
         $donor->delete();
+        // $donations = Donation::where('donor_id', $id)->get();
+        // $donations->delete();
 
         return redirect()->route('admin.donors.index');
     }
@@ -188,6 +253,8 @@ class DonorsController extends Controller
         }
         $donor = Donor::onlyTrashed()->findOrFail($id);
         $donor->forceDelete();
+        // $donations = Donation::onlyTrashed()->where('donor_id', $id)->get();
+        // $donations->forceDelete();
 
         return redirect()->route('admin.donors.index');
     }

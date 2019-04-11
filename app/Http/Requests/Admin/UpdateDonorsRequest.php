@@ -2,6 +2,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests;
 
 class UpdateDonorsRequest extends FormRequest
 {
@@ -24,12 +25,16 @@ class UpdateDonorsRequest extends FormRequest
     {
         return [
             'name' => 'min:1|max:30|required',
-            'blood_type' => 'required',
-            'patient' => 'min:1|max:30|required',
-            'patient_id' => 'required',
-            'phone_number' => 'required|integer',
+            'blood_type' => 'required',            
+            'birthday' => 'required|date_format:'.config('app.date_format'),
+            'age' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
+            'weight' => 'required',
+            'blood_count' => 'required',
             'status' => 'required',
-            'last_donation' => 'required|date_format:'.config('app.date_format'),
+            'date_donated' => 'required|date_format:'.config('app.date_format'),
         ];
     }
 }

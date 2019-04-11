@@ -6,7 +6,7 @@
 
     @can('donor_create')
     <p>
-        <a href="{{ route('admin.donors.create') }}" class="btn btn-success">Add New</a>
+        <a href="{{ route('admin.donors.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>&nbsp; Add New </a>
     </p>
     @endcan
     
@@ -32,15 +32,12 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
-                        @can('donor_id_access')<th>Donor ID</th>@endcan
+                        @can('donor_id_access')<th>Donor ID</th>@endcan                        
                         @can('donor_name_access')<th>Name</th>@endcan
                         <th>Blood Type</th>
-                        <th>Patient</th>
-                        <th>Patient ID</th>
-                        <th>Phone Number</th>
-                        <th>Status</th>
                         <th>Last Donation</th>
-                        @can('details_information_access')<th>Details Information</th>@endcan
+                        <th>Phone Number</th>
+                        <th>Address</th>
 
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -57,15 +54,12 @@
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
-                                @can('donor_id_access')<td field-key='id'>{{ $donor->id }}</td>@endcan
-                                @can('donor_name_access')<td field-key='name'>{{ $donor->name }}</td>@endcan
-                                <td field-key='blood_type'>{{ $donor->blood_type }}</td>                                
-                                <td field-key='patient'>{{ $donor->patient }}</td>
-                                <td field-key='patient_id'>{{ $donor->patient_id }}</td>
+                                @can('donor_id_access')<td field-key='id'>{{ $donor->id }}</td>@endcan  
+                                @can('donor_name_access')<td field-key='name'>{{ $donor->name }}</td>@endcan                        
+                                <td field-key='blood_type'>{{ $donor->blood_type }}</td>   
+                                <td field-key='last_donation'>Jan 22 17</td>
                                 <td field-key='phone_number'>{{ $donor->phone_number }}</td>
-                                <td field-key='status'>{{ $donor->status }}</td>
-                                <td field-key='last_donation'>{{ $donor->last_donation }}</td>
-                                @can('details_information_access')<td field-key='details_information'>{!! $donor->details_information !!}</td>@endcan
+                                <td field-key='address'>{{ $donor->address }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     @can('donor_delete')
@@ -90,16 +84,18 @@
                                 @else
                                 <td>
                                     @can('donor_view')
-                                    <a href="{{ route('admin.donors.show',[$donor->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.donors.show',[$donor->id]) }}" class="btn btn-xs btn-primary">View</a>
                                     @endcan
                                     @can('donor_edit')
-                                    <a href="{{ route('admin.donors.edit',[$donor->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
-                                    @endcan
+                                    <a href="{{ route('admin.donors.edit',[$donor->id]) }}" class="btn btn-xs btn-info">Edit</a>
+                                    @endcan                                  
+
                                     @can('donor_delete')
+                                        <!-- <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete_modal">Delete</button> -->
                                         {!! Form::open(array(
                                             'style' => 'display: inline-block;',
                                             'method' => 'DELETE',
-                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                            'onsubmit' => "return confirm('Sure?');",
                                             'route' => ['admin.donors.destroy', $donor->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                         {!! Form::close() !!}
@@ -110,7 +106,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="15">@lang('quickadmin.qa_no_entries_in_table')</td>
+                            <td colspan="15">No Entries in Table</td>
                         </tr>
                     @endif
                 </tbody>        
