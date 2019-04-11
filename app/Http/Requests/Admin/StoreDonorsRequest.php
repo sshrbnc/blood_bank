@@ -27,7 +27,7 @@ class StoreDonorsRequest extends FormRequest
             'blood_type' => 'required',
             'patient' => 'min:1|max:30|required',
             'patient_id' => 'required|integer',
-            'phone_number' => 'required|integer',
+            'phone_number' => 'required',
             'status' => 'required',
             'last_donation' => 'required|date_format:'.config('app.date_format'),
         ];

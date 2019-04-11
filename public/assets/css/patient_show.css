@@ -1,0 +1,33 @@
+.patient_blood_type{
+	font-weight: bold; 
+	font-size: 100px; 
+	float: right; 
+	color: #1a2226; 
+	padding-right: 10%;
+}
+
+.patient_name{
+	font-family: Roboto; 
+	font-weight: bold; 
+	font-size: 40px;
+}
+
+.patient_det{
+	font-family: Roboto; 
+	font-size: 15px;
+}
+
+.title{
+	font-size: 19px;
+}
+
+.patient_trans{
+	background-color: #fff; 
+	border: 1px solid 
+	gray; border-radius: 5px; 
+	padding: 5px;
+}
+
+
+/*create patient css*/
+

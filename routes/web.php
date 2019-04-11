@@ -38,8 +38,7 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-
-    Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 //Roles
 Route::resource('roles', 'Admin\RolesController');
@@ -57,7 +56,10 @@ Route::delete('profiles_perma_del/{id}', ['uses' => 'Admin\ProfilesController@pe
 
 //Patients
 Route::resource('patients', 'Admin\PatientsController');
-    
+Route::post('patients_restore/{id}', ['uses' => 'Admin\PatientsController@restore', 'as' => 'patients.restore']);
+Route::get('/blood_requests/create/{id}', ['uses' => 'Admin\PatientsController@createBR', 'as' => 'patients.newBloodRequests']);
+Route::delete('patients_perma_del/{id}', ['uses' => 'Admin\PatientsController@perma_del', 'as' => 'patients.perma_del']);
+
 //Donors
 Route::resource('donors', 'Admin\DonorsController');
 Route::post('donors_mass_destroy', ['uses' => 'Admin\DonorsController@massDestroy', 'as' => 'donors.mass_destroy']);
@@ -66,5 +68,16 @@ Route::delete('donors_perma_del/{id}', ['uses' => 'Admin\DonorsController@perma_
 
 //Blood Requests
 Route::resource('blood_requests', 'Admin\BloodRequestsController');
+Route::post('/blood_requests/{id}', ['uses' => 'Admin\BloodRequestsController@store', 'as' => 'blood_requests.store']);  
+
+// Route::get('/blood_requests/create/{id}', ['as' => 'blood_requests.create','uses' => 'Admin\BloodRequestsController@create', function ($id) {
+//     //
+//     return $id;
+// }]);
+
+
 
 });
+
+//search
+Route::get('/search', 'HomeController@search');

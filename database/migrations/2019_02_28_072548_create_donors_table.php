@@ -13,21 +13,21 @@ class CreateDonorsTable extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('donors')) {
-            Schema::create('donors', function (Blueprint $table) {
-                $table->increments('id');
+        Schema::create('donors', function (Blueprint $table) {
+             $table->increments('id');
                 $table->string('name');
                 $table->string('blood_type');
 
-                $table->string('gender');
-                $table->integer('weight');
-                $table->date('birthday');
-                $table->integer('age');
-                $table->integer('contact_number');
+                // $table->string('gender');
+                // $table->integer('weight');
+                // $table->date('birthday');
+                // $table->integer('age');
+                // $table->integer('contact_number');
 
-                // $table->string('patient');
-                // $table->integer('patient_id');
-                // $table->integer('phone_number');
+                $table->string('patient');
+                $table->integer('patient_id');
+                $table->integer('phone_number');
+                
                 $table->string('status')->nullable();
 
                 $table->date('last_donation')->nullable();
@@ -37,8 +37,7 @@ class CreateDonorsTable extends Migration
                 $table->softDeletes();
 
                 $table->index(['deleted_at']);
-            });
-        }
+        });
     }
 
     /**

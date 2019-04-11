@@ -33,4 +33,12 @@ class HomeController extends Controller
         return view('home', compact('donor'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('serach');
+        $patients = DB::table('patients')->where('name', 'like', '%'.$search.'%')->paginate(5);
+
+        return view('admin.patients.index', ['patients' => $patients]);
+    }
+
 }

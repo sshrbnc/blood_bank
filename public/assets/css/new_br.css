@@ -1,0 +1,21 @@
+.page-title{
+	font-weight: bold; 
+	font-size: 30px; 
+	color: #1a2226; 
+}
+
+.label_name{
+	font-weight: lighter;
+	font-family: Roboto; 
+	font-weight: bold; 
+	font-size: 15px;
+}
+.input_field{
+	border-radius: 5px;
+	width: 50%;
+	height: 30px;
+}
+
+.given_det{
+	padding-bottom: 10px;
+}

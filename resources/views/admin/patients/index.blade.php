@@ -25,7 +25,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped ">
+            <table class="table table-striped  {{ count($patients) > 0 ? 'datatable' : '' }} ">
                 <thead>
                     <tr>
                         @can('profile_delete')
@@ -47,28 +47,44 @@
                         @endif
                     </tr>
 
-
+                </thead>
+                <tbody>
                     @foreach($patients as $value)
                     <tr>
                         @can('profile_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
-                      
-                            <th>{{$value['name']}}</th>
-                            <th>{{$value['blood_type']}}</th>
-                            <th>{{$value['address']}}</th>
-                            <th>{{$value['birthday']}}</th>
-                             <th>{{$value['age']}}</th>
-                            <th>{{$value['contact_number']}}</th>
-                            <th>{{$value['details_information']}}</th>
-                        @endforeach
-                    </tr>
+                            <td>{{$value['name']}}</td>
+                            <td>{{$value['blood_type']}}</td>
+                            <td>{{$value['address']}}</td>
+                            <td>{{$value['birthday']}}</td>
+                            <td>{{$value['age']}}</td>
+                            <td>{{$value['contact_number']}}</td>
+                            <td>{{$value['details_information']}}</td>
+                            <td><a href="{{ route('admin.patients.show',$value['id']) }}" class="btn btn-xs btn-primary">View</a>
+                            @can('profile_delete')
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                        'route' => ['admin.patients.destroy', $value['id']])) !!}
+                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                            </td>
+                    </tr>    
+                    @endforeach
                     
-                </thead>
+                </tbody>    
+                
             </table>
         </div>
     </div>
+
 @stop
+
+
+
 
 @section('javascript') 
     <script>

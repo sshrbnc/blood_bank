@@ -12,10 +12,19 @@
             <div class="row">
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
+                        @can('donor_id_access')
                         <tr>
+                        <th>Donor ID</th> 
+                            <td field-key='name'>{{ $donor->id}}</td>
+                        </tr>
+                        @endcan
+                        <tr>
+
+                        @can('donor_name_access')
                         <th>Name</th> 
                             <td field-key='name'>{{ $donor->name }}</td>
                         </tr>
+                        @endcan
                         <tr>
                             <th>Blood Type</th>
                             <td field-key='blood_type'>{{ $donor->blood_type }}</td>

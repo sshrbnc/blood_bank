@@ -13,6 +13,15 @@
                 </div>
             </div>
         </div>
+
+        <form action="/search" method="get">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+        </form>
     </div>
     <!-- <form action="/transaction" method="POST" role="search">
         {{ csrf_field() }}

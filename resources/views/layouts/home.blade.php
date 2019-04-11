@@ -33,18 +33,9 @@
 
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">
         <div class="container1"><img class="prc_logo" src="assets/img/prc_logo.png"><a class="navbar-brand" href="/">&nbsp;Philippine Red Cross - Iloilo Chapter</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <!-- <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Home<br></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/donar">Donar</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/blog">Blog</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/manuel">Manuel</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/about-us">About Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/contact-us">Contact Us</a></li>
-                </ul>
-            </div> -->
-            <!-- <div class="col-lg-4" ></div> -->
-            <!-- <div class="col-lg-4" ></div> -->
+           
+
+
             <div class="col-lg-20 text-right" style="margin-top: -50px" >
                 @if (Auth::check())
                     <div style="color:white; width: 200%;">
@@ -57,13 +48,16 @@
                         {!! Form::open(['method'=>'POST','url'=>'/login'])  !!}
                             <input type="submit" value="Admin Panel" class="btn btn-primary">
                         {!! Form::close() !!}
+
                     </div>
-
-
                 @endif
+
+                 <div>
+        </div>
 
             </div>
         </div>
+
 
         <form action="/transaction" method="POST" role="search">
             {{ csrf_field() }}
@@ -78,10 +72,6 @@
         </form>
 
    
-        <!-- <form class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
-            <input class="form-control mr-lg-2" type="search" placeholder="Enter Transaction ID" aria-label="Search">
-            <button type="button" class="search_button" type="submit"><i class="fas fa-search"></i></button>
-        </form> -->
     </nav>
 <div style="background-color:rgb(238,244,247);">
 <div class="container2" style="margin: 0;">
@@ -135,10 +125,6 @@
     <p class="copyright" style="font-size:15px;padding-top:10px;">All Rigths Reserved © <?php echo date("Y"); ?>  </p>
 
 </div>
-
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>

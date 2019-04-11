@@ -7,6 +7,7 @@ use App\BloodRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Patient;
 
 class BloodRequestsController extends Controller
 {
@@ -19,7 +20,6 @@ class BloodRequestsController extends Controller
     {
         //
         $blood_requests = BloodRequests::all()->toArray();
-
         return view('admin.blood_requests.index', compact('blood_requests'));
     }
 
@@ -28,13 +28,13 @@ class BloodRequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
         //  if (! Gate::allows('user_create')) {
         //     return abort(401);
         // }
-        
         return view('admin.blood_requests.create');
     }
 
@@ -56,26 +56,21 @@ class BloodRequestsController extends Controller
             'quantity'  => 'required',
             'hospital'  => 'required',
             'component'  => 'required',
-            'blood_type'  => 'required',
-            'status'  => 'required'
             ]);
 
 
         if (Auth::check()){
-
             $blood_requests = new BloodRequests;
             $blood_requests->quantity = $request->input('quantity');
             $blood_requests->hospital = $request->input('hospital');
             $blood_requests->component = $request->input('component');
-            $blood_requests->blood_type = $request->input('blood_type');
-            $blood_requests->status = $request->input('status');
             $blood_requests->employee_id = Auth::user()->id;
+            $blood_requests->patient_id = $request['patient_id'];
             $blood_requests->save();  
         }
        
-
         if($blood_requests){
-            return redirect()->route('admin.blood_requests.index');
+            return redirect()->route('admin.patients.show', $request['patient_id']);
         }
     }
 

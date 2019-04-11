@@ -7,6 +7,8 @@
     window.printButtonTrans = '{{ trans("quickadmin.qa_print") }}';
     window.colvisButtonTrans = '{{ trans("quickadmin.qa_colvis") }}';
 </script>
+
+
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
@@ -33,15 +35,13 @@
 <script>
     window._token = '{{ csrf_token() }}';
 </script>
+
 <script>
     $.extend(true, $.fn.dataTable.defaults, {
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
         }
     });
-
-     
-
 </script>
 
 <script>
@@ -65,8 +65,13 @@
     });
 </script>
 
- 
-
-
+<!-- For blood type selection -->
+<!-- <script type="text/javascript">
+    $("#bloodTypeDropdown").select2({
+        placeholder:'Blood type:',
+        allowClear:true
+    });     
+</script>
+ -->
 
 @yield('javascript')
