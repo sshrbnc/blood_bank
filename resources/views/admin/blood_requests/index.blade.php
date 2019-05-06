@@ -23,12 +23,13 @@
     <div class="panel panel-default">
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped ">
+            <table class="table table-striped  {{ count($blood_requests) > 0 ? 'datatable' : '' }} ">
                 <thead>
                     <tr>
                         @can('profile_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
+                        <th>Transaction ID</th>
                         <th>Patient</th>
                         <th>Blood Component</th>
                         <th>Blood Type</th>
@@ -49,12 +50,29 @@
                         @can('profile_delete')
                             @if ( request('show_deleted') != 1 )<td style="text-align:center;"><input type="checkbox" id="select-all" /></td>@endif
                         @endcan
-                            <td>{{App\Patient::find( $value['patient_id'])->name }}</td>
+                            <td>{{$value['transaction_code']}}</td>
+                            <td>{{App\Patient::find($value['patient_id'])->firstname}} {{App\Patient::find($value['patient_id'])->middlename}} {{App\Patient::find($value['patient_id'])->lastname}} </td>
                             <td>{{$value['component']}}</td>
                             <td>{{App\Patient::find( $value['patient_id'])->blood_type }}</td>
                             <td>{{$value['quantity']}}</td>
                             <td>{{$value['hospital']}}</td>
                             <td>{{$value['status']}}</td>
+
+                            <td>
+                            <a href="{{ route('admin.br.assignDonor',['id'=> ($value['id'])]) }}" class="btn btn-xs btn-primary">Assign Donor</a>
+
+                            @can('profile_delete')
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                        'route' => ['admin.patients.destroy', $value['id']])) !!}
+                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endcan
+                            </td>
+
+
                         @endforeach
                     </tr>
                     </tbody>

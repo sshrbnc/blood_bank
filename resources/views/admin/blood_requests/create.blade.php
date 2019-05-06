@@ -6,7 +6,7 @@
 
     <div class ="row given_det">
         <b class="label_name col-sm-2">Patient Name:</b>
-         <span class="patient_det col-sm-10">{{$patient[0]->name}}</span>
+         <span class="patient_det col-sm-10">{{$patient[0]->firstname}} {{$patient[0]->middlename}} {{$patient[0]->lastname}}</span>
     </div>
 
     <div class="row given_det">
@@ -46,7 +46,7 @@
         <div class="form-group row">
             {{form::label('component', 'Component:',['class' => 'col-sm-2 label_name'])}}
 
-            {{form::select('component', array(''=>'','PRBC' => 'PRBC', 'WBC' => 'WBC','Whole blood' => 'Whole Blood','Platelets' => 'Platelets','Frozen Plasma' => 'Frozen Plasma', 'Cryoprecipitate ' => 'Cryoprecipitate ','Cryosupernate' => 'Cryosupernate'), null,  array('class'=>'input_field col-sm-10'))}}
+            {{form::select('component', array(''=>'','Red Blood Cell' => 'Red Blood Cell', 'White Cells & Granulocytes' => 'White Cells & Granulocytes','Whole blood' => 'Whole Blood','Platelet' => 'Platelet','Plasma' => 'Plasma', 'Cryo ' => 'Cryo'), null,  array('class'=>'input_field col-sm-10'))}}
         </div>
 
         <div class="form-group row">
@@ -63,7 +63,7 @@
 
         <div class="form-group row">
             {{form::label('status', 'Status:',['class' => 'col-sm-2 label_name'])}}
-            {{form::select('status', array('P'=>'Pending', 'R' => 'Released', 'D' => 'With Donor'), '', ['class'=>'input_field col-sm-10'])}}
+            {{form::select('status', array('Pending'=>'Pending', 'Released' => 'Released', 'With Donor' => 'With Donor'), '', ['class'=>'input_field col-sm-10'])}}
         </div>
 
 

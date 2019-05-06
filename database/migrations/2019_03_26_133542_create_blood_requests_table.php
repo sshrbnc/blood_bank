@@ -21,6 +21,8 @@ class CreateBloodRequestsTable extends Migration
                 $table->string('component');
                 $table->string('status')->default('Pending');
 
+                $table->string('transaction_code');
+
                 $table->unsignedInteger('patient_id');
                 $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 

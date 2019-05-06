@@ -32,6 +32,7 @@
     <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
 </head>
 
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">

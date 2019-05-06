@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Input;
 Route::get('/', ['uses' =>'AarticleController@home', 'as' => 'article.home']);
 Route::get('/donar', ['uses' =>'DonarController@index', 'as' => 'donar.index']);
 Route::get('/donar/{id}', ['uses' =>'DonarController@show', 'as' => 'donar.show']);
-Route::get('transaction/{trans_code}', ['uses' =>'TransactionsController@show', 'as' => 'transaction.show']);
+Route::get('transaction', ['uses' =>'TransactionsController@show', 'as' => 'transaction']);
 
 // Route::get('/blog', ['uses' =>'BlogController@index', 'as' => 'blog.index']);
 // Route::get('/blog/{id}', ['uses' =>'BlogController@show', 'as' => 'blog.show']);
@@ -73,14 +73,20 @@ Route::delete('donations_perma_del/{id}', ['uses' => 'Admin\DonationsController@
 Route::post('donations_restore/{id}', ['uses' => 'Admin\DonationsController@restore', 'as' => 'donations.restore']);
 
 //Blood Request Requests
+
 Route::resource('blood_requests', 'Admin\BloodRequestsController');
 Route::post('/blood_requests/{id}', ['uses' => 'Admin\BloodRequestsController@store', 'as' => 'blood_requests.store']);  
-
+Route::get('/searchDonor',['uses' => 'Admin\BloodRequestsController@searchDonor', 'as' => 'br.searchDonor']);
+Route::get('/blood_requests/assignDonor/{id}',['uses' => 'Admin\BloodRequestsController@assignDonor', 'as'=> 'br.assignDonor']);
 // Route::get('/blood_requests/create/{id}', ['as' => 'blood_requests.create','uses' => 'Admin\BloodRequestsController@create', function ($id) {
 //     //
 //     return $id;
 // }]);
 
+Route::get('/blood_requests/donorReceipient/{bcode}/{bid}/{did}',
+	['uses' => 'Admin\BloodRequestsController@donorReceipient',
+	'as' => 'br.donor_receipient']
+	);
 
 
 //Blood Requests

@@ -13,17 +13,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-
-        <form action="/search" method="get">
-            <div class="input-group">
-                <input type="search" name="search" class="form-control">
-                <span class="input-group-prepend">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </span>
-            </div>
-        </form>
-=======
     </div> -->
     <div class="col-md-6 center">
         <div class="panel panel-default">
@@ -60,31 +49,42 @@
                 </table>
             </div>
         </div>
-
     </div>
 
-    <!-- <form action="/transaction" method="POST" role="search">
-        {{ csrf_field() }}
+<div id="search_bar">
+    <form action="/search" method="get">
         <div class="input-group">
-            <input type="text" class="form-control" name="q" placeholder="Search available blood"> 
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
+            <input type="search" name="search" class="form-control">
+            <span class="input-group-prepend">
+                <button type="submit" class="btn btn-primary">Search</button>
             </span>
-        </div>
+        </div>    
     </form>
-    <h3 class="page-title center">Available Bloods</h3>
-    <div class="panel-body table-responsive">
-        <div class="row">
-            <div class="col-md-6">
-                <table class="table table-bordered table-striped table-dark">
-                    <thead class="thead-light">
-                        <th>Blood Type</th>
-                        <th>Quantity</th>
-                    </thead>    
-                </table>
-            </div>
-        </div>
-    </div> -->
+</div>
+
+<div class="panel-body table-responsive">
+<table class="table table-striped">
+<thead>
+    <tr>
+        <td>Name</td>
+        <td>Blood Type</td>
+        <td>Birthday</td>
+        <td>Address</td>
+    </tr>
+</thead>
+
+<tbody>
+@foreach ($patients as $patient)
+    <tr>
+        <td>{{$patient->firstname}} {{$patient->lastname}}</td>
+        <td>{{$patient->blood_type}}</td>
+        <td>{{$patient->birthday}}</td>
+        <td>{{$patient->address}}</td>
+        <td><a href="{{ route('admin.patients.show', $patient->id ) }}" class="btn btn-xs btn-primary">View</a></td>
+    </tr>
+@endforeach
+</tbody>
+</table>
+</div>
+
 @endsection

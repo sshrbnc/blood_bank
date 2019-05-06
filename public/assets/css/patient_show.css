@@ -37,6 +37,16 @@
 	color: black;
 }
 
-
 /*create patient css*/
+
+/*patients list css*/
+
+table.dataTable th{
+	font-family: Roboto;
+	font-size: 15px;
+}
+
+.input_field{
+	background-color: #f7f7f7;
+}
 

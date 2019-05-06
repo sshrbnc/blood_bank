@@ -47,7 +47,9 @@ class PatientsController extends Controller
         //
 
          $this->validate($request, [
-            'name'  => 'required',
+            'firstname'  => 'required',
+            'middlename'  => 'required',
+            'lastname'  => 'required',
             'blood_type'  => 'required',
             'address'  => 'required',
             'birthday'  => 'required',
@@ -59,7 +61,9 @@ class PatientsController extends Controller
             $years = Carbon::parse($request->input('birthday'))->age;
 
             $patients = new Patient;
-            $patients->name = $request->input('name');
+            $patients->firstname = $request->input('firstname');
+            $patients->middlename = $request->input('middlename');
+            $patients->lastname = $request->input('lastname');
             $patients->blood_type = $request->input('blood_type');
             $patients->address = $request->input('address');
             $patients->birthday = $request->input('birthday');

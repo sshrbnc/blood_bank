@@ -13,7 +13,7 @@
     </div>
 
     <div class ="patient_name">
-        {{$patient->name}}
+        {{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}}
     </div>
 
     <div class="patient_det">
@@ -49,13 +49,12 @@
                     <th>Hospital</th> 
                     <!-- <th>Transaction Code</th> -->
                     <th>Status</th>
-                    <th>&nbsp;</th>  
                 </tr>
             </thead>
             <tbody>
                 @foreach ($blood_requests as $br)
                 <tr>
-                    <td></td>
+                    <td><a href="{{ route('admin.br.assignDonor', ['id'=> ($br->id)] ) }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add Donor</a></td>
                     <td>{{$br->component}}</td>
                     <td>{{$br->quantity}}</td>
                     <td>{{$br->hospital}}</td>
