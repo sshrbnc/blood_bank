@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Input;
 Route::get('/', ['uses' =>'AarticleController@home', 'as' => 'article.home']);
 Route::get('/donar', ['uses' =>'DonarController@index', 'as' => 'donar.index']);
 Route::get('/donar/{id}', ['uses' =>'DonarController@show', 'as' => 'donar.show']);
-Route::get('transaction/{trans_code}', ['uses' =>'TransactionsController@show', 'as' => 'transaction.show']);
+// Route::get('transaction/{trans_code}', ['uses' =>'TransactionsController@show', 'as' => 'transaction.show']);
 
 // Route::get('/blog', ['uses' =>'BlogController@index', 'as' => 'blog.index']);
 // Route::get('/blog/{id}', ['uses' =>'BlogController@show', 'as' => 'blog.show']);

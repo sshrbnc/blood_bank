@@ -16,7 +16,9 @@ class CreateDonorsTable extends Migration
         if(! Schema::hasTable('donors')) {
             Schema::create('donors', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name');
+                $table->string('firstname')->change();
+                $table->string('middlename')->nullable();
+                $table->string('lastname');
                 $table->string('blood_type');              
                 $table->date('birthday');
                 $table->string('sex');

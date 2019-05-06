@@ -25,7 +25,7 @@ class CreateDonationsTable extends Migration
                 $table->string('result');
                 $table->string('details_information')->nullable();
                 $table->string('status');
-                $table->string('flag');
+                $table->string('flag')->default('Green');
                 $table->integer('employee_id')->unsigned();
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
                 $table->string('processed', 5);

@@ -6,14 +6,14 @@
     <a href="{{ url()->previous() }}"><i class="fas fa-angle-left"></i>&nbsp; Back </a>
     <p></p>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="width: 50%;">
         <div class="panel-heading">
-            Profile
+            <b style="font-size: 16px;">Profile</b>
         </div>
 
         <div class="panel-body table-responsive">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th>Name</th>

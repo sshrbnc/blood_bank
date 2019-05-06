@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="page-title">Donors</h3>
         
-    <a href="{{ route('admin.donors.index') }}" class="btn btn-success"><i class="fas fa-angle-left"></i> Back to list</a>
+    <a href="{{ route('admin.donors.show', [$donor]) }}" class="btn btn-success"><i class="fas fa-angle-left"></i> Back to list</a>
     <p></p>
 
     {!! Form::model($donation, ['method' => 'PUT', 'route' => ['admin.donations.update', $donation->id], 'files' => true,]) !!}
@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     {!! Form::label('date_donated', 'Date', ['class' => 'control-label']) !!}
-                    {!! Form::text('date_donated', $donation->date_donated, ['class' => 'form-control date-picker', 'placeholder' => '', 'required' => ''])  !!}
+                    {!! Form::text('date_donated', $donation->date_donated, ['style' => 'border-radius: 8px;', 'class' => 'form-control date-picker', 'placeholder' => '', 'required' => ''])  !!}
                     <p class="help-block"></p>
                     @if($errors->has('date_donated'))
                         <p class="help-block" style="color: red;">
@@ -28,7 +28,7 @@
                 </div>                                
                 <div class="col-md-4 mb-3">
                     {!! Form::label('weight', 'Weight (kg)', ['class' => 'control-label']) !!}
-                    {!! Form::text('weight', old('weight'), ['class' => 'form-control', 'placeholder' => 'Weight', 'required' => '']) !!}
+                    {!! Form::text('weight', old('weight'), ['style' => 'border-radius: 8px;', 'class' => 'form-control', 'placeholder' => 'Weight', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('weight'))
                         <p class="help-block" style="color: red;">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     {!! Form::label('blood_count', 'Blood Count', ['class' => 'control-label']) !!}
-                    {!! Form::text('blood_count', old('blood_count'), ['class' => 'form-control', 'placeholder' => 'Blood Count', 'required' => '']) !!}
+                    {!! Form::text('blood_count', old('blood_count'), ['style' => 'border-radius: 8px;', 'class' => 'form-control', 'placeholder' => 'Blood Count', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('blood_count'))
                         <p class="help-block" style="color: red;">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     {!! Form::label('flag', 'Flag', ['class' => 'control-label']) !!}
-                    {!! Form::text('flag', old('flag'), ['class' => 'form-control', 'placeholder' => 'Flag', 'required' => '']) !!}
+                    {!! Form::text('flag', old('flag'), ['style' => 'border-radius: 8px;', 'class' => 'form-control', 'placeholder' => 'Flag', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('flag'))
                         <p class="help-block" style="color: red;">
@@ -104,7 +104,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('details_information', 'Remarks on donor', ['class' => 'control-label']) !!}
-                    {!! Form::textarea('details_information', old('details_information'), ['class' => 'form-control details_info', 'placeholder' => '']) !!}
+                    {!! Form::textarea('details_information', old('details_information'), ['style' => 'border-radius: 8px;', 'class' => 'form-control details_info', 'placeholder' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('details_information'))
                         <p class="help-block" style="color: red;">

@@ -23,8 +23,8 @@ class DonationsController extends Controller
     {
         request()->validate([
             'date_donated' => 'required|date_format:'.config('app.date_format'),
-            'weight' => 'required|min:50|numeric',
-            'blood_count' => 'required|min:140|max:200|numeric',
+            'weight' => 'required|numeric',
+            'blood_count' => 'required|numeric',
             'result' => 'required',
             'status' => 'required',
             'flag' => 'required'
@@ -40,6 +40,7 @@ class DonationsController extends Controller
             $donation->result = $request->input('result');
             $donation->status = $request->input('status');
             $donation->flag = $request->input('flag');
+            $donation->details_information = $request->input('details_information');
             $donation->employee_id = Auth::user()->id;
             $donation->processed = 'No';
             $donation->save();
@@ -54,7 +55,7 @@ class DonationsController extends Controller
         $donation = Donation::findOrFail($id);
         $donor = $donation->donor_id;
 
-        return view('admin.donations.edit', compact('donation'));
+        return view('admin.donations.edit', compact('donation', 'donor'));
     }
 
     /**
@@ -92,6 +93,7 @@ class DonationsController extends Controller
             $donation->result = $request->input('result');
             $donation->status = $request->input('status');
             $donation->flag = $request->input('flag');
+            $donation->details_information = $request->input('details_information');
             $donation->employee_id = Auth::user()->id;
             $donation->processed = 'yes';
             $donation->update();
@@ -109,7 +111,7 @@ class DonationsController extends Controller
     public function destroy($id)
     {
         $donation = Donation::findOrFail($id);
-        $donation->delete();
+        $donation->forceDelete();
 
         return redirect()->back();
     }
@@ -143,7 +145,7 @@ class DonationsController extends Controller
         $donation = Donation::onlyTrashed()->findOrFail($id);
         $donation->restore();
 
-        return redirect()->route('admin.donors.index');
+        return redirect()->route('admin.donors.show', [$donor_id]);
     }
 
     /**
@@ -152,13 +154,13 @@ class DonationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function perma_del($id)
-    {
+    // public function perma_del($id)
+    // {
     
-        $donation = Donation::onlyTrashed()->findOrFail($id);
-        $donation->forceDelete();
+    //     $donation = Donation::onlyTrashed()->findOrFail($id);
+    //     $donation->forceDelete();
 
-        return redirect()->route('admin.donors.index');
-    }
+    //     return redirect()->route('admin.donors.show', [$donor_id]);
+    // }
    
 }

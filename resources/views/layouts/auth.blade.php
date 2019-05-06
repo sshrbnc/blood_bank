@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/Login-footer.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
 </head>
 
 <body class="page-header-fixed">

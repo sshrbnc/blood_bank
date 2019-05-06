@@ -22,6 +22,7 @@ class CreateBloodsTable extends Migration
                 $table->string('component');
                 $table->date('date_donated');
                 $table->date('exp_date');
+                $table->string('status')->nullable();
                 $table->integer('employee_id')->unsigned();
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
 

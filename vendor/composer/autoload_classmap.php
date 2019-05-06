@@ -16,11 +16,8 @@ return array(
     'App\\Http\\Controllers\\AarticleController' => $baseDir . '/app/Http/Controllers/AarticleController.php',
     'App\\Http\\Controllers\\Admin\\BlogsController' => $baseDir . '/app/Http/Controllers/Admin/BlogsController.php',
     'App\\Http\\Controllers\\Admin\\BloodRequestsController' => $baseDir . '/app/Http/Controllers/Admin/BloodRequestsController.php',
-
     'App\\Http\\Controllers\\Admin\\BloodsController' => $baseDir . '/app/Http/Controllers/Admin/BloodsController.php',
     'App\\Http\\Controllers\\Admin\\DonationsController' => $baseDir . '/app/Http/Controllers/Admin/DonationsController.php',
-
-
     'App\\Http\\Controllers\\Admin\\DonorsController' => $baseDir . '/app/Http/Controllers/Admin/DonorsController.php',
     'App\\Http\\Controllers\\Admin\\PatientsController' => $baseDir . '/app/Http/Controllers/Admin/PatientsController.php',
     'App\\Http\\Controllers\\Admin\\ProfilesController' => $baseDir . '/app/Http/Controllers/Admin/ProfilesController.php',

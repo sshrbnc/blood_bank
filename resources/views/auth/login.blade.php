@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-8 col-md-offset-3">
+                                <div class="col-md-10" style="font-size: 14px; margin-left: 30px; margin-top: 20px;">
                                     <a href="{{ route('auth.password.reset') }}">Forgot Password?</a>
                                     <a href="#" style="color: red;">Contact Admin</a>
                                 </div>
@@ -50,10 +50,9 @@
                         </div> -->
 
                        <!--  <div class="form-group"> -->
-                                <button type="submit" class="btn btn-light text-bold col-md-12 formContents" id="loginSubmit">
-                                    Log in
-                                   <!--  @lang('quickadmin.qa_login') -->
-                                </button>
+                            <button type="submit" class="btn btn-light text-bold col-md-12 formContents" id="loginSubmit">
+                                Log in
+                            </button>
                         <!-- </div> -->
                     </form>
                 </div>

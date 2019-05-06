@@ -401,11 +401,8 @@ class ComposerStaticInit3ff4a5f5e1f087c298e6fdbda7d9a873
         'App\\Http\\Controllers\\AarticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/AarticleController.php',
         'App\\Http\\Controllers\\Admin\\BlogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BlogsController.php',
         'App\\Http\\Controllers\\Admin\\BloodRequestsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BloodRequestsController.php',
-
         'App\\Http\\Controllers\\Admin\\BloodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BloodsController.php',
         'App\\Http\\Controllers\\Admin\\DonationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DonationsController.php',
-
-
         'App\\Http\\Controllers\\Admin\\DonorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DonorsController.php',
         'App\\Http\\Controllers\\Admin\\PatientsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PatientsController.php',
         'App\\Http\\Controllers\\Admin\\ProfilesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ProfilesController.php',
