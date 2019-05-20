@@ -8,6 +8,8 @@ use App\Blood;
 use DB;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Mail;
+// use App\Mail\SendMailable;
 
 class HomeController extends Controller
 {
@@ -47,5 +49,13 @@ class HomeController extends Controller
 
         return view('admin.patients.index', ['patients' => $patients]);
     }
+
+    // public function mail()
+    // {
+    //    $name = 'Shaira';
+    //    Mail::to('abancioshaira@gmail.com')->send(new SendMailable($name));
+       
+    //    return 'Email was sent';
+    // }
 
 }
