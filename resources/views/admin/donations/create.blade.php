@@ -52,10 +52,10 @@
                     <div class="form-group col-md-4 mb-3">
                         <!-- {!! Form::label('result', 'Result', ['class' => 'control-label']) !!}   -->
                         <label for="result" class="control-label">Result</label>
-                        <!-- <div>
+                        <div>
                             <p class="result1" style="visibility: hidden;">Passed</p>
                             <p class="result2" style="visibility: hidden;">Did not pass</p>
-                        </div> -->
+                        </div>
                         <!-- <label id="msg"></label> -->
                         <select id="result" class="form-control form-control-sm" name="result" style="border-radius: 8px;">
                             <option value="">--</option>
@@ -144,12 +144,13 @@
         });
     </script>
     <script>       
-        // $(document).ready(function(){
-        //     var weightVal = $('#weight').val();
-        //     $("#weight").change(function(){
-        //         console.log(weightVal);
-        //     });
-        // });
+        $(document).ready(function(){
+            // var weightVal = $('#weight').val();
+            // $("#weight").change(function(){
+            //     console.log(weightVal);
+            // });
+            var weightVal = $('#weight').val();
+        });
         // var dest = document.getElementById("destinationTextField");
         // var $displayWeight = $("#msg");
         // var $weightInput = $("#weight");

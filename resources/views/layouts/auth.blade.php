@@ -23,6 +23,5 @@
 
     <script src="/js/app.js"></script>
     @include('partials.javascripts')
-
 </body>
 </html>

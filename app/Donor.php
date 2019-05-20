@@ -37,18 +37,18 @@ class Donor extends Model
     //     }
     // }
 
-     /**
-     * Set attribute to date format
-     * @param $input
-     */
-    public function setBirthdayAttribute($input)
-    {
-        if ($input != null && $input != '') {
-            $this->attributes['birthday'] = Carbon::createFromFormat(config('app.date_format'), $input)->format('Y-m-d');
-        } else {
-            $this->attributes['birthday'] = null;
-        }
-    }
+    //  /**
+    //  * Set attribute to date format
+    //  * @param $input
+    //  */
+    // public function setBirthdayAttribute($input)
+    // {
+    //     if ($input != null && $input != '') {
+    //         $this->attributes['birthday'] = Carbon::createFromFormat(config('app.date_format'), $input)->format('Y-m-d');
+    //     } else {
+    //         $this->attributes['birthday'] = null;
+    //     }
+    // }
 
     // /**
     //  * Get attribute from date format
@@ -67,20 +67,20 @@ class Donor extends Model
     //     }
     // }
 
-    /**
-     * Get attribute from date format
-     * @param $input
-     *
-     * @return string
-     */
-    public function getBirthdayAttribute($input)
-    {
-        $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'], config('app.date_format'));
+    // /**
+    //  * Get attribute from date format
+    //  * @param $input
+    //  *
+    //  * @return string
+    //  */
+    // public function getBirthdayAttribute($input)
+    // {
+    //     $zeroDate = str_replace(['Y', 'm', 'd'], ['0000', '00', '00'], config('app.date_format'));
 
-        if ($input != $zeroDate && $input != null) {
-            return Carbon::createFromFormat('Y-m-d', $input)->format(config('app.date_format'));
-        } else {
-            return '';
-        }
-    }
+    //     if ($input != $zeroDate && $input != null) {
+    //         return Carbon::createFromFormat('Y-m-d', $input)->format(config('app.date_format'));
+    //     } else {
+    //         return '';
+    //     }
+    // }
 }

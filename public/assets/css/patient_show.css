@@ -39,6 +39,7 @@
 
 /*create patient css*/
 
+
 /*patients list css*/
 table.dataTable th{
 	font-family: Roboto;
@@ -73,3 +74,10 @@ table.dataTable th{
 }
 
 /*blood_req*/
+
+
+/*donor*/
+.pac-container {
+    z-index: 9999;
+}
+

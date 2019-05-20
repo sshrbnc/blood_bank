@@ -21,11 +21,10 @@ class CreateDonationsTable extends Migration
                 $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
                 $table->string('trans_code')->nullable();
                 $table->integer('weight');
-                $table->integer('blood_count');
-                $table->string('result');
-                $table->string('details_information')->nullable();
+                $table->integer('blood_count')->nullable();
+                $table->string('flag')->nullable();
                 $table->string('status');
-                $table->string('flag')->default('Green');
+                $table->string('details_information')->nullable();
                 $table->integer('employee_id')->unsigned();
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
                 $table->string('processed', 5);

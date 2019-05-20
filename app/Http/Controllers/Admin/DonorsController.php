@@ -91,7 +91,7 @@ class DonorsController extends Controller
             'firstname' => 'min:1|max:30|required',
             'lastname' => 'min:1|max:30|required',
             'blood_type' => 'required',            
-            'birthday' => 'required|date_format:'.config('app.date_format'),
+            'birthday' => 'required',
             'sex' => 'required',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
@@ -149,7 +149,7 @@ class DonorsController extends Controller
             'firstname' => 'min:1|max:30|required|string',
             'lastname' => 'min:1|max:30|required|string',
             'blood_type' => 'required',            
-            'birthday' => 'required|date_format:'.config('app.date_format'),
+            'birthday' => 'required',
             'sex' => 'required',
             'address' => 'required',
             'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
@@ -184,21 +184,21 @@ class DonorsController extends Controller
         
         $donor = Donor::findOrFail($id);
         $donation = Donation::where('donor_id', $id)->get();
-        
-        $date_now_wbc = Carbon::now();
-        $date_now_rbc = Carbon::now();
-        $date_now_platelet = Carbon::now();
-        $date_now_plasma = Carbon::now();
-        $date_now_cryo= Carbon::now();
-        $date_now_wcg= Carbon::now();
-        $expdatewbc = $date_now_wbc->addMonth()->format('m-d-Y');
-        $expdaterbc = $date_now_rbc->addMonths(2)->format('m-d-Y');
-        $expdateplatelet = $date_now_platelet->addMonths(3)->format('m-d-Y');
-        $expdateplasma = $date_now_plasma->addMonths(4)->format('m-d-Y');
-        $expdatecryo = $date_now_cryo->addMonths(5)->format('m-d-Y');
-        $expdatewcg = $date_now_wcg->addMonths(6)->format('m-d-Y');
+        // $donations = Donation::findOrFail($id);
+        // $date_now_wbc = Carbon::now();
+        // $date_now_rbc = Carbon::now();
+        // $date_now_platelet = Carbon::now();
+        // $date_now_plasma = Carbon::now();
+        // $date_now_cryo= Carbon::now();
+        // $date_now_wcg= Carbon::now();
+        // $expdatewbc = $date_now_wbc->addMonth()->format('m-d-Y');
+        // $expdaterbc = $date_now_rbc->addMonths(2)->format('m-d-Y');
+        // $expdateplatelet = $date_now_platelet->addMonths(3)->format('m-d-Y');
+        // $expdateplasma = $date_now_plasma->addMonths(4)->format('m-d-Y');
+        // $expdatecryo = $date_now_cryo->addMonths(5)->format('m-d-Y');
+        // $expdatewcg = $date_now_wcg->addMonths(6)->format('m-d-Y');
 
-        return view('admin.donors.show', compact('donor', 'donation', 'expdatewbc', 'expdaterbc', 'expdateplatelet', 'expdateplasma', 'expdatecryo', 'expdatewcg'));
+        return view('admin.donors.show', compact('donor', 'donation'));
     }
 
     /**

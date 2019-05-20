@@ -23,11 +23,11 @@ class DonationsController extends Controller
     {
         request()->validate([
             'date_donated' => 'required|date_format:'.config('app.date_format'),
-            'weight' => 'required|numeric',
-            'blood_count' => 'required|numeric',
-            'result' => 'required',
-            'status' => 'required',
-            'flag' => 'required'
+            // 'weight' => 'required|numeric',
+            // 'blood_count' => 'numeric',
+            // 'result' => 'required',
+            // 'status' => 'required',
+            // 'flag' => 'required'
         ]);
 
         if(Auth::check()){
@@ -36,10 +36,16 @@ class DonationsController extends Controller
             $donation->donor_id = $request['donor_id'];
             $donation->trans_code = $request->input('trans_code');
             $donation->weight = $request->input('weight');
+            if ($request->input('weight') >= 50) {
+                // also finished interview about confidential questions
+                $donation->status = "Passed PE and Interview";
+            }else{
+                $donation->status = "Defer";
+            }
+            // button : "Hemoglobin Checking"
             $donation->blood_count = $request->input('blood_count');
-            $donation->result = $request->input('result');
-            $donation->status = $request->input('status');
             $donation->flag = $request->input('flag');
+
             $donation->details_information = $request->input('details_information');
             $donation->employee_id = Auth::user()->id;
             $donation->processed = 'No';
@@ -76,11 +82,11 @@ class DonationsController extends Controller
             'donor_id' => 'required',
             // 'patient_id' => 'required', 
             // 'trans_code' => 'required',  
-            'weight' => 'required',
-            'blood_count' => 'required',
-            'result' => 'required',
-            'status' => 'required',
-            'flag' => 'required',
+            // 'weight' => 'required',
+            // 'blood_count' => 'required',
+            // 'result' => 'required',
+            // 'status' => 'required',
+            // 'flag' => 'required',
         ]);
 
         if(Auth::check()){
@@ -89,13 +95,30 @@ class DonationsController extends Controller
             $donation->donor_id = $request['donor_id'];
             $donation->trans_code = $request->input('trans_code');
             $donation->weight = $request->input('weight');
+            // if button is "Hemoglobin Checking"
             $donation->blood_count = $request->input('blood_count');
-            $donation->result = $request->input('result');
-            $donation->status = $request->input('status');
-            $donation->flag = $request->input('flag');
-            $donation->details_information = $request->input('details_information');
-            $donation->employee_id = Auth::user()->id;
-            $donation->processed = 'yes';
+
+            if ($request->input('blood_count') >= 150) {               
+                $donation->status = "Passed Checking"; //button: for collection
+            }else{
+                $donation->status = "Defer "; //NO button for collection
+            }
+            
+            
+
+             if ($request->input('flag') != "--") {
+                $donation->flag = $request->input('flag');
+                $donation->details_information = $request->input('details_information');
+                $donation->status = "Discard";
+                $donation->employee_id = Auth::user()->id;
+                $donation->processed = 'Yes';
+            }else{
+                $donation->flag = $request->input('--');
+                $donation->details_information = $request->input('details_information');
+                $donation->employee_id = Auth::user()->id;
+                $donation->processed = 'No';
+            }
+
             $donation->update();
         }
         $donor_id = $request->input('donor_id');

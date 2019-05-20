@@ -149,12 +149,12 @@
         $(function() {
           $("#dob").datepicker(
             {
-              minDate: new Date(1900,1-1,1), maxDate: '-18Y',
+              minDate: new Date(1900,1-1,1), maxDate: '-16Y',
               dateFormat: 'dd/mm/yy',
-              defaultDate: new Date(2001,1-1,1),
+              defaultDate: new Date(2003,1-1,1),
               changeMonth: true,
               changeYear: true,
-              yearRange: '-110:-18'
+              yearRange: '-110:-16'
             }
           );                    
         });
