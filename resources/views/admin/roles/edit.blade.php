@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.roles.title')</h3>
+    <h3 class="page-title">Roles</h3>
+    <a href="{{ route('admin.roles.index') }}"><i class="fas fa-angle-left"></i>&nbsp; Back to list</a>
+    <p></p>
     
     {!! Form::model($role, ['method' => 'PUT', 'route' => ['admin.roles.update', $role->id]]) !!}
 
@@ -13,7 +15,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('title', trans('quickadmin.roles.fields.title').'*', ['class' => 'control-label']) !!}
+                    {!! Form::label('title', 'Title', ['class' => 'control-label']) !!}
                     {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('title'))

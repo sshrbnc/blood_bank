@@ -190,5 +190,20 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('donation_w_bc', function ($user) {
             return in_array($user->role_id, [1, 3, 4]);
         });
+
+        //Donation
+        Gate::define('donation_delete', function ($user) {
+            return in_array($user->role_id, [1, 3]);
+        });
+
+        //Flag
+        Gate::define('can_see_flag', function ($user) {
+            return in_array($user->role_id, [1, 3, 4]);
+        });
+
+        //View Employee who edited's Name
+        Gate::define('see_employee_name', function ($user) {
+            return in_array($user->role_id, [1, 3]);
+        });
     }
 }

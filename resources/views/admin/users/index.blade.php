@@ -23,12 +23,10 @@
                         @can('user_delete')
                             <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         @endcan
-
-                        <th>@lang('quickadmin.users.fields.name')</th>
-                        <th>@lang('quickadmin.users.fields.email')</th>
-                        <th>@lang('quickadmin.users.fields.role')</th>
-                                                <th>&nbsp;</th>
-
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 
@@ -39,37 +37,46 @@
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
-
                                 <td field-key='name'>{{ $user->name }}</td>
                                 <td field-key='email'>{{ $user->email }}</td>
                                 <td field-key='role'>{{ $user->role->title or '' }}</td>
-                                                                <td>
+                                <td>
                                     @can('user_view')
-                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">View</a>
                                     @endcan
                                     @can('user_edit')
-                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">Edit</a>
                                     @endcan
                                     @can('user_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.users.destroy', $user->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
+                                    <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteUserModal">Delete</button>
                                     @endcan
                                 </td>
-
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="10">@lang('quickadmin.qa_no_entries_in_table')</td>
+                            <td colspan="10">No entries in table.</td>
                         </tr>
                     @endif
                 </tbody>
             </table>
+            <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width:30%;">
+                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @stop

@@ -1,25 +1,21 @@
 @inject('request', 'Illuminate\Http\Request')
 <!-- Left side column. contains the sidebar -->
-<aside class="main-sidebar">
+<aside class="main-sidebar" style="background-color: #750000;">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <ul class="sidebar-menu">            
-
+        <ul class="sidebar-menu">        
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">
                     <i class="fa fa-th"></i>
                     <span class="title">View Site</span>
                 </a>
             </li>
-
-
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a href="{{ url('/admin/home') }}">
                     <i class="fa fa-wrench"></i>
-                    <span class="title">@lang('quickadmin.qa_dashboard')</span>
+                    <span class="title">Dashboard</span>
                 </a>
             </li>
-
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -104,7 +100,8 @@
                             <i class="fa fa-star"></i>
                             <span class="title">Profile</span>
                         </a>
-                    </li>@endcan
+                    </li>
+                    @endcan
                     <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                         <a href="{{ route('auth.change_password') }}">
                             <i class="fa fa-key"></i>

@@ -33,7 +33,7 @@
     </div>
     <p></p>
 
-    <a href="{{ route('admin.patients.newBloodRequests', ['id'=> ($patient->id)] ) }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp; New Blood Request</a>
+    <a href="{{ route('admin.patients.newBloodRequests', ['id'=> ($patient->id)] ) }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp; New Blood Request</a>
     <p></p>
 
     <div class="title">Blood Requests</div>
@@ -41,24 +41,30 @@
         <table class="table table-bordered table-striped table-responsive">
             <thead>
                 <tr>
-                    @can('donor_delete')
-                        @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
-                    @endcan
+                   
                     <th>Component</th> 
                     <th>Quantity</th> 
                     <th>Hospital</th> 
-                    <!-- <th>Transaction Code</th> -->
+                    <th>Transaction Code</th>
                     <th>Status</th>
+                     <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($blood_requests as $br)
                 <tr>
-                    <td><a href="{{ route('admin.br.assignDonor', ['id'=> ($br->id)] ) }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Add Donor</a></td>
                     <td>{{$br->component}}</td>
                     <td>{{$br->quantity}}</td>
                     <td>{{$br->hospital}}</td>
+                    <td>{{$br->transaction_code}}</td>
                     <td>{{$br->status}}</td>
+                    @if ($br->status=="With Donor")
+                        <td><a href="{{ route('admin.br.assignDonor', ['id'=> ($br->id)] ) }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Encode Donor</a></td>
+                    @elseif ($br->status=="Pending")
+                        <td>Waiting for Donor</td>
+                    @elseif ($br->status=="Matched")
+                        <td>{{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('firstname')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('middlename')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('lastname')[0]}}</td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

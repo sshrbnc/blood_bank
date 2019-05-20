@@ -71,7 +71,7 @@
                                 @endcan
 
                                 @can('donor_id_access')<td field-key='id'>{{ $donor->id }}</td>@endcan  
-                                @can('donor_name_access')<td field-key='name'>{{ $donor->name }}</td>@endcan                        
+                                @can('donor_name_access')<td field-key='name'>{{ $donor->firstname }}</td>@endcan                        
                                 <td field-key='blood_type'>{{ $donor->blood_type }}</td>   
                                 <td field-key='last_donation'>Jan 22 17</td>
                                 <td field-key='phone_number'>{{ $donor->phone_number }}</td>

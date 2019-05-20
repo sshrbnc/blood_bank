@@ -33,13 +33,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
+    <link rel="shortcut icon" type="image/png" src="../assets/img/prc_logo.png" style="width: 15px; height: 15px;"/>
+
 </head>
 
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">
         <div class="container1"><img class="prc_logo" src="assets/img/prc_logo.png"><a class="navbar-brand" href="/">&nbsp;Philippine Red Cross - Iloilo Chapter</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-           
-
-
             <div class="col-lg-20 text-right" style="margin-top: -50px" >
                 @if (Auth::check())
                     <div style="color:white; width: 200%;">
@@ -55,50 +54,16 @@
 
                     </div>
                 @endif
-
-                 <div>
-        </div>
-
             </div>
         </div>
-
-
-
-        <form action="/transaction" method="POST" role="search">
-
-        <!-- <form action="/transaction" method="POST" role="search">
-
-            {{ csrf_field() }}
-            <div class="input-group">
-                <input type="text" class="form-control" name="q" placeholder="Search users"> 
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form> -->
-
-   
-
-
-        <form action="{{ route('transaction') }}" method="GET" class="form-inline my-2 my-sm-1" style="margin-left: -200px;">
-            @csrf
-            <input class="form-control mr-lg-2" type="search" placeholder="Enter Transaction ID" aria-label="Search">
-            <button type="submit" class="search_button" type="submit"><i class="fas fa-search"></i></button>
-        </form>
     </nav>
     
 <div style="background-color:rgb(238,244,247);">
-<div class="container2" style="margin: 0;">
-    <div class="row" style="margin:0px;">
-
-        @yield('main')
-
-
+    <div class="container2" style="margin: 0;">
+        <div class="row" style="margin:0px;">
+            @yield('main')
+        </div>
     </div>
-</div>
-
 </div>
 
 <div class="projects-clean"></div>
@@ -106,7 +71,7 @@
     <footer>
         <div class="container3">
             <div class="row">
-                <div class="col-sm-6 col-md-3 item">
+                <div class="col-sm-6 col-md-3 item" style="padding-left: 50px;">
                     <h5>Important Links:</h5>
                     <ul>
                         <li><a href="#">Ambulance</a></li>
@@ -124,7 +89,7 @@
                 </div>
                 <div class="col-md-6 item text">
                     <h5>About Us:</h5>
-                    <p>
+                    <p style="font-size: 14px;">
                         At present, the Philippine Red Cross provides six major services: Blood Services, Disaster Management Services, Safety Services, Health Services, Social Services, Red Cross Youth and Volunteer Services. All of them embody the fundamental principles of the International Red Cross and Red Crescent Movement – humanity, impartiality, neutrality, independence, voluntary service, unity and universality. These values guide and inspire all Red Cross staff and volunteers, to whom being a Red Crosser is more than just a philosophy but a way of life.
                     </p>
                 </div>
@@ -139,8 +104,8 @@
         <a href="https://www.instagram.com/minhazulkabir/"><i class="icon ion-social-instagram-outline"></i></a>
     </div>
     <p class="copyright" style="font-size:15px;padding-top:10px;">All Rigths Reserved © <?php echo date("Y"); ?>  </p>
-
 </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>

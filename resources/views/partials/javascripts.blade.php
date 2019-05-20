@@ -68,7 +68,10 @@
     
 </script>
 
-<!-- search donor ajax -->
+<!-- add patient validation -->
+<script type="text/javascript">
 
+
+</script>
 
 @yield('javascript')

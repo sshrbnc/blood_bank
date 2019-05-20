@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
+use App\Transactions;
 use App\BloodRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,8 @@ class BloodRequestsController extends Controller
     public function index()
     {
         //
-        $blood_requests = BloodRequests::all()->toArray();
-        return view('admin.blood_requests.index', compact('blood_requests'));
+        $data = DB::table('blood_requests')->get();;        
+        return view('admin.blood_requests.index', compact('data'));
     }
 
     /**
@@ -28,6 +29,18 @@ class BloodRequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function showByStatus(Request $request)
+    {
+        $status = $request->stat;
+        if ($status == "all"){
+            $data = DB::table('blood_requests')->get();
+        }
+        else{     
+            $data = DB::table('blood_requests')->where('status', $status)->get();
+        }
+            return view('admin.blood_requests.requestsByStatus',['data' => $data]);
+    }
 
     public function create()
     {
@@ -40,8 +53,8 @@ class BloodRequestsController extends Controller
 
 
     public function generate_code(){
-       $transaction_code = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 8);
-    $t_code = DB::table('blood_requests')->where('transaction_code',$transaction_code)->first();
+        $transaction_code = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 8);
+        $t_code = DB::table('blood_requests')->where('transaction_code',$transaction_code)->first();
 
         if($t_code){
            return $this->generate_code(); 
@@ -73,18 +86,38 @@ class BloodRequestsController extends Controller
 
 
         if (Auth::check()){
+            $transactions = new Transactions;
             $blood_requests = new BloodRequests;
+            $patient = DB::table('patients')->where('id', $request['patient_id'])->get()->first();
+            
+
             $blood_requests->quantity = $request->input('quantity');
             $blood_requests->hospital = $request->input('hospital');
             $blood_requests->component = $request->input('component');
             $blood_requests->employee_id = Auth::user()->id;
             $blood_requests->patient_id = $request['patient_id'];
-            $blood_requests->status = $request->input('status');;
+            $blood_requests->status = $request->input('status');
             $blood_requests->transaction_code = $this->generate_code();
-            $blood_requests->save();
+            
+            if ($request->input('urgent') == 1) {
+                $blood_requests->urgent = true;
+                $avail_matchbloods = DB::table('bloods')->where('blood_type', $patient->blood_type)->where('component', $request->input('component') )->get(); 
+                if (count($avail_matchbloods) > 0) {
+                    $blood_requests->blood_id = $avail_matchbloods->first()->id;
+                    $blood_requests->status = 'Matched';
+                }
             }
-       
-        if($blood_requests){
+
+            else{
+                $blood_requests->urgent = false;  
+            }
+
+            $blood_requests->save();
+           
+            }
+            
+
+        if($blood_requests){    
             return redirect()->route('admin.patients.show', $request['patient_id']);
         }
     }
@@ -139,6 +172,10 @@ class BloodRequestsController extends Controller
         $patient = DB::table('patients') -> where('id', $br->patient_id)->get()->first();
         $donors = DB::table('donors')->get();
         return view('admin.blood_requests.assignDonor', compact('br', 'patient','donors')); 
+    }
+
+    public function chooseDonor(){
+        
     }
 
     public function donorReceipient(Request $request, $bcode, $bid, $did){

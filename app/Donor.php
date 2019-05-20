@@ -11,7 +11,7 @@ class Donor extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'blood_type', 'birthday', 'sex', 'address', 'phone_number', 'employee_id'];
+    protected $fillable = ['firstname', 'middlename', 'lastname', 'blood_type', 'birthday', 'sex', 'address', 'phone_number', 'employee_id'];
     protected $hidden = [];
 
     public function donations()

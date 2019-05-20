@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-	<h3 class="page-title">@lang('quickadmin.qa_change_password')</h3>
 
 	@if(session('success'))
 		<!-- If password successfully show message -->
@@ -13,15 +12,15 @@
 	@else
 		{!! Form::open(['method' => 'PATCH', 'route' => ['auth.change_password']]) !!}
 		<!-- If no success message in flash session show change password form  -->
-		<div class="panel panel-default">
+		<div class="panel panel-default" style="width: 50%; margin-left: 25%; margin-top: 5%;">
 			<div class="panel-heading">
-				@lang('quickadmin.qa_edit')
+				<h5 class="page-title" style="padding: 0;">Change password</h5>
 			</div>
 
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-xs-12 form-group">
-						{!! Form::label('current_password', trans('quickadmin.qa_current_password'), ['class' => 'control-label']) !!}
+						{!! Form::label('current_password', 'Current password', ['class' => 'control-label']) !!}
 						{!! Form::password('current_password', ['class' => 'form-control', 'placeholder' => '']) !!}
 						<p class="help-block"></p>
 						@if($errors->has('current_password'))
@@ -34,7 +33,7 @@
 
 				<div class="row">
 					<div class="col-xs-12 form-group">
-						{!! Form::label('new_password', trans('quickadmin.qa_new_password'), ['class' => 'control-label']) !!}
+						{!! Form::label('new_password', 'New password', ['class' => 'control-label']) !!}
 						{!! Form::password('new_password', ['class' => 'form-control', 'placeholder' => '']) !!}
 						<p class="help-block"></p>
 						@if($errors->has('new_password'))
@@ -47,7 +46,7 @@
 
 				<div class="row">
 					<div class="col-xs-12 form-group">
-						{!! Form::label('new_password_confirmation', trans('quickadmin.qa_password_confirm'), ['class' => 'control-label']) !!}
+						{!! Form::label('new_password_confirmation', 'New password confirmation', ['class' => 'control-label']) !!}
 						{!! Form::password('new_password_confirmation', ['class' => 'form-control', 'placeholder' => '']) !!}
 						<p class="help-block"></p>
 						@if($errors->has('new_password_confirmation'))
@@ -57,11 +56,12 @@
 						@endif
 					</div>
 				</div>
-			</div>
-		</div>
-
-		{!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
-		{!! Form::close() !!}
+				<div style="margin-left: 90%;">
+				{!! Form::submit('Save', ['class' => 'btn btn-danger']) !!}
+				{!! Form::close() !!}
+				</div>
+			</div>			
+		</div>	
 	@endif
 @stop
 

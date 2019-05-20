@@ -25,7 +25,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($bloods) > 0 ? 'datatable' : '' }} @can('blood_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table class="table table-bordered table-hover {{ count($bloods) > 0 ? 'datatable' : '' }} @can('blood_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('blood_delete')
@@ -63,15 +63,21 @@
                                     <td field-key='donor_id'>{{ $blood->donor_id }}</td>  
                                 @endcan  
                                 @can('donor_name_access')
-                                    <td field-key='name'><a href="{{ route('admin.donors.show', [$blood->donor_id]) }}">{{ App\Donor::find($blood->donor_id)->name }}</a></td>   
+                                    <td field-key='name'><a href="{{ route('admin.donors.show', [$blood->donor_id]) }}">{{ App\Donor::find($blood->donor_id)->firstname }} {{ App\Donor::find($blood->donor_id)->middlename }} {{ App\Donor::find($blood->donor_id)->lastname }}</a></td>   
                                 @endcan
                                 <td field-key='blood_type'>{{ $blood->blood_type }}</td>                                
                                 <td field-key='component'>{{ $blood->component }}</td>
-                                <td field-key='date_donated'>{{ $blood->date_donated }}</td>
+                                <td field-key='date_donated'>{{ \Carbon\Carbon::parse($blood->created_at)->format('M d, Y H:i') }}</td>
                                 <td field-key='exp_date'>{{ $blood->exp_date }}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>
-                                    @can('blood_delete')
+                                    @can('donor_delete')
+                                        <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#restoreBloodModal">Restore</button>                             
+                                    @endcan
+                                    @can('donor_delete')
+                                        <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#permaDelBloodModal">Delete Permanently</button>                                    
+                                    @endcan
+                                    <!-- @can('blood_delete')
                                         {!! Form::open(array(
                                             'style' => 'display: inline-block;',
                                             'method' => 'POST',
@@ -88,17 +94,20 @@
                                             'route' => ['admin.bloods.perma_del', $blood->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
                                         {!! Form::close() !!}
-                                    @endcan
+                                    @endcan -->
                                 </td>
                                 @else
                                 <td>
                                     @can('blood_view')
-                                    <a href="{{ route('admin.bloods.show',[$blood->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.bloods.show',[$blood->id]) }}" style="background-color: #026C76; border: none;" class="btn btn-xs btn-primary">View</a>
                                     @endcan
                                     @can('blood_edit')
-                                    <a href="{{ route('admin.bloods.edit',[$blood->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.bloods.edit',[$blood->id]) }}" style="background-color: #4682B4; border: none;" class="btn btn-xs btn-info">Edit</a>
                                     @endcan
-                                    @can('blood_delete')
+                                    @can('donor_delete')
+                                    <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteBloodModal">Delete</button>
+                                    @endcan
+                                    <!-- @can('blood_delete')
                                         {!! Form::open(array(
                                             'style' => 'display: inline-block;',
                                             'method' => 'DELETE',
@@ -106,7 +115,7 @@
                                             'route' => ['admin.bloods.destroy', $blood->id])) !!}
                                         {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                         {!! Form::close() !!}
-                                    @endcan
+                                    @endcan -->
                                 </td>
                                 @endif
                             </tr>
@@ -118,6 +127,58 @@
                     @endif
                 </tbody>        
             </table>
+            @foreach ($bloods as $blood)
+            <div class="modal fade" id="deleteBloodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width:30%;">
+                    <form action="{{ route('admin.bloods.destroy', $blood->id) }}" method="POST">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="submit" style="background-color: #026C76; border: none;" class="btn btn-primary">Yes</button>
+                            </div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal fade" id="restoreBloodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width:30%;">
+                    <form action="{{ route('admin.bloods.restore', $blood->id) }}" method="POST">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {{ csrf_field() }}
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="submit" style="background-color: #026C76; border: none;" class="btn btn-primary">Yes</button>
+                            </div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal fade" id="permaDelBloodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="width:30%;">
+                    <form action="{{ route('admin.bloods.perma_del', $blood->id) }}" method="POST">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="submit" style="background-color: #026C76; border: none;" class="btn btn-primary">Yes</button>
+                            </div>                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 @stop

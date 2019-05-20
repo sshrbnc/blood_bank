@@ -7,7 +7,7 @@
 
 
     <div class="donor_blood_type" style="font-weight: bold; font-size: 100px; float: right; color: #1a2226; padding-right: 10%;">{{ $donor->blood_type }}</div>
-    <div class="donor_name" style="font-family: Roboto; font-weight: bold; font-size: 40px;">{{ $donor->name }}</div>
+    <div class="donor_name" style="font-family: Roboto; font-weight: bold; font-size: 40px;">{{ $donor->lastname }}, {{ $donor->firstname}} {{$donor->middlename}} </div>
     <div class="donor_address" style="font-family: Roboto; font-size: 15px;">Address: {{ $donor->address }}</div>
     <div class="donor_phone_number" style="font-family: Roboto; font-size: 15px;">Phone Number: {{ $donor->phone_number }}</div>
     <div class="sex" style="font-family: Roboto; font-size: 15px;">Sex: {{ $donor->sex }}</div>
@@ -15,7 +15,7 @@
     <div class="age" style="font-family: Roboto; font-size: 15px;">Age: {{ Carbon\Carbon::parse($donor->birthday)->diffInYears(\Carbon\Carbon::now()) }}</div>
     <p></p>
     <form>
-        <a href="{{ route('admin.donors.newDonation', [$donor->id]) }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp; New Donation</a>
+        <a href="{{ route('admin.donors.newDonation', [$donor->id]) }}" style="background-color: #026C76;" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp; New Donation</a>
         <p></p>
     </form>
    
@@ -25,14 +25,14 @@
     <p>
         <ul class="list-inline">
             <li><a href="{{ route('admin.donors.show', [$donor->id]) }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.donors.index', [$donor->id]) }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
+            <li><a href="{{ route('admin.donors.show', [$donor->id]) }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
         </ul>
     </p>
     @endcan -->
 
 
     <div class="donor_trans" style="background-color: #fff; border: 1px solid gray; border-radius: 5px; padding: 5px;">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     @can('donor_delete')
@@ -43,39 +43,56 @@
                     <th>Weight</th> 
                     <th>Blood Count</th> 
                     @endcan
-                    <!-- <th>Patient</th> -->
                     <th>Result</th>
-                    <!-- <th>Transaction Code</th> -->
+                    @can('can_see_flag')
                     <th>Flag</th>
+                    @endcan
                     <th>Status</th>
                     <th>Remarks</th>
                     <th>&nbsp;</th>
+
+                   <!--  @if( request('show_deleted') == 1 )
+                    <th>&nbsp;</th>
+                    @else
+                    <th>&nbsp;</th>
+                    @endif -->
                 </tr> 
             </thead>
             <tbody>
                 @if (count($donation) > 0)
                     @foreach ($donation as $donations)
                         <tr data-entry-id="{{ $donor->id }}">
-                            <!-- @can('donor_delete') -->
-                                @if ( request('show_deleted') != 1 )<td></td>@endif
-                            <!-- @endcan -->
-                            <td field-key='date_donated'>{{ $donations->date_donated }}</td>
+                            @can('donation_delete')    
+                                @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
+                                <!-- @if ( request('show_deleted') != 1 )<td></td>@endif -->
+                            @endcan
+                            <td field-key='date_donated'>{{ \Carbon\Carbon::parse($donations->created_at)->format('M d, Y H:i') }}</td>
                             @can('donation_w_bc')
                             <td field-key='weight'>{{ $donations->weight }}</td>
                             <td field-key='blood_count'>{{ $donations->blood_count }}</td>
                             @endcan
-                            <!-- <td field-key='patient'>{{ $donations->patient }}</td> -->
                             <td field-key='result'>{{ $donations->result }}</td>
-                            <!-- <td field-key='trans_code'>{{ $donations->trans_code }}</td> -->
+                            @can('can_see_flag')
                             <td field-key='flag'>{{ $donations->flag }}</td>
+                            @endcan
                             <td field-key='status'>{{ $donations->status }}</td>
                             <td field-key='status'>{{ $donations->details_information }}</td>
+                            @if( request('show_deleted') == 1 )
+                            <td>
+                                @can('donor_delete')
+                                    <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#restoreDonorModal">Restore</button>                                  
+                                @endcan 
+                                @can('donor_delete')
+                                    <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#permaDelDonorModal">Delete Permanently</button>
+                                @endcan
+                            </td>
+                            @else
                             <td>
                                 @if($donations->processed == "Yes")
                                     <i id="processed"><i class="fas fa-check"></i> Processed</i>                                
                                 @else
-                                    @if($donations->result == 'Passed' and $donations->flag == 'Green')
-                                    <button id="toProcess" type="button" class="btn btn-xs btn-success process" data-toggle="modal" data-target="#separate_modal">Process Blood</button>
+                                    @if(($donations->result == 'Passed' and $donations->flag == 'Green') and $donations->processed == "No")
+                                    <button id="toProcess" style="background-color: #2E8B57; border: none;" type="button" class="btn btn-xs btn-success process" data-toggle="modal" data-target="#separate_modal">Process Blood</button>
                                     @endif
                                 @endif
                                 <!-- @can('donor_view')
@@ -83,21 +100,16 @@
                                 @endcan -->
                                 @if($donations->processed == "No")
                                     @can('donor_edit')
-                                    <a href="{{ route('admin.donations.edit',[$donations->id]) }}" class="btn btn-xs btn-info">Edit</a>
+                                    <a href="{{ route('admin.donations.edit',[$donations->id]) }}" style="background-color: #4682B4; border: none;" class="btn btn-xs btn-info">Edit</a>
                                     @endcan                                  
 
                                     @can('donor_delete')
-                                        {!! Form::open(array(
-                                            'style' => 'display: inline-block;',
-                                            'method' => 'DELETE',
-                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                            'route' => ['admin.donations.destroy', $donations->id])) !!}
-                                        {!! Form::submit('Delete', array('class' => 'btn btn-xs btn-danger')) !!}
-                                        {!! Form::close() !!}
+                                    <button type="button" style="border: none;" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteDonationModal">Delete</button>
                                     @endcan
                                 @endif
-                            </td>
-                        </tr>
+                            </td> 
+                            @endif  
+                        </tr> 
                     @endforeach
                 @else
                     <tr>
@@ -107,7 +119,25 @@
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
+    @foreach ($donation as $donations)
+    <div class="modal fade" id="deleteDonationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:30%;">
+            <form action="{{ route('admin.donations.destroy', $donations->id) }}" method="POST">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                    </div>                            
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Component Modal -->
     <div class="modal fade" id="separate_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content"> 
@@ -176,11 +206,9 @@
                         </div>
                     </div>   
                     <div class="form-group">
-                        {{ Form::hidden('donor_id', $donor->id) }}   
-                        @foreach($donation as $donations)                    
+                        {{ Form::hidden('donor_id', $donor->id) }}          
                         {{ Form::hidden('date_donated', $donations->date_donated) }}   
-                        {{ Form::hidden('donation_id', $donations->id) }}                           
-                        @endforeach                
+                        {{ Form::hidden('donation_id', $donations->id) }}  
                         {{ Form::hidden('blood_type', $donor->blood_type) }}
                         {{ Form::hidden('processed', 'Yes') }}
                     </div>                        
@@ -194,6 +222,7 @@
         </div>
       </div>
     </div>
+    @endforeach
 @stop
 
 @section('javascript') 

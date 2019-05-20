@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>
-    @lang('quickadmin.quickadmin_title')
+    PRC Blood Bank
 </title>
 
 <meta http-equiv="X-UA-Compatible"
@@ -12,6 +12,7 @@
 
 <!-- allen -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" id="csrftoken" content="{{ csrf_token() }}">
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -19,6 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="shortcut icon" type="image/png" src="../assets/img/prc_logo.png" style="width: 15px; height: 15px;"/>
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,13 +40,14 @@
 <link href="{{ url('assets/css/new_br.css') }}" rel="stylesheet">
 <link href="{{ url('assets/css/assign_donor.css') }}" rel="stylesheet">
 
+
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"/>
 <link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"/>
-
-
+<link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
 
 <link href="{{ url('adminlte/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+

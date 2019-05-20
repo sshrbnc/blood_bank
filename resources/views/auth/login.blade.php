@@ -17,7 +17,6 @@
                 <div class="col-md-12" id="iprc_head">
                     Iloilo Blood Center
                 </div>
-
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
                 
                 <div class="col-md-12 lg_det" id="adminUsername">
@@ -26,6 +25,7 @@
                
                 <div class="lg_det col-md-12 lg_det" id="adminPassword">
                     <input type="password" class="form-control" name="password" placeholder="Password">
+
                 </div>
                 <div class="col-md-12" id="forgotpw_note">
                     <a href="{{ route('auth.password.reset') }}">Forgot Password?</a>

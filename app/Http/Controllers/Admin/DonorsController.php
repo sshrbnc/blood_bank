@@ -38,10 +38,23 @@ class DonorsController extends Controller
             $donors = Donor::onlyTrashed()->get();
         } else {
             $donors = Donor::all();
-        }
-        return view('admin.donors.index', compact('donors', 'last_donation'));
-    }
 
+            // foreach ($donors as $donor) {
+            //     $data = Donation::select('donor_id', 'date_donated', 'created_at')->get();
+            //     $grouped = $data->groupBy('donor_id');
+            // }
+            // dd($grouped->toArray());
+            
+            
+            // $donor_donation = array();
+           
+            // $donor_donation = DB::table('donations')->where('donor_id', $donors[0]->id)->get();
+            // $last_donation[] = DB::table('donations')->where('donor_id', $donors[0]->id)->orderBy('created_at', 'desc')->first();
+        }
+        // dd($last_donation);       
+        return view('admin.donors.index', compact('donors', 'donor_donation', 'last_donation'));
+    }
+  
     /**
      * Show the form for creating new Donor.
      *
@@ -75,7 +88,8 @@ class DonorsController extends Controller
         }
 
         request()->validate([
-            'name' => 'min:1|max:30|required',
+            'firstname' => 'min:1|max:30|required',
+            'lastname' => 'min:1|max:30|required',
             'blood_type' => 'required',            
             'birthday' => 'required|date_format:'.config('app.date_format'),
             'sex' => 'required',
@@ -85,7 +99,9 @@ class DonorsController extends Controller
 
         if(Auth::check()){
             $donor = new Donor;
-            $donor->name = $request->input('name');
+            $donor->firstname = $request->input('firstname');
+            $donor->middlename = $request->input('middlename');
+            $donor->lastname = $request->input('lastname');
             $donor->blood_type = $request->input('blood_type');
             $donor->birthday = $request->input('birthday');
             $donor->sex = $request->input('sex');
@@ -130,7 +146,8 @@ class DonorsController extends Controller
         }
 
         request()->validate([
-            'name' => 'min:1|max:30|required|string',
+            'firstname' => 'min:1|max:30|required|string',
+            'lastname' => 'min:1|max:30|required|string',
             'blood_type' => 'required',            
             'birthday' => 'required|date_format:'.config('app.date_format'),
             'sex' => 'required',
@@ -140,7 +157,9 @@ class DonorsController extends Controller
 
         if(Auth::check()){
             $donor = Donor::find($id);
-            $donor->name = $request->input('name');
+            $donor->firstname = $request->input('firstname');
+            $donor->middlename = $request->input('middlename');
+            $donor->lastname = $request->input('lastname');
             $donor->blood_type = $request->input('blood_type');
             $donor->birthday = $request->input('birthday');
             $donor->sex = $request->input('sex');
@@ -162,9 +181,7 @@ class DonorsController extends Controller
      */
     public function show($id)
     {
-        if (! Gate::allows('donor_view')) {
-            return abort(401);
-        }
+        
         $donor = Donor::findOrFail($id);
         $donation = Donation::where('donor_id', $id)->get();
         

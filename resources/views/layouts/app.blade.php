@@ -31,7 +31,7 @@
                             <p>{{ Session::get('message') }}</p>
                         </div>
                     @endif
-                    @if ($errors->count() > 0)
+                    <!-- @if ($errors->count() > 0)
                         <div class="alert alert-danger">
                             <strong>Oopsies!</strong>
                             <br><br>
@@ -41,7 +41,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                    @endif -->
 
                     @yield('content')
 

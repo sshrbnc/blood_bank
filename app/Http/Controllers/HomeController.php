@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Donor;
+
 use App\Patient;
+use App\Donation;
+use App\Blood;
+
 use DB;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -27,8 +31,21 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $patients = DB::table('patients')->paginate(5);
         return view('home', ['patients'=>$patients]);
+
+        $donor = DB::table('donors')
+                ->select('blood_type')
+                ->get();
+        // $donors = Donor::all();
+        // $bloods = Blood::all();
+
+        // $avail_blood = DB::table('bloods')->where('donor_id', $donor->id)->get();
+
+
+        return view('home', compact('donor'));
+
     }
 
     public function search(Request $request)

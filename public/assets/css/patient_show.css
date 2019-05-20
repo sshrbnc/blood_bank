@@ -40,7 +40,6 @@
 /*create patient css*/
 
 /*patients list css*/
-
 table.dataTable th{
 	font-family: Roboto;
 	font-size: 15px;
@@ -50,3 +49,27 @@ table.dataTable th{
 	background-color: #f7f7f7;
 }
 
+#fname, #mname, #lname, #btype, #address, #bdate, #contactNum{
+	width: 40%;
+}
+
+#options
+{
+    width:100%;
+    text-align: center;
+}
+.opt_button
+{
+    display: inline-block;
+}
+
+/*new patient*/
+.valid{
+	color: green;
+}
+
+.invalid{
+	color:red;
+}
+
+/*blood_req*/
