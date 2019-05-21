@@ -104,20 +104,19 @@ class DonationsController extends Controller
                 $donation->status = "Defer "; //NO button for collection
             }
             
-            
-
-             if ($request->input('flag') != "--") {
+            if ( $request->input('flag') == "--") {
+                $donation->flag = $request->input('flag');
+                $donation->details_information = $request->input('details_information');
+                $donation->employee_id = Auth::user()->id;
+                $donation->processed = 'No';
+            }else{
                 $donation->flag = $request->input('flag');
                 $donation->details_information = $request->input('details_information');
                 $donation->status = "Discard";
                 $donation->employee_id = Auth::user()->id;
                 $donation->processed = 'Yes';
-            }else{
-                $donation->flag = $request->input('--');
-                $donation->details_information = $request->input('details_information');
-                $donation->employee_id = Auth::user()->id;
-                $donation->processed = 'No';
             }
+
 
             $donation->update();
         }

@@ -91,6 +91,12 @@ class BloodsController extends Controller
                 $donation = Donation::find($request['donation_id']);
                 $donation->processed = $request['processed'];
 
+                $query = DB::table('blood_requests')
+                ->where('blood_type', $blood->blood_type)
+                ->where('components', $blood->component);
+                if (condition) {
+                    # code...
+                }
                 $donation->save();
                 $blood->save();
             }
