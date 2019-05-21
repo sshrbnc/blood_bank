@@ -115,10 +115,8 @@
 <!-- end of modal -->
 
 
-
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ modal for create -->
+<!-- modal for create -->
 <div class="modal fade" id="newPatientModal" tabindex="-1" role="dialog" aria-labelledby="newPatientModalLabel">
-
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -230,11 +228,8 @@
             </div>
         </div>
     </div>      
-
 </div>
-
 <!-- \\\\\\\\\\\\\\\\\\\end of modal\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-
 
 <!-- \\\\\\\\\\\\\\for sms\\\\\\\\\\\\\ -->
 <form action="{{url('sms')}}" method="post">
@@ -247,8 +242,8 @@
     <button type="submit" class="btn btn-primary">
         Send SMS        
     </button>
-    
 </form>
+
 @stop
 
 

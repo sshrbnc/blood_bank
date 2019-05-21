@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Patient;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class BloodRequestsController extends Controller
 {
@@ -88,8 +89,6 @@ class BloodRequestsController extends Controller
         if (Auth::check()){
             $transactions = new Transactions;
             $blood_requests = new BloodRequests;
-            $patient = DB::table('patients')->where('id', $request['patient_id'])->get()->first();
-            
 
             $blood_requests->quantity = $request->input('quantity');
             $blood_requests->hospital = $request->input('hospital');
@@ -99,6 +98,8 @@ class BloodRequestsController extends Controller
             $blood_requests->status = $request->input('status');
             $blood_requests->transaction_code = $this->generate_code();
             
+            $patient = DB::table('patients')->where('id', $request['patient_id'])->get()->first();
+
             if ($request->input('urgent') == 1) {
                 $blood_requests->urgent = true;
                 $avail_matchbloods = DB::table('bloods')->where('blood_type', $patient->blood_type)->where('component', $request->input('component') )->get(); 
@@ -113,13 +114,31 @@ class BloodRequestsController extends Controller
             }
 
             $blood_requests->save();
-           
             }
             
 
-        if($blood_requests){    
+        if($blood_requests){   
+            if(($blood_requests->status)== 'Matched'){
+                Nexmo::message()->send([
+                    'to'   => $patient->contact_number,
+                    'from' => '16105552344',
+                    'text' => 'Your pending blood request is granted. Please visit the Blood center or your hospital'
+                ]);
+            } 
             return redirect()->route('admin.patients.show', $request['patient_id']);
         }
+    }
+
+
+    public function sendSMS(Request $request){
+        Nexmo::message()->send([
+            'to'   => $request->input('mobile'),
+            'from' => '16105552344',
+            'text' => 'Testing from Philippine Red Cross'
+        ]);
+
+        Session::flash('success', 'SMS Send');
+        return redirect('/');
     }
 
     /**
@@ -175,7 +194,7 @@ class BloodRequestsController extends Controller
     }
 
     public function chooseDonor(){
-        
+
     }
 
     public function donorReceipient(Request $request, $bcode, $bid, $did){

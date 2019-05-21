@@ -8,7 +8,7 @@
             <img id="login_bg" src="assets/img/login.jpg">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" id="formContainer">
             <form class="form-horizontal" id="formCont" role="form" method="POST" action="{{ url('login') }}">
                 <div class="col-md-12 logo_panel">
                     <img id="logo" src="assets/img/prc_logo.png">
@@ -20,7 +20,8 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
                 
                 <div class="col-md-12 lg_det" id="adminUsername">
-                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                    <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                    <span id="emailMsg"></span>
                 </div>
                
                 <div class="lg_det col-md-12 lg_det" id="adminPassword">
@@ -39,6 +40,7 @@
 
             </form>
         </div>
+
         <div class="modal fade" id="sendEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <form action="{{ url('sendemail/send') }}" method="POST">
@@ -69,7 +71,7 @@
 </div>
 
 
-@include('partials.footer')
+
 @endsection
 
 @section('javascript') 
@@ -85,8 +87,8 @@
                 var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 if(!filter.test(email)){    
                     $('#emailMsg').html('<label class="text-danger">Invalid Email</label>');
-                    $('#email').addClass('has-error');
-                    $('#loginSubmit').attr('disabled', 'disabled');
+                    $('#emailMsg').addClass('has-error');
+                    $('#login_submitbtn').attr('disabled', 'disabled');
                 }else{
                     $.ajax({
                         url:"{{ route('login.check') }}",
@@ -95,12 +97,12 @@
                         success:function(result){
                             if(result == 'unique'){
                                 $('#emailMsg').html('<label class="text-success">Email Available</label>');
-                                $('#email').removeClass('has-error');
-                                $('#loginSubmit').attr('disabled', false);
+                                $('#emailMsg').removeClass('has-error');
+                                $('#login_submitbtn').attr('disabled', false);
                             }else{
                                 $('#emailMsg').html('<label class="text-danger">Email not Available</label>');
-                                $('#email').addClass('has-error');
-                                $('#loginSubmit').attr('disabled', 'disabled');
+                                $('#emailMsg').addClass('has-error');
+                                $('#login_submitbtn').attr('disabled', 'disabled');
                             }
                         }
                     })

@@ -104,25 +104,24 @@ class DonationsController extends Controller
                 $donation->status = "Defer "; //NO button for collection
             }
             
-            
 
-             if ($request->input('flag') != "--") {
-                $donation->flag = $request->input('flag');
-                $donation->details_information = $request->input('details_information');
-                $donation->status = "Discard";
-                $donation->employee_id = Auth::user()->id;
-                $donation->processed = 'Yes';
-            }else{
-                $donation->flag = $request->input('--');
-                $donation->details_information = $request->input('details_information');
-                $donation->employee_id = Auth::user()->id;
-                $donation->processed = 'No';
-            }
+            // if ($request->input('flag') != "--") {
+            //     $donation->flag = $request->input('flag');
+            //     $donation->details_information = $request->input('details_information');
+            //     $donation->status = "Discard";
+            //     $donation->employee_id = Auth::user()->id;
+            //     $donation->processed = 'Yes';
+            // }else{
+            //     $donation->flag = $request->input('--');
+            //     $donation->details_information = $request->input('details_information');
+            //     $donation->employee_id = Auth::user()->id;
+            //     $donation->processed = 'No';
+            // }
 
             $donation->update();
         }
-        $donor_id = $request->input('donor_id');
-        return redirect()->route('admin.donors.show', [$donor_id]);
+        // $donor_id = $request->input('donor_id');
+        return redirect()->route('admin.donors.show', [$donation->donor_id]);
     }
 
     /**

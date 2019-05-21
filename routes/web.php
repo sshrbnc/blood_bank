@@ -100,6 +100,8 @@ Route::post('bloods_mass_destroy', ['uses' => 'Admin\BloodsController@massDestro
 Route::post('bloods_restore/{id}', ['uses' => 'Admin\BloodsController@restore', 'as' => 'bloods.restore']);
 Route::delete('bloods_perma_del/{id}', ['uses' => 'Admin\BloodsController@perma_del', 'as' => 'bloods.perma_del']);
 
+Route::post('blood_requests/storeDonor/{br_id}', ['uses'=>'Admin\DonorsController@storeFromBr', 'as'=>'donors.storeFromBr']);
+
 //Donations
 Route::resource('donations', 'Admin\DonationsController');
 
