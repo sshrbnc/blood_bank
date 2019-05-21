@@ -23,6 +23,7 @@ class CreateBloodRequestsTable extends Migration
 
                 $table->string('transaction_code');
                 $table->boolean('urgent')->default(false);
+                
                 $table->unsignedInteger('patient_id');
                 $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 

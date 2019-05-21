@@ -47,17 +47,20 @@
             {{form::label('component', 'Component:',['class' => 'col-sm-2 label_name'])}}
 
             {{form::select('component', array(''=>'','Red Blood Cell' => 'Red Blood Cell', 'White Cells & Granulocytes' => 'White Cells & Granulocytes','Whole blood' => 'Whole Blood','Platelet' => 'Platelet','Plasma' => 'Plasma', 'Cryo ' => 'Cryo'), null,  array('class'=>'input_field form-control col-sm-10'))}}
+            <span id="componentErrMsg"></span>
         </div>
 
         <div class="form-group row">
             {{form::label('quantity', 'Quantity:',['class' => 'col-sm-2 label_name'])}}
             {{form::text('quantity', '', ['placeholder' => 'Number of bags','class'=>'input_field form-control col-sm-10'])}}
+            <span id="quantErrMsg"></span>
         </div>
 
 
         <div class="form-group row">
             {{form::label('hospital', 'Hospital:', ['class' => 'col-sm-2 label_name'])}}
             {{form::text('hospital', '', [ 'placeholder' => '','class'=>'input_field form-control col-sm-10'])}}
+            <span id="hospitalErrMsg"></span>
         </div>
 
 
@@ -74,7 +77,7 @@
         </div>
 
 
-    {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+    {{Form::submit('Submit', ['class' => 'btn btn-primary', 'id'=>'submit_br'])}}
     <a href="{{ route('admin.patients.show', $patient->id) }}" class="btn btn-default">Cancel</a>
     {!! Form::close() !!}
 
@@ -83,6 +86,67 @@
 @section('javascript')
 <script type="text/javascript">
     $(document).ready(function(){
+        $("#submit_br").on('click', function(event){
+            console.log("submit_form");
+            checkComponent();
+            checkHospital();
+            checkQuant();
+            if($("span").hasClass("invalid")){
+                event.preventDefault();    
+            }
+            
+        });
+
+        $("#component").on('input', checkComponent);
+        $("#hospital").on('input', checkHospital);
+
+        function checkComponent(){
+            if($("#component").val()===""){
+                $("#componentErrMsg").text("Required");
+                $("#componentErrMsg").removeClass("valid").addClass("invalid");
+            }
+            else{
+                $("#componentErrMsg").text("");
+                $("#componentErrMsg").removeClass("invalid").addClass("valid");
+            }
+        }
+
+        function checkHospital(){
+             if($("#hospital").val()===""){
+                $("#hospitalErrMsg").text("Required");
+                $("#hospitalErrMsg").removeClass("valid").addClass("invalid");
+            }
+            else{
+                $("#hospitalErrMsg").text("");
+                $("#hospitalErrMsg").removeClass("invalid").addClass("valid");
+            }   
+        }
+
+        function checkQuant(){
+             if($("#quantity").val()===""){
+                $("#quantErrMsg").text("Required");
+                $("#quantErrMsg").removeClass("valid").addClass("invalid");
+            }
+            else{
+                $("#quantErrMsg").text("");
+                $("#quantErrMsg").removeClass("invalid").addClass("valid");
+            }   
+        }
+
+        $('#quantity').on('input', function(){
+                var inputNum = $(this);
+                var numPat = new RegExp("^[1-9]{1}$");
+                var validNum = numPat.test(inputNum.val());
+
+                if(validNum){
+                    $("#quantErrMsg").text("Input is valid");
+                    $("#quantErrMsg").removeClass("invalid").addClass("valid");
+                }
+                else{
+                    $("#quantErrMsg").text("Input is invalid");
+                    $("#quantErrMsg").removeClass("valid").addClass("invalid");
+                } 
+            });
     });
 </script>
 @endsection

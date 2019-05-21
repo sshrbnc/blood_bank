@@ -57,6 +57,14 @@
                                 </select>
                                 <span id="flagValid" name="flagValid"></span>                                  
                             </div>
+
+                             <div class="col-md-4 mb-3">
+                                
+                                <label for="trans_code" class="control-label">Transaction Code</label>
+                                <input id="trans_code" type="text" class="form-control" name="trans_code" value="" style="border-radius: 8px;">
+                                <span id="code_valid" name="blood_countValid"></span>                                  
+                                
+                            </div>
                         </div>      
                         <div class="form-group">
                           <label for="details_information">Remarks on donor</label>
@@ -93,6 +101,7 @@
                         @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                     @endcan -->
                     <th>Donation Date</th> 
+                    <th>Blood Request</th>
                     @can('donation_w_bc')
                     <th>Weight</th> 
                     <th>Blood Count</th> 
@@ -113,6 +122,13 @@
                                 @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                             @endcan -->
                             <td field-key='date_donated'>{{ \Carbon\Carbon::parse($donations->created_at)->format('M d, Y H:i') }}</td>
+                            <td field-key='reciepient'>
+                                @if ($donations->blood_req_id != 'NULL')
+                                    {{App\BloodRequests::where( ['id'=>$donations->blood_req] )->pluck('transaction_code')->first()}}
+                                @else
+                                    Walk-in donor
+                                @endif
+                            </td>
                             @can('donation_w_bc')
                             <td id="weightVal" field-key='weight'>{{ $donations->weight }}</td>
                             <td field-key='blood_count'>{{ $donations->blood_count }}</td>

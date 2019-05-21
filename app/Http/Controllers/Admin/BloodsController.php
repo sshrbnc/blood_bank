@@ -13,6 +13,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBloodsRequest;
 use App\Http\Requests\Admin\UpdateBloodsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Patient;
+use App\BloodRequests;
+use DB;
 
 class BloodsController extends Controller
 {
@@ -91,17 +94,64 @@ class BloodsController extends Controller
                 $donation = Donation::find($request['donation_id']);
                 $donation->processed = $request['processed'];
 
-                $query = DB::table('blood_requests')
-                ->where('blood_type', $blood->blood_type)
-                ->where('components', $blood->component);
-                if (condition) {
-                    # code...
-                }
                 $donation->save();
                 $blood->save();
+
+                $urgent = DB::table('blood_requests')
+                ->where('component', $blood->component)->where('urgent', true)->get();
+
+                $pending = DB::table('blood_requests')
+                ->where('component', $blood->component)->where('status', "Pending")->get();
+
+                if($donation->blood_req==NULL){
+                    if (count($urgent)>0) {
+                        foreach($urgent as $urg){
+                            $id = $urg->patient_id;
+                            $patient = DB::table('patients')->where('id',$id)->get()->first();
+                            if($patient->blood_type == $blood->blood_type){
+                                BloodRequests::where('id', $urg->id)->update(array('blood_id' => $blood->id, 'status' => 'Matched'));
+                                break;
+                            }
+                        }
+                    }
+                    else{
+                        if (count($pending)>0){
+                            foreach($pending as $pend){
+                            $id = $pend->patient_id;
+                            $patient = DB::table('patients')->where('id',$id)->get()->first();
+
+                                if($patient->blood_type == $blood->blood_type){
+                                    BloodRequests::where('id', $pend->id)->update(array('blood_id' => $blood->id, 'status' => 'Matched'));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    $br = DB::table('blood_requests')->where('id', $donation->blood_req)->where('component', $blood->component)->get()->first();
+                    if($br){
+                        BloodRequests::where('id', $br->id)->update(array('blood_id' => $blood->id, 'status' => 'Donor donated'));
+                    }
+
+                }
+                
             }
-        }
+                
+            }
+        
         return redirect()->route('admin.bloods.index');
+    }
+
+     public function sendSMS($mobile){
+        Nexmo::message()->send([
+            'to'   => $mobile,
+            'from' => '16105552344',
+            'text' => 'Testing from Philippine Red Cross'
+        ]);
+
+        Session::flash('success', 'SMS Send');
+        return redirect('/');
     }
 
     /**

@@ -17,17 +17,22 @@ class CreateDonationsTable extends Migration
             Schema::create('donations', function (Blueprint $table) {
                 $table->increments('id');
                 $table->date('date_donated');
-                $table->integer('donor_id')->unsigned();
-                $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
-                $table->string('trans_code')->nullable();
+
+                $table->integer('blood_req')->unsigned()->nullable();
+                $table->foreign('blood_req')->references('id')->on('blood_requests')->onDelete('cascade');
+
                 $table->integer('weight');
                 $table->integer('blood_count')->nullable();
                 $table->string('flag')->nullable();
                 $table->string('status');
                 $table->string('details_information')->nullable();
+               
                 $table->integer('employee_id')->unsigned();
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
                 $table->string('processed', 5);
+
+                $table->integer('donor_id')->unsigned();
+                $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
 
                 $table->timestamps();
                 $table->softDeletes();

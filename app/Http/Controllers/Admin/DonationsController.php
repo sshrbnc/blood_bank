@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use DB;
 
 class DonationsController extends Controller
 {
@@ -34,7 +35,7 @@ class DonationsController extends Controller
             $donation = new Donation;
             $donation->date_donated = $request->input('date_donated');
             $donation->donor_id = $request['donor_id'];
-            $donation->trans_code = $request->input('trans_code');
+            
             $donation->weight = $request->input('weight');
             if ($request->input('weight') >= 50) {
                 // also finished interview about confidential questions
@@ -49,6 +50,12 @@ class DonationsController extends Controller
             $donation->details_information = $request->input('details_information');
             $donation->employee_id = Auth::user()->id;
             $donation->processed = 'No';
+
+            $code = DB::table('blood_requests')->where('transaction_code', $request->input('trans_code'))->get()->first();
+
+            if ($code){
+                $donation->blood_req = $code->id;
+            }
             $donation->save();
         }
         $donor_id = $request->input('donor_id');
@@ -93,7 +100,7 @@ class DonationsController extends Controller
             $donation = Donation::find($id);
             $donation->date_donated = $request->input('date_donated');
             $donation->donor_id = $request['donor_id'];
-            $donation->trans_code = $request->input('trans_code');
+
             $donation->weight = $request->input('weight');
             // if button is "Hemoglobin Checking"
             $donation->blood_count = $request->input('blood_count');

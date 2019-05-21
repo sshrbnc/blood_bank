@@ -15,14 +15,6 @@
     </p>
     @endcan
 
-    @can('patient_delete')
-    <p>
-        <ul class="list-inline">
-            <li><a href="{{ route('admin.patients.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.patients.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
-        </ul>
-    </p>
-    @endcan
 
     <div class="panel panel-default">
         <div class="panel-heading">
