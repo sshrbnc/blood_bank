@@ -3,16 +3,9 @@
 
 @section('content')
 
-<div class="container">
-    <h1>Assign Donor</h1>
-    <h1>Donor's list</h1>
-    <h1>Donor is existing</h1>
-    <h1>new donor</h1>
-</div>
-
 <div class="">
     <div class="patient_name">
-        {{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}}
+        {{$patient->firstname}} {{$patient->middlename}} {{$patient->lastname}} <i class="fas fa-wheelchair"></i>
     </div>
 
     <div class="patient_blood_type">
@@ -41,7 +34,7 @@
         </div>
 
         <div class="panel-body table-responsive list_panel">
-            <table class="table table-bordered table-striped {{ count($donors) > 0 ? 'datatable' : '' }} @can('donor_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table style="" class="table table-bordered table-striped {{ count($donors) > 0 ? 'datatable' : '' }} @can('donor_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('donor_delete')
@@ -54,12 +47,7 @@
                         <th>Last Donation</th>
                         <th>Phone Number</th>
                         <th>Address</th>
-
-                        @if( request('show_deleted') == 1 )
-                        <th>&nbsp;</th>
-                        @else
-                        <th>&nbsp;</th>
-                        @endif
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,30 +64,8 @@
                                 <td field-key='last_donation'>Jan 22 17</td>
                                 <td field-key='phone_number'>{{ $donor->phone_number }}</td>
                                 <td field-key='address'>{{ $donor->address }}</td>
-                                @if( request('show_deleted') == 1 )
-                                <td>
-                                    @can('donor_delete')
-                                        {!! Form::open(array(
-                                            'style' => 'display: inline-block;',
-                                            'method' => 'POST',
-                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                            'route' => ['admin.donors.restore', $donor->id])) !!}
-                                        {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
-                                        {!! Form::close() !!}
-                                    @endcan
-                                    @can('donor_delete')
-                                        {!! Form::open(array(
-                                            'style' => 'display: inline-block;',
-                                            'method' => 'DELETE',
-                                            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                            'route' => ['admin.donors.perma_del', $donor->id])) !!}
-                                        {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                        {!! Form::close() !!}
-                                    @endcan
-                                </td>
-                                @else
+                                
                                 <td><a href="{{ route('admin.br.donor_receipient',['did' => $donor->id, 'bcode' => $br->transaction_code, 'bid' => $br->id]) }}" class="btn btn-xs btn-primary">Assign</a></td>
-                                @endif
                             </tr>
                         @endforeach
                     @else

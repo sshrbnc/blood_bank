@@ -1,0 +1,45 @@
+#searchPic{
+	width: 100%;
+}
+
+#logo_rc{
+	width: 20%;
+	height:20%;
+	margin-top: 5%;
+}
+
+#resultPanel{
+	background-color: white;
+}
+
+#searchPanel{
+	margin-top: 5%;
+}
+
+#logo_row{
+	display: flex;
+	justify-content: center;
+}
+
+#searchSec{
+	background-color: white;
+}
+
+#searchIcon{
+	font-size: 100%;
+}
+
+#search_trans{
+	border-radius: 0px;
+	background-color: #aa010c;
+	width: 20%;
+}
+
+#searchInput{
+	width: 80%;
+}
+
+.content{
+	display: flex;
+	align-items: center;
+}

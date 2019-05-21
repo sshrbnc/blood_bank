@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ 'Blood Bank Management System' }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,87 +30,81 @@
     <link rel="stylesheet" href="assets/css/Status.css">
     <link rel="stylesheet" href="assets/css/Transaction.css">
     <link rel="stylesheet" href="assets/css/sidebar.css">
-    <link rel="stylesheet" href="adminlte/css/skins/skin-blue.css">   
+    <link rel="stylesheet" href="adminlte/css/skins/skin-blue.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/index-page.css"">   
+
     <link rel="shortcut icon" type="image/png" href="assets/img/prc_logo.png"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <link rel="shortcut icon" type="image/png" src="../assets/img/prc_logo.png" style="width: 15px; height: 15px;"/>
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 
-    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color: #c30000;">
-        <div class="container1"><img class="prc_logo" src="assets/img/prc_logo.png"><a class="navbar-brand" href="/">&nbsp;Philippine Red Cross - Iloilo Chapter</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="col-lg-20 text-right" style="margin-top: -50px" >
-                @if (Auth::check())
-                    <div style="color:white; width: 200%;">
-                        Logged in as {{ Auth::user()->name }}
-                        <form action="{{ route('auth.logout') }}" method="post">
-                            {{ csrf_field() }}
-                            <input type="submit" value="Logout" class="btn btn-success">
-                        </form>
+<body style="background-color: #d82247">
 
-                        {!! Form::open(['method'=>'POST','url'=>'/login'])  !!}
-                            <input type="submit" value="Admin Panel" class="btn btn-primary">
-                        {!! Form::close() !!}
+    <div class="container-fluid">
+        <div class="row no-gutters justify-content-center" id="searchPanel" >
+            <div id="searchSec" class="col-md-3">
+                <div class="row no-gutters">
+                   
+                    <input type="text" name="searchInput" class="form-control" id="searchInput" placeholder="Input transaction code" style="border-radius: 0px;">
 
-                    </div>
-                @endif
-            </div>
-        </div>
-    </nav>
-    
-<div style="background-color:rgb(238,244,247);">
-    <div class="container2" style="margin: 0;">
-        <div class="row" style="margin:0px;">
-            @yield('main')
-        </div>
-    </div>
-</div>
-
-<div class="projects-clean"></div>
-<div class="footer-dark" style="background-color:rgb(0,0,0);">
-    <footer>
-        <div class="container3">
-            <div class="row">
-                <div class="col-sm-6 col-md-3 item" style="padding-left: 50px;">
-                    <h5>Important Links:</h5>
-                    <ul>
-                        <li><a href="#">Ambulance</a></li>
-                        <li><a href="http://www.infoblood.org">Blood Bank</a></li>
-                        <li><a href="#">Dhaka Medical</a></li>
-                    </ul>
+                    <button id="search_trans" class="btn btn-xs"><i id="searchIcon" class="fas fa-search"></i></button>
+                    
                 </div>
-                <div class="col-sm-6 col-md-3 item">
-                    <h5>Others: </h5>
-                    <ul>
-                        <li><a href="#">Company</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6 item text">
-                    <h5>About Us:</h5>
-                    <p style="font-size: 14px;">
-                        At present, the Philippine Red Cross provides six major services: Blood Services, Disaster Management Services, Safety Services, Health Services, Social Services, Red Cross Youth and Volunteer Services. All of them embody the fundamental principles of the International Red Cross and Red Crescent Movement – humanity, impartiality, neutrality, independence, voluntary service, unity and universality. These values guide and inspire all Red Cross staff and volunteers, to whom being a Red Crosser is more than just a philosophy but a way of life.
-                    </p>
+                <div class="">
+                    <img id="searchPic" src="assets/img/pic4.jpg">
                 </div>
             </div>
+
+            <div class="col-md-4" id="resultPanel">
+                <div class="col-md-12" id="logo_row">
+                    <img id="logo_rc" src="assets/img/prc_logo.png">
+                </div>
+
+                <div id="results" class="col-md-12">
+                    
+                </div>
+                
+            </div>
         </div>
-    </footer>
-    <div class="col item social">
-        <a href="https://github.com/MinhazulKabir"><i class="icon ion-social-github-outline"></i></a>
-        <a href="https://bd.linkedin.com/in/minhazulkabir"><i class="icon ion-social-linkedin-outline"></i></a>
-        <a href="https://www.facebook.com/MinhazulKabir"><i class="icon ion-social-facebook-outline"></i></a>
-        <a href="https://twitter.com/mminhazulkabir"><i class="icon ion-social-twitter-outline"></i></a>
-        <a href="https://www.instagram.com/minhazulkabir/"><i class="icon ion-social-instagram-outline"></i></a>
+        
     </div>
-    <p class="copyright" style="font-size:15px;padding-top:10px;">All Rigths Reserved © <?php echo date("Y"); ?>  </p>
-</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#searchInput").on('keyup',function(){
+            $value = $(this).val();
+            $.ajax({
+                type : 'get',
+                url : '{{URL('search')}}',
+                data:{'trans':$value},
+                success:function(response){
+                    $('#results').html(response);
+                    console.log(response);
+                }
+            });
+        });
+    });
+</script>
 </body>
+
 
 </html>

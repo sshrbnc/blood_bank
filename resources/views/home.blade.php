@@ -14,7 +14,7 @@
             </div>
         </div>
     </div> -->
-    <div class="col-md-6 center">
+    <div class="col-md-6 justify-content center">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Available Bloods
@@ -25,66 +25,46 @@
                     <thead>
                         <tr>                                                
                             <th>Blood Type</th>                        
-                            <th>In Stock</th>
+                            <th>Supply</th>
                         </tr>
                     </thead>
                     <tbody>    
                         <tr>                              
                             <td field-key='blood_type'>A+</td>                                
-                            <td field-key='stock'>90</td>                                
+                            <td field-key='stock'>{{count($apblood)}}</td>                                
                         </tr>    
                         <tr>                              
                             <td field-key='blood_type'>A-</td>                                
-                            <td field-key='stock'>67</td>                                
+                            <td field-key='stock'>{{count($anblood)}}</td>                                
                         </tr>               
                         <tr>                              
                             <td field-key='blood_type'>B+</td>                                
-                            <td field-key='stock'>44</td>                                
+                            <td field-key='stock'>{{count($bpblood)}}</td>                                
                         </tr> 
                         <tr>                              
                             <td field-key='blood_type'>B-</td>                                
-                            <td field-key='stock'>10</td>                                
-                        </tr> 
+                            <td field-key='stock'>{{count($bnblood)}}</td>                                
+                        </tr>
+                        <tr>                              
+                            <td field-key='blood_type'>O+</td>                                
+                            <td field-key='stock'>{{count($opblood)}}</td>                                
+                        </tr>
+                        <tr>                              
+                            <td field-key='blood_type'>O-</td>                                
+                            <td field-key='stock'>{{count($onblood)}}</td>                                
+                        </tr>
+                        <tr>                              
+                            <td field-key='blood_type'>AB+</td>                                
+                            <td field-key='stock'>{{count($abpblood)}}</td>                                
+                        </tr>
+                        <tr>                              
+                            <td field-key='blood_type'>AB-</td>                                
+                            <td field-key='stock'>{{count($abnblood)}}</td>                                
+                        </tr>     
                     </tbody>        
                 </table>
             </div>
         </div>
     </div>
-
-<div id="search_bar">
-    <form action="/search" method="get">
-        <div class="input-group">
-            <input type="search" name="search" class="form-control">
-            <span class="input-group-prepend">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </span>
-        </div>    
-    </form>
-</div>
-
-<div class="panel-body table-responsive">
-<table class="table table-striped">
-<thead>
-    <tr>
-        <td>Name</td>
-        <td>Blood Type</td>
-        <td>Birthday</td>
-        <td>Address</td>
-    </tr>
-</thead>
-
-<tbody>
-@foreach ($patients as $patient)
-    <tr>
-        <td>{{$patient->firstname}} {{$patient->lastname}}</td>
-        <td>{{$patient->blood_type}}</td>
-        <td>{{$patient->birthday}}</td>
-        <td>{{$patient->address}}</td>
-        <td><a href="{{ route('admin.patients.show', $patient->id ) }}" class="btn btn-xs btn-primary">View</a></td>
-    </tr>
-@endforeach
-</tbody>
-</table>
-</div>
 
 @endsection

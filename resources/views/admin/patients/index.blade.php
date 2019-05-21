@@ -232,18 +232,18 @@
 <!-- \\\\\\\\\\\\\\\\\\\end of modal\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
 
 <!-- \\\\\\\\\\\\\\for sms\\\\\\\\\\\\\ -->
-<form action="{{url('sms')}}" method="post">
+<!-- <form action="{{url('sms')}}" method="post">
     {{csrf_field()}}
     <div class="form-group">
-        <label for="mobile">Mobile Number</label>
+       <label for="mobile">Mobile Number</label>
         <input type="text" name="mobile" class="form-control" id="mobile" placeholder="Mobile Number">
     </div>
 
     <button type="submit" class="btn btn-primary">
         Send SMS        
     </button>
-</form>
-
+</form> 
+ -->
 @stop
 
 
@@ -403,6 +403,5 @@
                }
             }            
         });
-
     </script>
 @endsection

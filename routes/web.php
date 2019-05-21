@@ -109,9 +109,9 @@ Route::resource('donations', 'Admin\DonationsController');
 });
 
 
-//search
-Route::get('/search', 'HomeController@search');
-
-
 //Message test
 Route::post('sms','Admin\PatientsController@sendSMS');
+
+
+//search transaction in home
+Route::get('search','LiveSearchController@search');

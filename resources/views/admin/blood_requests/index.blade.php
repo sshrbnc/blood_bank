@@ -28,11 +28,11 @@
                     <th>Hospital</th>
                     <th>Status</th>
                     <th>Donor</th>
-                    @if( request('show_deleted') == 1 )
-                        <th>&nbsp;</th>
-                    @else
-                        <th>&nbsp;</th>
-                    @endif
+                   <!--  @if( request('show_deleted') == 1 ) -->
+                    <th>&nbsp;</th>
+                    <!-- @else -->
+                    <th>&nbsp;</th>
+                    <!-- @endif -->
                 </tr>
             </thead>
             <tbody id="table_body">
@@ -50,14 +50,18 @@
                                 <td>{{$br->hospital}}</td>
                                 <td>{{$br->status}}</td>
 
-                                <td>
-                                @if ( $br->status!='Matched')
-                                    <a href="{{ route('admin.br.assignDonor',['id'=> ($br->id)]) }}" class="btn btn-xs btn-primary">Assign Donor</a>
-
-                                @else
-                                    {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('firstname')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('middlename')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('lastname')[0]}}
+                    
+                                @if ($br->status=='Matched')
+                                    <td>{{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('firstname')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('middlename')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('lastname')[0]}}</td>
+                                @elseif ( $br->status=='With Donor')
+                                    <td><a href="{{ route('admin.br.assignDonor',['id'=> ($br->id)]) }}" class="btn btn-xs btn-primary">Encode Donor</a></td>
+                                @elseif ( $br->status=='Pending')
+                                    <td><a href="{{ route('admin.br.assignDonor',['id'=> ($br->id)]) }}" class="btn btn-xs btn-primary">Assign Donor</a></td>
+                                @elseif ($br->urgent == true)
+                                    <td>Urgent</td>
+                                    
                                 @endif
-                                </td>
+                                
 
                                 <td>
                                 @can('profile_delete')

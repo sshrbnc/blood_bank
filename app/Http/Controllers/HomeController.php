@@ -7,6 +7,7 @@ use App\Donor;
 use App\Patient;
 use App\Donation;
 use App\Blood;
+use App\BloodRequests;
 
 use DB;
 use App\Http\Requests;
@@ -34,29 +35,27 @@ class HomeController extends Controller
     public function index()
     {
 
-        $patients = DB::table('patients')->paginate(5);
-        return view('home', ['patients'=>$patients]);
-
-        $donor = DB::table('donors')
-                ->select('blood_type')
-                ->get();
-        // $donors = Donor::all();
-        // $bloods = Blood::all();
-
-        // $avail_blood = DB::table('bloods')->where('donor_id', $donor->id)->get();
+        $opblood = DB::table('bloods')->where('blood_type', 'O+')->get();
+        $onblood = DB::table('bloods')->where('blood_type', 'O-')->get();
+        $apblood = DB::table('bloods')->where('blood_type', 'A+')->get();
+        $anblood = DB::table('bloods')->where('blood_type', 'A-')->get();
+        $abpblood = DB::table('bloods')->where('blood_type', 'AB+')->get();
+        $abnblood = DB::table('bloods')->where('blood_type', 'AB-')->get();
+        $bpblood = DB::table('bloods')->where('blood_type', 'B+')->get();
+        $bnblood = DB::table('bloods')->where('blood_type', 'B-')->get();
 
 
-        return view('home', compact('donor'));
+        return view('home', compact('opblood','onblood', 'apblood','anblood', 'abpblood', 'abnblood', 'bpblood', 'bnblood'));
 
     }
 
-    public function search(Request $request)
-    {
-        $search = $request->get('search');
-        $patients = DB::table('patients')->where('name', 'like', '%'.$search.'%')->paginate(5);
+    // public function search(Request $request)
+    // {
+    //     $search = $request->get('search');
+    //     $patients = DB::table('patients')->where('name', 'like', '%'.$search.'%')->paginate(5);
 
-        return view('home', ['patients' => $patients]);
-    }
+    //     return view('home', ['patients' => $patients]);
+    // }
 
     // public function mail()
     // {
@@ -65,5 +64,7 @@ class HomeController extends Controller
        
     //    return 'Email was sent';
     // }
+
+
 
 }
