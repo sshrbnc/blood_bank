@@ -204,7 +204,7 @@
 
                     @if($errors->has('contact_number'))
                         <p class="help-block">
-                            {{ $errors->first('contact_number') }}
+                                     {{ $errors->first('contact_number') }}
                         </p>
                     @endif
                 </div>

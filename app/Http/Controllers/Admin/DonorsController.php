@@ -253,9 +253,6 @@ class DonorsController extends Controller
         }
         $donor = Donor::findOrFail($id);
         $donor->delete();
-        // $donations = Donation::where('donor_id', $id)->get();
-        // $donations->delete();
-
         return redirect()->route('admin.donors.index');
     }
 

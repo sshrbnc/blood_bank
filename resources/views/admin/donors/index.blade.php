@@ -168,7 +168,7 @@
                                     
                                         {!! Form::label('blood_type', 'Blood Type', ['class' => 'control-label']) !!}
                                         <div>
-                                            {!! Form::select('blood_type', array('A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+', 'B-' => 'B-', 'AB+' => 'AB+', 'AB-' => 'AB-', 'O+' => 'O+', 'O-' => 'O-'), old('blood_type'), array('style' => 'border-radius: 8px;', 'class' => 'form-control', 'placeholder' => 'Select Blood Type')) !!}  
+                                            {!! Form::select('blood_type', array('A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+', 'B-' => 'B-', 'AB+' => 'AB+', 'AB-' => 'AB-', 'O+' => 'O+', 'O-' => 'O-'), old('blood_type'), array('style' => 'border-radius: 8px;', 'class' => 'form-control', 'placeholder' => 'Select Blood Type', 'id'=>'btype')) !!}  
                                         </div> 
                                         <p class="help-block"></p>
                                         @if($errors->has('blood_type'))
@@ -394,7 +394,7 @@
             {
               minDate: new Date(1900,1-1,1), maxDate: '-16Y',
               dateFormat: 'yy-mm-dd',
-              defaultDate: new Date(2003,1-1,1),
+              defaultDate: new Date(2003,5-1,21),
               changeMonth: true,
               changeYear: true,
               yearRange: '-110:-16'
@@ -409,5 +409,17 @@
         //         $(".modal-body #hiddenValue").val(donor_id);
         //     })
         // });
+    </script>
+    <script>
+        function checkFname(){
+            if ($("#fname").val() ===""){
+                $("#fnameErrorMsg").text("Required field");
+                $("#fnameErrorMsg").removeClass("valid").addClass("invalid");
+            }
+            else if ($("#fname").val() !=""){
+                $("#fnameErrorMsg").text("");
+                $("#fnameErrorMsg").removeClass("invalid").addClass("valid");
+            }  
+        }
     </script>      
 @endsection
