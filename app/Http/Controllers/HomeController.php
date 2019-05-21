@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Donor;
+
+use App\Patient;
 use App\Donation;
 use App\Blood;
+
 use DB;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -30,6 +33,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $patients = DB::table('patients')->paginate(5);
+        return view('home', ['patients'=>$patients]);
+
         $donor = DB::table('donors')
                 ->select('blood_type')
                 ->get();
@@ -40,14 +47,15 @@ class HomeController extends Controller
 
 
         return view('home', compact('donor'));
+
     }
 
     public function search(Request $request)
     {
-        $search = $request->get('serach');
+        $search = $request->get('search');
         $patients = DB::table('patients')->where('name', 'like', '%'.$search.'%')->paginate(5);
 
-        return view('admin.patients.index', ['patients' => $patients]);
+        return view('home', ['patients' => $patients]);
     }
 
     // public function mail()

@@ -44,6 +44,7 @@
     });
 </script>
 
+
 <script>
     $(function(){
         /** add active class and stay opened when selected */
@@ -63,15 +64,14 @@
              return this.href == url;
         }).parentsUntil('.sidebar-menu > .treeview-menu').addClass('menu-open').css('display', 'block');
     });
+
+    
 </script>
 
-<!-- For blood type selection -->
-<!-- <script type="text/javascript">
-    $("#bloodTypeDropdown").select2({
-        placeholder:'Blood type:',
-        allowClear:true
-    });     
+<!-- add patient validation -->
+<script type="text/javascript">
+
+
 </script>
- -->
 
 @yield('javascript')

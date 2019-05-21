@@ -14,10 +14,74 @@
     <div class="birthday" style="font-family: Roboto; font-size: 15px;"><b>Birthday:</b> {{ \Carbon\Carbon::parse($donor->birthday)->format('M d, Y') }}</div>
     <div class="age" style="font-family: Roboto; font-size: 15px;"><b>Age:</b> {{ Carbon\Carbon::parse($donor->birthday)->diffInYears(\Carbon\Carbon::now()) }}</div>
     <p></p>
-    <form>
-        <a href="#" data-toggle="modal" data-target="#newDonationModal" style="background-color: #026C76;" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp; New Donation</a>
-        <p></p>
-    </form>
+
+    <!-- New Donation -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" id="newDonation" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:40%;">
+            {!! Form::open(['method' => 'POST', 'route' => ['admin.donations.store'], 'files' => true,]) !!}
+           
+            <form action="{{ route('admin.donations.store') }}" method="POST">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {{ csrf_field() }}          
+                        {{ Form::hidden('donor_id', $donor->id) }} 
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {!! Form::label('date_donated', 'Date', ['class' => 'control-label']) !!}
+                                {!! Form::text('date_donated', Carbon\Carbon::today()->format('d-m-Y'), ['style' => 'border-radius: 8px;', 'class' => 'form-control date-picker', 'placeholder' => '', 'required' => ''])  !!}
+                                <!-- <span id="date_donatedValid" name="date_donatedValid">.</span>                                   -->
+                            </div>                               
+                            <div class="col-md-4 mb-3">
+                                <label for="weight" class="control-label">Weight (kg)</label>
+                                <input id="weight" type="text" class="form-control" name="weight" style="border-radius: 8px;">
+                                <span id="weightValid" name="weightValid"></span>                                  
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <!-- {!! Form::label('blood_count', 'Blood Count', ['class' => 'control-label']) !!} -->
+                                <label for="blood_count" class="control-label">Blood Count</label>
+                                <input disabled id="blood_count" type="text" class="form-control" name="blood_count" value="" style="border-radius: 8px;">
+                                <span id="blood_countValid" name="blood_countValid"></span>                                  
+                                
+                            </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="flag" class="control-label">Flag</label>
+                                <!-- <input id="flag" type="input" class="form-control" name="flag" style="border-radius: 8px;"> -->
+                                <select id="flag" class="form-control" name="flag" style="border-radius: 8px;">
+                                    <option selected>--</option>
+                                    <option>Green</option>
+                                    <option>Red</option>
+                                    <option>Yellow</option>
+                                    <option>Blue</option>
+                                </select>
+                                <span id="flagValid" name="flagValid"></span>                                  
+                            </div>
+                        </div>      
+                        <div class="form-group">
+                          <label for="details_information">Remarks on donor</label>
+                          <textarea class="form-control" rows="5" id="details_information" name="details_information" style="border-radius: 8px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onsubmit="return validateForm()" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="submitBtn" name="submitBtn" type="submit" style="background-color: #026C76; border: none;" class="btn btn-primary">Submit</button>
+                    </div>                            
+                </div>
+            </form>
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    <button 
+        type="button" 
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#newDonation">
+        <i class="fas fa-plus"></i> New Donation
+    </button>
+  
+    <p></p>
    
     <div class="donations" style="font-size: 19px;">Donations</div>
 
@@ -200,8 +264,7 @@
                                             </div>
                                         </div>
                                         @endif
-
-                                         <!-- Edit Donation -->
+                                        <!-- Edit Donation -->
                                         <div class="modal fade" id="editDonationModal-{{ $donations->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document" style="width:40%;">
                                                 {!! Form::model($donations, ['method' => 'PUT', 'route' => ['admin.donations.update', $donations->id], 'files' => true,]) !!}
@@ -243,10 +306,12 @@
                                                     </div>
                                                 </form>
                                                 {!! Form::close() !!}          
-                                            </div>
-                                        </div>  
+                                            </div>                                     
+                                        </div>    
+
                                         @can('donor_edit')
-                                        <a href="#" data-toggle="modal" data-target="#editDonationModal-{{ $donations->id }}" style="background-color: #4682B4;" class="btn btn-xs btn-info">Edit</a>
+                                        <a href="#" data-toggle="modal" data-target="#editDonationModal-{{$donations->id}}" style="background-color: #4682B4;" class="btn btn-xs btn-info">Edit</a>
+
                                         @endcan                            
                                         @can('donor_delete')
                                         <button type="button" style="border: none;" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteDonationModal">Delete</button>
@@ -301,6 +366,7 @@
                 </div>
             </form>
         </div>
+
     </div> -->
     <!-- New Donation -->
     <div class="modal fade" id="newDonationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -360,9 +426,6 @@
         </div>
     </div>
     @endforeach
-     
-    
-   
 @stop
 
 @section('javascript') 
@@ -416,24 +479,5 @@
             }
         }
     </script>
-    <!-- <script>
-        $(document).ready(function(){
-            $("#toDiscard").click(function(event) {
-            event.preventDefault();
-
-            $.ajax({
-                type: "post",
-                url: "{{ route('admin.donors.index') }}",
-                dataType: "json",
-                data: $('#toDiscard').serialize(),
-                success: function(data){
-                      alert("Data Save: " + data);
-                },
-                error: function(data){
-                     alert("Error")
-                }
-            });
-        });
-    </script> -->
     <!-- <script type="text/javascript" src="../assets/formValidation.js"></script> -->
 @endsection

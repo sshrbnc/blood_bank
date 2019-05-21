@@ -15,6 +15,7 @@ use App\Http\Requests\Admin\StoreDonorsRequest;
 use App\Http\Requests\Admin\UpdateDonorsRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
 use Illuminate\Database\Eloquent\Collection;
+use App\BloodRequests;
 
 class DonorsController extends Controller
 {
@@ -113,6 +114,44 @@ class DonorsController extends Controller
         }
         
         return redirect()->route('admin.donors.index');
+    }
+
+    public function storeFromBr(Request $request, $br_id)
+    {
+        if (! Gate::allows('donor_create')) {
+            return abort(401);
+        }
+
+        request()->validate([
+            'firstname' => 'min:1|max:30|required',
+            'lastname' => 'min:1|max:30|required',
+            'blood_type' => 'required',            
+            'birthday' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
+        ]);
+
+        if(Auth::check()){
+            $donor = new Donor;
+            $donor->firstname = $request->input('firstname');
+            $donor->middlename = $request->input('middlename');
+            $donor->lastname = $request->input('lastname');
+            $donor->blood_type = $request->input('blood_type');
+            $donor->birthday = $request->input('birthday');
+            $donor->sex = $request->input('sex');
+            $donor->address = $request->input('address');
+            $donor->phone_number = $request->input('phone_number');
+            $donor->employee_id = Auth::user()->id;
+
+            $donor->save();
+        }
+
+        $blood_req = BloodRequests::find($br_id);
+        $blood_req->donor_id = $donor->id;
+        $blood_req->update();
+        
+        return redirect()->route('admin.donors.show', $donor->id);
     }
 
 

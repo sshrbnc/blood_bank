@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Carbon\Carbon;
+use Nexmo\Laravel\Facade\Nexmo;
+use Session;
 
 
 class PatientsController extends Controller
@@ -47,33 +49,40 @@ class PatientsController extends Controller
         //
 
          $this->validate($request, [
-            'name'  => 'required',
+            'firstname'  => 'required',
+            'middlename'  => 'required',
+            'lastname'  => 'required',
             'blood_type'  => 'required',
             'address'  => 'required',
             'birthday'  => 'required',
-            'contact_number'  => ['required', 'regex:/(09|\+639)\d{9}$/'
-            ]            ]);
+            'contact_number'  => 'required'
+            ]);
 
 
         if (Auth::check()){
             $years = Carbon::parse($request->input('birthday'))->age;
 
             $patients = new Patient;
-            $patients->name = $request->input('name');
+            $patients->firstname = $request->input('firstname');
+            $patients->middlename = $request->input('middlename');
+            $patients->lastname = $request->input('lastname');
             $patients->blood_type = $request->input('blood_type');
             $patients->address = $request->input('address');
             $patients->birthday = $request->input('birthday');
             $patients->age = $years;
-            $patients->contact_number = $request->input('contact_number');
+            $patients->contact_number = '639'.$request->input('contact_number');
 
             $patients->details_information = $request->input('details_information');
-          
+
             $patients->save();  
         }
-       
+        
+
+        $id = $patients->id;
 
         if($patients){
-            return redirect()->route('admin.patients.index');
+            $patient = DB::table('patients')->where('id',$id)->get()->first();
+            return view('admin.blood_requests.create', compact('patient'));
         }
     }
 
@@ -83,7 +92,6 @@ class PatientsController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    // public function show(Patient $patient)
 
     public function show($id)
     {
@@ -146,7 +154,7 @@ class PatientsController extends Controller
      public function createBR($id)
     {
         //
-        $patient = DB::table('patients')->where('id',$id)->get();
+        $patient = DB::table('patients')->where('id',$id)->get()->first();
         return view('admin.blood_requests.create', compact('patient')); 
     }
 
@@ -169,6 +177,32 @@ class PatientsController extends Controller
         $patient->forceDelete();
 
         return redirect()->route('admin.patients.index');
+    }
+
+
+      public function massDestroy(Request $request)
+    {
+        if (! Gate::allows('patient_delete')) {
+            return abort(401);
+        }
+        if ($request->input('ids')) {
+            $entries = Patient::whereIn('id', $request->input('ids'))->get();
+
+            foreach ($entries as $entry) {
+                $entry->delete();
+            }
+        }
+    }
+
+    public function sendSMS(Request $request){
+        Nexmo::message()->send([
+            'to'   => $request->input('mobile'),
+            'from' => '16105552344',
+            'text' => 'Testing from Philippine Red Cross'
+        ]);
+
+        Session::flash('success', 'SMS Send');
+        return redirect('/');
     }
 
 }

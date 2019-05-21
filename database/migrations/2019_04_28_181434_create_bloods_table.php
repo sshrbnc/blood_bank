@@ -18,11 +18,14 @@ class CreateBloodsTable extends Migration
                 $table->increments('id');
                 $table->integer('donor_id')->unsigned();
                 $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
+
                 $table->string('blood_type');
                 $table->string('component');
                 $table->date('date_donated');
                 $table->date('exp_date');
-                $table->string('status')->nullable();
+
+                $table->string('status')->default('On storage');
+
                 $table->integer('employee_id')->unsigned();
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
 

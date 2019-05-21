@@ -120,8 +120,8 @@ class DonationsController extends Controller
 
             $donation->update();
         }
-        $donor_id = $request->input('donor_id');
-        return redirect()->route('admin.donors.show', [$donor_id]);
+        // $donor_id = $request->input('donor_id');
+        return redirect()->route('admin.donors.show', [$donation->donor_id]);
     }
 
     /**

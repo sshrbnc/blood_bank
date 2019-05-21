@@ -5,12 +5,34 @@
 
     {!! Form::open(['action' => 'Admin\PatientsController@store', 'method' => 'POST']) !!}
         <div class="form-group row">
-            {{form::label('name', 'Name:', ['class' => 'col-sm-2 label_name'])}}
-            {{form::text('name', '', ['class' => 'col-sm-10 input_field', 'placeholder' => ''])}}
+            {{form::label('firstname', 'First Name:', ['class' => 'col-sm-2 label_name'])}}
+            {{form::text('firstname', '', ['class' => 'col-sm-10 input_field', 'placeholder' => ''])}}
 
-            @if($errors->has('name'))
+            @if($errors->has('firstname'))
                 <p class="help-block">
-                    {{ $errors->first('name') }}
+                    {{ $errors->first('firstname') }}
+                </p>
+            @endif
+        </div>
+
+         <div class="form-group row">
+            {{form::label('middlename', 'Middle Name:', ['class' => 'col-sm-2 label_name'])}}
+            {{form::text('middlename', '', ['class' => 'col-sm-10 input_field', 'placeholder' => ''])}}
+
+            @if($errors->has('middlename'))
+                <p class="help-block">
+                    {{ $errors->first('middlename') }}
+                </p>
+            @endif
+        </div>
+
+         <div class="form-group row">
+            {{form::label('lastname', 'Last Name:', ['class' => 'col-sm-2 label_name'])}}
+            {{form::text('lastname', '', ['class' => 'col-sm-10 input_field', 'placeholder' => ''])}}
+
+            @if($errors->has('lastname'))
+                <p class="help-block">
+                    {{ $errors->first('lastname') }}
                 </p>
             @endif
         </div>
@@ -42,8 +64,7 @@
 
         <div class="form-group row">
             {{form::label('birthday', 'Birthday:', ['class' => 'col-sm-2 label_name'])}}
-            {{form::date('birthday', '', ['class' => 'col-sm-10 input_field form-controldate', 'placeholder' => ''])}}
-
+            {{form::date('birthday', '', ['class' => 'col-sm-10 input_field form-control date', 'placeholder' => ''])}}
             @if($errors->has('birthday'))
                 <p class="help-block">
                     {{ $errors->first('birthday') }}
