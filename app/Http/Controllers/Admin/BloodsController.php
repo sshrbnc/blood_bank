@@ -16,6 +16,7 @@ use App\Http\Controllers\Traits\FileUploadTrait;
 use App\Patient;
 use App\BloodRequests;
 use DB;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class BloodsController extends Controller
 {
@@ -101,15 +102,22 @@ class BloodsController extends Controller
                 ->where('component', $blood->component)->where('urgent', true)->get();
 
                 $pending = DB::table('blood_requests')
-                ->where('component', $blood->component)->where('status', "Pending")->get();
+                ->where('component', $blood->component)->where('urgent', false)->where('status', "Pending")->get();
 
-                if($donation->blood_req==NULL){
+                if($donation->blood_req==null){
                     if (count($urgent)>0) {
                         foreach($urgent as $urg){
                             $id = $urg->patient_id;
                             $patient = DB::table('patients')->where('id',$id)->get()->first();
                             if($patient->blood_type == $blood->blood_type){
-                                BloodRequests::where('id', $urg->id)->update(array('blood_id' => $blood->id, 'status' => 'Matched'));
+                                BloodRequests::where('id', $urg->id)->update(array('blood_id' => $blood->id, 'status' => 'Donor assigned'));
+                                Blood::where('id', $blood->id)->update(array('status' => 'Assigned to Donor'));
+
+                                // Nexmo::message()->send([
+                                //         'to'   => $patient->contact_number,
+                                //         'from' => '16105552344',
+                                //         'text' => 'You already have a donor'
+                                //     ]);
                                 break;
                             }
                         }
@@ -121,7 +129,16 @@ class BloodsController extends Controller
                             $patient = DB::table('patients')->where('id',$id)->get()->first();
 
                                 if($patient->blood_type == $blood->blood_type){
-                                    BloodRequests::where('id', $pend->id)->update(array('blood_id' => $blood->id, 'status' => 'Matched'));
+                                    BloodRequests::where('id', $pend->id)->update(array('blood_id' => $blood->id, 'status' => 'Donor Assigned'));
+
+                                    Blood::where('id', $blood->id)->update(array('status' => 'Assigned to Donor'));
+                                    // message
+                                    // Nexmo::message()->send([
+                                    //     'to'   => $patient->contact_number,
+                                    //     'from' => '16105552344',
+                                    //     'text' => 'You already have a donor'
+                                    // ]);
+                                //
                                     break;
                                 }
                             }

@@ -95,7 +95,6 @@ class DonorsController extends Controller
             'birthday' => 'required',
             'sex' => 'required',
             'address' => 'required',
-            'phone_number' => ['required', 'regex:/(09|\+639)\d{9}$/'],
         ]);
 
         if(Auth::check()){
@@ -107,13 +106,13 @@ class DonorsController extends Controller
             $donor->birthday = $request->input('birthday');
             $donor->sex = $request->input('sex');
             $donor->address = $request->input('address');
-            $donor->phone_number = $request->input('phone_number');
+            $donor->phone_number = '639'.$request->input('phone_number');
             $donor->employee_id = Auth::user()->id;
 
             $donor->save();
         }
         
-        return redirect()->route('admin.donors.index');
+        return redirect()->route('admin.donors.show', $donor->id);
     }
 
     public function storeFromBr(Request $request, $br_id)

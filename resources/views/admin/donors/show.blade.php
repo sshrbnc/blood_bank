@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <a href="{{ route('admin.donors.index') }}"><i class="fas fa-angle-left"></i> Back to list</a>
+    <a href="{{ route('admin.donors.index') }}"><i class="fas fa-angle-left"></i> Back </a>
     <p>&nbsp;</p>
 
 
     <div class="donor_blood_type" style="font-weight: bold; font-size: 100px; float: right; color: #1a2226; padding-right: 10%;">{{ $donor->blood_type }}</div>
-    <div class="donor_name" style="font-family: Roboto; font-weight: bold; font-size: 40px;">{{ $donor->lastname }}, {{ $donor->firstname}} {{$donor->middlename}} </div>
+    <div class="donor_name" style="font-family: Roboto; font-weight: bold; font-size: 40px;">{{ $donor->lastname }}, {{ $donor->firstname}} {{$donor->middlename}}  <i class="fa fa-gift"></i> </div>
     <div class="donor_address" style="font-family: Roboto; font-size: 15px;"><b>Address:</b> {{ $donor->address }}</div>
     <div class="donor_phone_number" style="font-family: Roboto; font-size: 15px;"><b>Phone Number:</b> {{ $donor->phone_number }}</div>
     <div class="sex" style="font-family: Roboto; font-size: 15px;"><b>Sex:</b> {{ $donor->sex }}</div>
@@ -29,7 +29,6 @@
                             <div class="col-md-4 mb-3">
                                 {!! Form::label('date_donated', 'Date', ['class' => 'control-label']) !!}
                                 {!! Form::text('date_donated', Carbon\Carbon::today()->format('d-m-Y'), ['style' => 'border-radius: 8px;', 'class' => 'form-control date-picker', 'placeholder' => '', 'required' => ''])  !!}
-                                <!-- <span id="date_donatedValid" name="date_donatedValid">.</span>                                   -->
                             </div>                               
                             <div class="col-md-4 mb-3">
                                 <label for="weight" class="control-label">Weight (kg)</label>
@@ -85,7 +84,7 @@
         type="button" 
         class="btn btn-primary"
         data-toggle="modal"
-        data-target="#newDonation">
+        data-target="#newDonation" style="background-color: #026C76; border: none;">
         <i class="fas fa-plus"></i> New Donation
     </button>
   
@@ -121,7 +120,7 @@
                             <!-- @can('donation_delete')    
                                 @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                             @endcan -->
-                            <td field-key='date_donated'>{{ \Carbon\Carbon::parse($donations->created_at)->format('M d, Y H:i') }}</td>
+                            <td field-key='date_donated'>{{ \Carbon\Carbon::parse($donations->date_donated)->format('M d, Y') }}</td>
                             <td field-key='reciepient'>
                                 @if ($donations->blood_req_id != 'NULL')
                                     {{App\BloodRequests::where( ['id'=>$donations->blood_req] )->pluck('transaction_code')->first()}}
@@ -150,7 +149,7 @@
                             @else
                             <td>        
                                 @if($donations->processed == "Yes")
-                                    <i id="processed"><i class="fas fa-check"></i> Processed</i>                                
+                                    <i id="processed"><i class="fas fa-check"></i> Processed</i>                             
                                 @else                     
                                     @if($donations->status != "Defer")
                                         @if(($donations->status == "Passed Checking"))
@@ -249,7 +248,6 @@
                                                 <form action="{{ route('admin.donations.update', $donations->id) }}" method="PUT">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            {{$donations->id}}
                                                             {{ Form::hidden('date_donated', $donations->date_donated) }}          
                                                             {{ Form::hidden('donor_id', $donations->donor_id) }}         
                                                             {{ Form::hidden('weight', $donations->weight) }}
@@ -287,8 +285,7 @@
                                                 <form action="{{ route('admin.donations.update', $donations->id) }}" method="PUT">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            {{ csrf_field() }}  
-                                                            {{ $donations->id }}  
+                                                            {{ csrf_field() }}    
                                                             {{ Form::hidden('donor_id', $donations->donor_id) }}
                                                             {{ Form::hidden('flag', '--') }}
                                                             <div class="row">
@@ -325,10 +322,14 @@
                                             </div>                                     
                                         </div>    
 
-                                        @can('donor_edit')
-                                        <a href="#" data-toggle="modal" data-target="#editDonationModal-{{$donations->id}}" style="background-color: #4682B4;" class="btn btn-xs btn-info">Edit</a>
+                                        <!-- allen -->
+                                        @can('donor_edit') 
+                                        @if ($donations->date_donated == Carbon\Carbon::today()->format('d-m-Y'))
+                                            <a href="#" data-toggle="modal" data-target="#editDonationModal-{{$donations->id}}" style="background-color: #4682B4;" class="btn btn-xs btn-info">Edit</a>
+                                        @endif
+                                        @endcan
 
-                                        @endcan                            
+
                                         @can('donor_delete')
                                         <button type="button" style="border: none;" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteDonationModal">Delete</button>
                                         <div class="modal fade" id="deleteDonationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -446,6 +447,7 @@
 
 @section('javascript') 
     <script>
+
         function displayExpwbc(){            
             var a = document.getElementById("expwbc");
             if (a.style.display === "none") {

@@ -46,13 +46,13 @@
         <div class="form-group row">
             {{form::label('component', 'Component:',['class' => 'col-sm-2 label_name'])}}
 
-            {{form::select('component', array(''=>'','Red Blood Cell' => 'Red Blood Cell', 'White Cells & Granulocytes' => 'White Cells & Granulocytes','Whole blood' => 'Whole Blood','Platelet' => 'Platelet','Plasma' => 'Plasma', 'Cryo ' => 'Cryo'), null,  array('class'=>'input_field form-control col-sm-10'))}}
+            {{form::select('component', array(''=>'','Red Blood Cell' => 'Red Blood Cell', 'White Cells & Granulocytes' => 'White Cells','Whole blood' => 'Whole Blood','Platelet' => 'Platelet','Plasma' => 'Plasma', 'Cryo ' => 'Cryo'), null,  array('class'=>'input_field form-control col-sm-10'))}}
             <span id="componentErrMsg"></span>
         </div>
 
         <div class="form-group row">
             {{form::label('quantity', 'Quantity:',['class' => 'col-sm-2 label_name'])}}
-            {{form::text('quantity', '', ['placeholder' => 'Number of bags','class'=>'input_field form-control col-sm-10'])}}
+            {{form::text('quantity', '', ['placeholder' => 'Number of bags','class'=>'input_field form-control col-sm-10'])}}&nbsp;
             <span id="quantErrMsg"></span>
         </div>
 

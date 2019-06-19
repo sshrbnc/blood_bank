@@ -35,14 +35,14 @@ class HomeController extends Controller
     public function index()
     {
 
-        $opblood = DB::table('bloods')->where('blood_type', 'O+')->get();
-        $onblood = DB::table('bloods')->where('blood_type', 'O-')->get();
-        $apblood = DB::table('bloods')->where('blood_type', 'A+')->get();
-        $anblood = DB::table('bloods')->where('blood_type', 'A-')->get();
-        $abpblood = DB::table('bloods')->where('blood_type', 'AB+')->get();
-        $abnblood = DB::table('bloods')->where('blood_type', 'AB-')->get();
-        $bpblood = DB::table('bloods')->where('blood_type', 'B+')->get();
-        $bnblood = DB::table('bloods')->where('blood_type', 'B-')->get();
+        $opblood = DB::table('bloods')->where('blood_type', 'O+')->where('status', 'On storage')->get();
+        $onblood = DB::table('bloods')->where('blood_type', 'O-')->where('status', 'On storage')->get();
+        $apblood = DB::table('bloods')->where('blood_type', 'A+')->where('status', 'On storage')->get();
+        $anblood = DB::table('bloods')->where('blood_type', 'A-')->where('status', 'On storage')->get();
+        $abpblood = DB::table('bloods')->where('blood_type', 'AB+')->where('status', 'On storage')->get();
+        $abnblood = DB::table('bloods')->where('blood_type', 'AB-')->where('status', 'On storage')->get();
+        $bpblood = DB::table('bloods')->where('blood_type', 'B+')->where('status', 'On storage')->get();
+        $bnblood = DB::table('bloods')->where('blood_type', 'B-')->where('status', 'On storage')->get();
 
 
         return view('home', compact('opblood','onblood', 'apblood','anblood', 'abpblood', 'abnblood', 'bpblood', 'bnblood'));

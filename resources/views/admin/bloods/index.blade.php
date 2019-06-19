@@ -4,11 +4,11 @@
 @section('content')
     <h3 class="page-title">Bloods</h3>
 
-    @can('blood_create')
+   <!--  @can('blood_create')
     <p>
         <a href="{{ route('admin.bloods.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>&nbsp; Add New</a>
     </p>
-    @endcan
+    @endcan -->
     
     @can('blood_delete')
     <p>
@@ -63,7 +63,9 @@
                                     <td field-key='donor_id'>{{ $blood->donor_id }}</td>  
                                 @endcan  
                                 @can('donor_name_access')
-                                    <td field-key='name'><a href="{{ route('admin.donors.show', [$blood->donor_id]) }}">{{ App\Donor::find($blood->donor_id)->firstname }} {{ App\Donor::find($blood->donor_id)->middlename }} {{ App\Donor::find($blood->donor_id)->lastname }}</a></td>   
+                                    <td field-key='name'><a href="{{ route('admin.donors.show', [$blood->donor_id]) }}">
+                                    {{App\Donor::find($blood->donor_id)->firstname}} {{App\Donor::find($blood->donor_id)->middlename}} {{App\Donor::find($blood->donor_id)->lastname}}
+                                   </a></td>   
                                 @endcan
                                 <td field-key='blood_type'>{{ $blood->blood_type }}</td>                                
                                 <td field-key='component'>{{ $blood->component }}</td>

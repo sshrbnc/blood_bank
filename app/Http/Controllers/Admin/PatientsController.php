@@ -86,6 +86,40 @@ class PatientsController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+
+        request()->validate([
+             'firstname'  => 'required',
+            'middlename'  => 'required',
+            'lastname'  => 'required',
+            'blood_type'  => 'required',
+            'address'  => 'required',
+            'birthday'  => 'required',
+            'contact_number'  => 'required'
+        ]);
+
+        if(Auth::check()){
+            $patient = Patient::find($id);
+
+            $years = Carbon::parse($request->input('birthday'))->age;
+            $patient->firstname = $request->input('firstname');
+            $patient->middlename = $request->input('middlename');
+            $patient->lastname = $request->input('lastname');
+            $patient->blood_type = $request->input('blood_type');
+            $patient->address = $request->input('address');
+            $patient->birthday = $request->input('birthday');
+            $patient->age = $years;
+            $patient->contact_number = '639'.$request->input('contact_number');
+
+            $patient->details_information = $request->input('details_information');
+
+            $patient->update();
+        }
+
+        return redirect()->route('admin.patients.index');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -139,11 +173,7 @@ class PatientsController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
-    {
-        //
-    }
-
+ 
     /**
      * Remove the specified resource from storage.
      *

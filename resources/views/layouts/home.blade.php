@@ -48,7 +48,7 @@
 <body style="background-color: #d82247">
 
     <div class="container-fluid">
-        <div class="row no-gutters justify-content-center" id="searchPanel" >
+        <div class="row no-gutters justify-content-center" id="searchPanel">
             <div id="searchSec" class="col-md-3">
                 <div class="row no-gutters">
                    

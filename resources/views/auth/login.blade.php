@@ -22,14 +22,13 @@
                 <div class="col-md-12 lg_det" id="adminUsername">
                     <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                     <span id="emailMsg"></span>
-                </div>
-               
-                <div class="lg_det col-md-12 lg_det" id="adminPassword">
+                </div>               
+                <div class="lg_det2 col-md-12" id="adminPassword">
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>
                 <div class="col-md-12" id="forgotpw_note">
-                    <a href="{{ route('auth.password.reset') }}">Forgot Password?</a>
-                    <a href="#" style="color: red;" data-toggle="modal" data-target="#sendEmail">Contact Admin</a>
+                    <p style="font-size: 10px;">Forgot Password? &nbsp;</p>
+                    <a href="#" style="color: red; font-size: 10px;" data-toggle="modal" data-target="#sendEmail">Contact Admin</a>
                 </div>
 
                 <div class="col-md-12" id="loginSubmit">

@@ -1,7 +1,7 @@
 #login_bg{
 	width: 100%;
 	opacity: 0.8;
-	height: 75%;
+	height: 70%;
 }
 
 #formContainer{
@@ -36,6 +36,12 @@
 	justify-content: center;
 }
 
+.lg_det2{
+	margin-top: 2%;
+	display: flex;
+	justify-content: center;
+}
+
 #loginSubmit{
 	margin-bottom: 15%;
 	display: flex;
@@ -57,8 +63,13 @@ input[type=email], input[type=password]{
 }
 
 #lg_submitbtn{
-	width: 70%;
+	width: 40%;
 	font-size: 170%;
-	background-color: #d6d2d1;
+	background-color: #c30000;
 	margin-top: 10%;
+	color: #fff;
+}
+
+#forgotCredentials{
+	font-size: 20px;
 }

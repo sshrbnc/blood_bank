@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Patient;
 use Nexmo\Laravel\Facade\Nexmo;
+use App\Blood;
 
 class BloodRequestsController extends Controller
 {
@@ -106,6 +107,7 @@ class BloodRequestsController extends Controller
                 if (count($avail_matchbloods) > 0) {
                     $blood_requests->blood_id = $avail_matchbloods->first()->id;
                     $blood_requests->status = 'Matched';
+
                 }
             }
 
@@ -119,11 +121,12 @@ class BloodRequestsController extends Controller
 
         if($blood_requests){   
             if(($blood_requests->status)== 'Matched'){
-                Nexmo::message()->send([
-                    'to'   => $patient->contact_number,
-                    'from' => '16105552344',
-                    'text' => 'Your pending blood request is granted. Please visit the Blood center or your hospital'
-                ]);
+                Blood::where('id', $blood_requests->blood_id)->update(array('status' => 'Assigned to Donor'));
+                // Nexmo::message()->send([
+                //     'to'   => $patient->contact_number,
+                //     'from' => '16105552344',
+                //     'text' => 'Your pending blood request is granted. Please visit the Blood center or your hospital'
+                // ]);
             } 
             return redirect()->route('admin.patients.show', $request['patient_id']);
         }

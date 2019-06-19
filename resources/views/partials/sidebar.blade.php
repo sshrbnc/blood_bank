@@ -84,38 +84,6 @@
                     <span>Blood Requests</span>
                 </a>
             </li>@endcan
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-user"></i>
-                    <span>{{ @Auth::user()->name }}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    @can('user_view')
-                    <li>
-                        <a href="{{ route('admin.users.show',[@Auth::user()->id]) }}">
-                            <i class="fa fa-star"></i>
-                            <span class="title">Profile</span>
-                        </a>
-                    </li>
-                    @endcan
-                    <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
-                        <a href="{{ route('auth.change_password') }}">
-                            <i class="fa fa-key"></i>
-                            <span class="title">Change Password</span>
-                        </a>
-                    </li>                   
-                    <li>
-                        <a href="#logout" onclick="$('#logout').submit();">
-                            <i class="fa fa-arrow-left"></i>
-                            <span class="title">Logout</span>
-                        </a>
-                    </li>                    
-                </ul>
-            </li>
         </ul>
     </section>
 </aside>

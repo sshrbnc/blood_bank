@@ -27,8 +27,8 @@ class CreateBloodRequestsTable extends Migration
                 $table->unsignedInteger('patient_id');
                 $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
-                $table->unsignedInteger('donor_id')->nullable();
-                $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
+                // $table->unsignedInteger('donor_id')->nullable();
+                // $table->foreign('donor_id')->references('id')->on('donors')->onDelete('cascade');
 
                 $table->unsignedInteger('employee_id');
                 $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');

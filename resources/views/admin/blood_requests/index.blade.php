@@ -45,20 +45,24 @@
                                 <td>{{$br->transaction_code}}</td>
                                 <td>{{App\Patient::find($br->patient_id)->firstname}} {{App\Patient::find($br->patient_id)->middlename}} {{App\Patient::find($br->patient_id)->lastname}} </td>
                                 <td>{{$br->component}}</td>
-                                <td>{{App\Patient::find( $br->patient_id)->blood_type }}</td>
+                                <td>{{App\Patient::find( $br->patient_id)->blood_type}}</td>
                                 <td>{{$br->quantity}}</td>
                                 <td>{{$br->hospital}}</td>
                                 <td>{{$br->status}}</td>
 
                     
-                                @if ($br->status=='Matched')
+                                @if ( $br->status=='Pending')
+                                    <td>pending</td>
+                                @elseif($br->status =='Urgent')
+                                    @if($br->blood_id == null)
+                                        <td>Waiting for available blood</td>
+                                    @else{
+                                        <td>{{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('firstname')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('middlename')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('lastname')[0]}}</td>
+                                    }
+                                    @endif
+                                @else
                                     <td>{{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('firstname')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('middlename')[0]}} {{App\Donor::where( ['id'=>App\Blood::find($br->blood_id)->donor_id] )->pluck('lastname')[0]}}</td>
-                                @elseif ( $br->status=='With Donor')
-                                    <td><a href="{{ route('admin.br.assignDonor',['id'=> ($br->id)]) }}" class="btn btn-xs btn-primary">Encode Donor</a></td>
-                                @elseif ( $br->status=='Pending')
-                                    <td><a href="{{ route('admin.br.assignDonor',['id'=> ($br->id)]) }}" class="btn btn-xs btn-primary">Assign Donor</a></td>
-                                @elseif ($br->urgent == true)
-                                    <td>Urgent</td>
+                                
                                     
                                 @endif
                                 
